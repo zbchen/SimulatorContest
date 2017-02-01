@@ -73,7 +73,7 @@ class FileUploadController {
 
       def f = UploadFile.findById(params.int("fid"))
       if (f) {
-        if (f.group.id == session["group"].id || session["group"].id == 75) {
+        if (f.group.id == session["group"].id || session["group"].identity == 75) {
           def file = new File(f.path)
           if (file.exists()) {
             response.setContentType("application/octet-stream")
