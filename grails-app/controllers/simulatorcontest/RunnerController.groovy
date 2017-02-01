@@ -1,6 +1,8 @@
 package simulatorcontest
 
+import runner.ParserTestSuite
 import runner.STestCase
+import runner.STestSuite
 import runner.TestRunner
 
 class RunnerController {
@@ -15,10 +17,7 @@ class RunnerController {
         if (f) {
             if (f.group.id == session["group"].id || session["group"].identity == 75){
                 def tester = new TestRunner(tarFileName:f.path, result:"")
-                def testSuite = [
-                        new STestCase(0, "", "", "", "", 3),
-                        new STestCase(1, "", "", "", "", 3)
-                ]
+                def testSuite = new ParserTestSuite().getSuite("1") // get the first suite
                 tester.test(testSuite, f.group)
                 f.result = tester.result
                 ///println tester.result

@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>组管理</title>
+    <title>测试集管理</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -51,39 +51,33 @@
                             <table id="table1" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>组号</th>
-                                    <th>组名</th>
-                                    <th>学生1</th>
-                                    <th>学号1</th>
-                                    <th>学生2</th>
-                                    <th>学号2</th>
+                                    <th>编号</th>
+                                    <th>测试集名称</th>
+                                    <th>超时配置</th>
+                                    <th>调用参数</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                        def glist = simulatorcontest.ContestGroup.findAll([sort:"identity", order:"asc"])
+                                        def suitelist = simulatorcontest.TestCase.findAll()
                                     %>
-                                <g:each in="${glist}" var="g">
-                                    <%
-                                        /// only list the latest file of each group
-                                    %>
+                                <g:each in="${suitelist}" var="s">
                                         <tr>
-                                            <th>${g.identity}</th>
-                                            <th>${g.name}</th>
-                                            <th>${g.students[0].name}</th>
-                                            <th>${g.students[0].identity}</th>
-                                            <th>${g.students[1].name}</th>
-                                            <th>${g.students[1].identity}</th>
+                                            <th>${s.id}</th>
+                                            <th>${s.suite}</th>
+                                            <th>${s.timeout}</th>
+                                            <th>${s.getParamsString()}</th>
                                             <th>
-                                                <a href="/groupAdmin/remove?gid=${g.id}">删除</a>
+                                                <a href="/TestSuite/remove?sid=${s.id}">删除</a>
+                                                <a href="#" onclick="window.showModalDialog('/addpara?sid=${s.id}')">添加参数</a>
                                             </th>
                                         </tr>
                                 </g:each>
                                 </tbody>
 
                             </table>
-                            
+                            <button type="submit" onclick="window.showModalDialog('/addcase')">添加</button>
                         </div>
                         <!-- /.box-body -->
                     </div>

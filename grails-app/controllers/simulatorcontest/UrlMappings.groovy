@@ -15,6 +15,9 @@ class UrlMappings {
         "/admin"(view:"/manager")
         "/menu"(view:"/menu")
         "/gadmin"(view:"/groupadmin")
+        "/testsuite"(view:"/testsuite")
+        "/addcase"(view:"/addcase")
+        "/addpara"(view:"/addpara")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

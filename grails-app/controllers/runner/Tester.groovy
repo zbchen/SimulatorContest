@@ -1,6 +1,7 @@
 package runner
 
 import simulatorcontest.ContestGroup
+import simulatorcontest.TestCase
 
 class Compiler {
     def programPath = ""
@@ -51,7 +52,49 @@ class Compiler {
 
 }
 
-class STestCase {
+///
+class STestSuite {
+
+    /**
+     *
+     * Return a list of test cases
+     * @param suiteName
+     */
+    def getSuite(String suiteName) {
+
+    }
+
+}
+
+class ParserTestSuite extends STestSuite {
+
+    def getSuite(String suiteName) {
+        def caseList = TestCase.findAllBySuite(suiteName)
+
+        List suite = new ArrayList()
+
+        int i = 1
+        caseList.each { it ->
+            def c = new STestCase()
+            c.index = i
+            c.construct(it)
+            suite.add(c)
+            i++
+        }
+
+        return suite
+    }
+
+}
+
+class AbstractTestCase {
+    def construct(TestCase c) {}
+    def command() {}
+    def compare() {}
+    def execute(String program) {}
+}
+
+class STestCase extends AbstractTestCase {
     // Need to provide the absolute paths of all files
     def index
     def instructionFile
@@ -60,6 +103,8 @@ class STestCase {
     def oracleFile
     def timeout // in seconds
     def result = ""
+
+    STestCase(){}
 
     STestCase(STestCase it) {
         index = it.index
@@ -77,6 +122,24 @@ class STestCase {
         outputFile = opf
         oracleFile = orf
         timeout = to
+    }
+
+    def construct(TestCase c) {
+
+        timeout = c.timeout
+        outputFile = "output_" + index;
+
+        c.paras.each { it->
+            if (it.name == "-i") {
+                instructionFile = it.path
+            }
+            if (it.name == "-m") {
+                memoryFile = it.path
+            }
+            if (it.name == "-o") {
+                oracleFile = it.path
+            }
+        }
     }
 
     def command() {

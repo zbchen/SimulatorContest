@@ -8,7 +8,7 @@ class FileUploadController {
         return
       }
 
-      println "getting file"
+      //println "getting file"
       def f = request.getFile("myFile")
       if (f.empty) {
         render "Empty File"
@@ -57,6 +57,32 @@ class FileUploadController {
           def file = new File(fileName)
           file.delete()
           redirect(uri:"/user")
+        } else {
+          render "Not your file, please!!!"
+        }
+      } else {
+        render "The upload file of this ID does not exist!"
+      }
+    }
+
+    def download() {
+      if (!params["fid"] || !session["group"]) {
+        redirect(uri: "/")
+        return
+      }
+
+      def f = UploadFile.findById(params.int("fid"))
+      if (f) {
+        if (f.group.id == session["group"].id || session["group"].id == 75) {
+          def file = new File(f.path)
+          if (file.exists()) {
+            response.setContentType("application/octet-stream")
+            response.setHeader("Content-disposition", "filename=${f.name}")
+            response.outputStream << file.bytes
+            return
+          } else {
+            render "File does not exist!!"
+          }
         } else {
           render "Not your file, please!!!"
         }

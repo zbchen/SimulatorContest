@@ -67,7 +67,7 @@
                                     <tr>
                                         <th>${i++}</th>
                                         <th>${f.group.name}</th>
-                                        <th>${f.name}</th>
+                                        <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
                                         <th>${f.uploadDate}</th>
                                         <th>
                                             <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
