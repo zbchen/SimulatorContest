@@ -15,7 +15,7 @@ class RunnerController {
 
         def f = UploadFile.findById(params.int("fid"))
         if (f) {
-            if (f.group.id == session["group"].id || session["group"].identity == 75){
+            if (session["group"].identity == 75){
                 def tester = new TestRunner(tarFileName:f.path, result:"")
                 def testSuite = new ParserTestSuite().getSuite("1") // get the first suite
                 tester.test(testSuite, f.group)
@@ -24,7 +24,7 @@ class RunnerController {
                 f.save(flush:true)
                 renderResult(tester.result)
             } else {
-                render "Not your file, please!!!"
+                render "You cannot do this, please!!!"
             }
         } else {
             render "The upload file of this ID does not exist!"
