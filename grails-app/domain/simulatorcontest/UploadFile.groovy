@@ -12,4 +12,9 @@ class UploadFile {
     static constraints = {
         result blank: true, nullable: true
     }
+
+    static mapping = {
+        result type: 'text'
+    }
+
 }
