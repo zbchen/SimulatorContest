@@ -109,7 +109,7 @@ class STestCase {
      * @param program
      */
     def execute(String program) {
-        def executionCommand = "time gtimeout " + timeout + "s " + program + command()
+        def executionCommand = "time timeout " + timeout + "s " + program + command()
         println executionCommand
         def executionProcess = executionCommand.execute()
         executionProcess.waitFor()
