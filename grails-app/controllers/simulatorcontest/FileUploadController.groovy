@@ -48,7 +48,10 @@ class FileUploadController {
       def f = UploadFile.findById(params.int("fid"))
       if (f) {
         if (f.group.id == session["group"].id) {
+          String fileName = f.path
           f.delete(flush:true)
+          def file = new File(fileName)
+          file.delete()
           redirect(uri:"/user")
         } else {
           render "Not your file, please!!!"

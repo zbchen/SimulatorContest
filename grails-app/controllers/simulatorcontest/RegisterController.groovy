@@ -2,6 +2,12 @@ package simulatorcontest
 
 class RegisterController {
 
+    def enter() {
+        println request.getSession(true)
+        render "abc"
+        return
+    }
+
     def index() {
         def g = ContestGroup.findById(1);
         render g.files[0].name

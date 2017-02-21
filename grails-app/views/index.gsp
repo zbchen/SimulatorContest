@@ -55,7 +55,8 @@
 
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="/Login/log" method="post" class="login-form">
+                        <g:form controller="Register" action="enter" method="post">
+                        <!--form role="form" action="/Login/log" method="post" class="login-form"-->
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Username</label>
                                 <input type="text" name="username" placeholder="账号" class="form-username form-control" id="form-username">
@@ -65,12 +66,11 @@
                                 <input type="password" name="password" placeholder="密码" class="form-password form-control" id="form-password">
                             </div>
 
-                            <input type="hidden" value="go" name="dest">
                             <div id="form-alert" class="alert alert-info">
 
                             </div>
                             <button type="submit" class="btn">点我登录</button>
-                        </form>
+                        </g:form>
                     </div>
                 </div>
             </div>
