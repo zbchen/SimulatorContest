@@ -110,7 +110,7 @@ environments:
             url: jdbc:mysql://localhost:3306/simulatorcontest?useUnicode=true&characterEncoding=UTF-8
     production:
         dataSource:
-            dbCreate: none
+            dbCreate: update
             url: jdbc:mysql://localhost:3306/simulatorcontest?useUnicode=true&characterEncoding=UTF-8
             properties:
                 jmxEnabled: true
