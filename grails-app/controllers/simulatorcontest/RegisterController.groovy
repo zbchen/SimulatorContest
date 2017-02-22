@@ -2,12 +2,6 @@ package simulatorcontest
 
 class RegisterController {
 
-    def enter() {
-        println request.getSession(true)
-        render "abc"
-        return
-    }
-
     def index() {
         def g = ContestGroup.findById(1);
         render g.files[0].name
@@ -15,10 +9,10 @@ class RegisterController {
 
     def reg() {
         int number = params.int("groupnum")
-        def g = ContestGroup.findById(number)
+        def g = ContestGroup.findByIdentity(number)
         if (g) {
             render "The group of this number already exists"
-        } else {
+        } else if (number > 0 && number <= 50) {
             // do the registration
             def newGroup = new ContestGroup(name: params.get("groupname"),
                     password: params.get("password"),
@@ -31,6 +25,8 @@ class RegisterController {
             newGroup.addToStudents(student2)
             newGroup.save()
             render "Group created. Please <a href=\"../../\" >login</a>!"
+        } else {
+            render "Number should be between 1 .. 50 !"
         }
     }
 

@@ -12,6 +12,7 @@ class UrlMappings {
         "/"(view:"/index")
         "/register"(view:"/register")
         "/user"(view:"/userfiles")
+        "/admin"(view:"/manager")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

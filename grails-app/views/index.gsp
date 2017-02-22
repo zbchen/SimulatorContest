@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,7 +54,7 @@
 
                     </div>
                     <div class="form-bottom">
-                        <g:form controller="Register" action="enter" method="post">
+                        <g:form controller="Login" action="log" method="post">
                         <!--form role="form" action="/Login/log" method="post" class="login-form"-->
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Username</label>

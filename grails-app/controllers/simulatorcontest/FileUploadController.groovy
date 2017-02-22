@@ -18,6 +18,10 @@ class FileUploadController {
         // Do file copy
         // make sure the "uploadFiles" folder exists
         def prefix = "/UploadFiles/"//servletContext.getRealPath("/uploadFiles/")
+        def folder = new File(prefix)
+        if (!folder.exists()) {
+          folder.createNewFile()
+        }
         def d = new Date()
         def dateStr = d.format("yyyyMMddHHmmss")
         Random random = new Random()

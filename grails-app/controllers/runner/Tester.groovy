@@ -171,6 +171,12 @@ class TestRunner {
             result += "\n"
         }
 
+        // remove the temp folder recursively
+//        def folder = new File(compiler.programPath)
+//        if (folder.exists()) {
+//            folder.deleteDir()
+//        }
+
         return 0;
     }
 

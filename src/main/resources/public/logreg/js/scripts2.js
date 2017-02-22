@@ -29,7 +29,7 @@ jQuery(document).ready(function() {
         
         var bblank = false;
         var bhasspace = false;
-        $(this).find('input[type="text"], input[type="password"], textarea').each(function(){
+        $(this).find('input[type="text",name!="name2"], input[type="password"], textarea').each(function(){
             if( $(this).val() == "" ) {
                 e.preventDefault();
                 $(this).addClass('input-error');

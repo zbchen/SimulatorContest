@@ -37,7 +37,12 @@
     <div class="wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1><a href="/FileUpload">上载</a> <a href="/Login/logout">注销</a></h1>
+            <h1>
+                <a href="/user">用户</a>
+                <a href="/FileUpload">上载</a>
+                <%if (session["group"].identity == 75) {%><a href="/admin">管理</a><%}%>
+                <a href="/Login/logout">注销</a>
+            </h1>
             <h1>提交列表</h1>
         </section>
 
@@ -58,7 +63,7 @@
                                     <th>组名</th>
                                     <th>文件名</th>
                                     <th>提交时间</th>
-                                    <th>运行结果</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -72,8 +77,8 @@
                                         <th>${f.group.name}</th>
                                         <th>${f.name}</th>
                                         <th>${f.uploadDate}</th>
-                                        <th><a href="/Runner/test?fid=${f.id}">测试</a>&nbsp;
-                                            <a href="/Runner/result?fid=${f.id}">查看</a>&nbsp;
+                                        <th>
+                                            <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
                                             <a href="/FileUpload/remove?fid=${f.id}">删除</a>
                                         </th>
                                     </tr>
