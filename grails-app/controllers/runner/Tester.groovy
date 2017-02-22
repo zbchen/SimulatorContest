@@ -163,7 +163,7 @@ class TestRunner {
         tests.each { it ->
             def test = new STestCase(it)
             test.outputFile = compiler.programPath + File.separator + test.outputFile
-            int r = test.execute(compiler.programPath + "/simulator" + (group.identity.intValue()<10?"0":"") + group.identity.toString())
+            int r = test.execute(compiler.programPath + "/DLXSimulator" + (group.identity.intValue()<10?"0":"") + group.identity.toString())
             result += "The execution of test case " + it.index
             if (r == -1)
                 result += " fails\n"
