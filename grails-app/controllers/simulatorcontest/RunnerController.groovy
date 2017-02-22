@@ -19,8 +19,9 @@ class RunnerController {
                         new STestCase(0, "", "", "", "", 3),
                         new STestCase(1, "", "", "", "", 3)
                 ]
-                tester.test(testSuite)
+                tester.test(testSuite, f.group)
                 f.result = tester.result
+                ///println tester.result
                 f.save(flush:true)
                 renderResult(tester.result)
             } else {

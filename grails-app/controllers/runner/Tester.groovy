@@ -1,5 +1,7 @@
 package runner
 
+import simulatorcontest.ContestGroup
+
 class Compiler {
     def programPath = ""
     def result = ""
@@ -99,7 +101,7 @@ class STestCase {
         if (oracleLines.size() != outputLines.size()) return -1
 
         for (int i = 0; i < oracleLines.size(); i++) {
-            if (outputLines[i] != oracleLines[i]) return -1
+            if (outputLines[i].trim() != oracleLines[i].trim()) return -1
         }
         return 0
     }
@@ -146,7 +148,7 @@ class TestRunner {
     def tarFileName
     def result
 
-    def test(List<STestCase> tests) {
+    def test(List<STestCase> tests, ContestGroup group) {
         // compile
         def compiler = new Compiler()
         int i = compiler.compile(tarFileName)
@@ -161,7 +163,7 @@ class TestRunner {
         tests.each { it ->
             def test = new STestCase(it)
             test.outputFile = compiler.programPath + File.separator + test.outputFile
-            int r = test.execute(compiler.programPath + "/simulator") //TODO name to be modified
+            int r = test.execute(compiler.programPath + "/simulator" + (group.identity.intValue()<10?"0":"") + group.identity.toString())
             result += "The execution of test case " + it.index
             if (r == -1)
                 result += " fails\n"
