@@ -54,8 +54,7 @@
 
                     </div>
                     <div class="form-bottom">
-                        <g:form controller="Login" action="log" method="post">
-                        <!--form role="form" action="/Login/log" method="post" class="login-form"-->
+                        <form role="form" action="/Login/log" method="post" class="login-form">
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Username</label>
                                 <input type="text" name="username" placeholder="账号" class="form-username form-control" id="form-username">
@@ -69,7 +68,7 @@
 
                             </div>
                             <button type="submit" class="btn">点我登录</button>
-                        </g:form>
+                        </form>
                     </div>
                 </div>
             </div>
