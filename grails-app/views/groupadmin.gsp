@@ -1,6 +1,6 @@
 <%@ page import="simulatorcontest.UploadFile" %>
 
-<g:if test="${!session["group"]}">
+<g:if test="${!session["group"] || session["group"].identity != 75}">
     <g:javascript>
         window.location.href = '/';
     </g:javascript>
@@ -51,30 +51,34 @@
                             <table id="table1" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>编号</th>
+                                    <th>组号</th>
                                     <th>组名</th>
-                                    <th>文件名</th>
-                                    <th>提交时间</th>
+                                    <th>学生1</th>
+                                    <th>学号1</th>
+                                    <th>学生2</th>
+                                    <th>学号2</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                        def flist = simulatorcontest.UploadFile.findAllByGroup(session["group"],[sort:"id", order:"desc"])
-                                        def i = 1
+                                        def glist = simulatorcontest.ContestGroup.findAll([sort:"identity", order:"asc"])
                                     %>
-                                <g:each in="${flist}" var="f">
-                                    <tr>
-                                        <th>${i++}</th>
-                                        <th>${f.group.name}</th>
-                                        <th>${f.name}</th>
-                                        <th>${f.uploadDate}</th>
-                                        <th>
-                                            <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
-                                            <a href="/FileUpload/remove?fid=${f.id}">删除</a>
-                                        </th>
-                                    </tr>
-
+                                <g:each in="${glist}" var="g">
+                                    <%
+                                        /// only list the latest file of each group
+                                    %>
+                                        <tr>
+                                            <th>${g.identity}</th>
+                                            <th>${g.name}</th>
+                                            <th>${g.students[0].name}</th>
+                                            <th>${g.students[0].name}</th>
+                                            <th>${g.students[1].name}</th>
+                                            <th>${g.students[1].name}</th>
+                                            <th>
+                                                <a href="/groupAdmin/remove?gid=${g.id}">删除</a>
+                                            </th>
+                                        </tr>
                                 </g:each>
                                 </tbody>
 

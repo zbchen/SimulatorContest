@@ -36,14 +36,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                <a href="/user">用户</a>
-                <a href="/FileUpload">上载</a>
-                <a href="/admin">管理</a>
-                <a href="/Login/logout">注销</a></h1>
-            <h1>提交列表</h1>
-        </section>
+        <g:include view="/menu" />
 
         <!-- Main content -->
         <section class="content">
@@ -58,7 +51,7 @@
                             <table id="table1" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>编号</th>
+                                    <th>组号</th>
                                     <th>组名</th>
                                     <th>文件名</th>
                                     <th>提交时间</th>
@@ -78,7 +71,7 @@
                                             def f = fileList[0]
                                     %>
                                         <tr>
-                                            <th>${i++}</th>
+                                            <th>${g.identity}</th>
                                             <th>${g.name}</th>
                                             <th>${f.name}</th>
                                             <th>${f.uploadDate}</th>
