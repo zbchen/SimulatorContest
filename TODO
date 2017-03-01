@@ -1,0 +1,11 @@
+ 1. Delete test case files when deleting a test case
+ 2. Detect clones using jplag-2.11.8
+ 3. Parser the result
+ 4. Provide update functionality, e.g., user & group information, test case information
+
+
+
+ maybe later
+
+ 1) use security plugin to restrict access
+ 2)
