@@ -179,10 +179,10 @@ class STestCase extends AbstractTestCase {
         def executionProcess = executionCommand.execute()
         executionProcess.waitFor()
         String resultText = executionProcess.err.text
-//        println executionProcess.in.text
-//        println resultText
-//        println executionProcess.exitValue()
-        if (executionProcess.exitValue() != 124 && resultText.readLines().size() == 1) {
+        println executionProcess.in.text
+        println resultText
+        println executionProcess.exitValue()
+        if (executionProcess.exitValue() == 0) {
             // successfully execute
             // Parse the result
             if (compare() == 0) {
