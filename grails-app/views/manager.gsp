@@ -47,6 +47,7 @@
                             <h3 class="box-title"></h3>
                         </div>
                         <!-- /.box-header -->
+                        <a href="/Runner/testAll">全部测试</a>
                         <div class="box-body">
                             <table id="table1" class="table table-bordered table-hover">
                                 <thead>
@@ -54,6 +55,7 @@
                                     <th>组号</th>
                                     <th>组名</th>
                                     <th>文件名</th>
+                                    <th>状态</th>
                                     <th>提交时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -67,13 +69,14 @@
                                     <%
                                         /// only list the latest file of each group
                                         if (g.files.size() > 0) {
-                                            def fileList = simulatorcontest.UploadFile.findAllByGroup(g, [sort:"id", order:"desc"])
-                                            def f = fileList[0]
+                                            //def fileList = simulatorcontest.UploadFile.findAllByGroup(g, [sort:"id", order:"desc"])
+                                            def f = g.files[0]
                                     %>
                                         <tr>
                                             <th>${g.identity}</th>
                                             <th>${g.name}</th>
                                             <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
+                                            <th>${f.result?"已测试":"未测试"}</th>
                                             <th>${f.uploadDate}</th>
                                             <th><a href="/Runner/test?fid=${f.id}">测试</a>&nbsp;
                                                 <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
@@ -87,7 +90,7 @@
                                 </tbody>
 
                             </table>
-                            
+
                         </div>
                         <!-- /.box-body -->
                     </div>

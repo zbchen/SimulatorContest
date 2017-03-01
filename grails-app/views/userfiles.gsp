@@ -54,6 +54,7 @@
                                     <th>编号</th>
                                     <th>组名</th>
                                     <th>文件名</th>
+                                    <th>状态</th>
                                     <th>提交时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -68,6 +69,7 @@
                                         <th>${i++}</th>
                                         <th>${f.group.name}</th>
                                         <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
+                                        <th>${f.result?"已测试":"未测试"}</th>
                                         <th>${f.uploadDate}</th>
                                         <th>
                                             <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;

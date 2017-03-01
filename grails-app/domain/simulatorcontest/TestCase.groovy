@@ -15,6 +15,10 @@ class TestCase {
 
     static hasMany = [paras: Parameter]
 
+    static mapping = {
+        paras sort : "id", order : "asc"
+    }
+
     static constraints = {
     }
 }

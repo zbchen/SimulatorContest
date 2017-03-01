@@ -9,6 +9,10 @@ class ContestGroup {
 
     static hasMany = [students: Student, files: UploadFile]
 
+    static mapping = {
+        files sort : "id", order : "desc"
+    }
+
     static constraints = {
     }
 }

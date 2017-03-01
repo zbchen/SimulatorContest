@@ -7,6 +7,43 @@ import runner.TestRunner
 
 class RunnerController {
 
+    def testFile(UploadFile f) {
+        def tester = new TestRunner(tarFileName:f.path, result:"")
+        def testSuite = new ParserTestSuite().getSuite("1") // get the first suite
+        tester.test(testSuite, f.group)
+        f.result = tester.result
+        ///println tester.result
+        f.save(flush:true)
+        return tester.result
+    }
+
+    def testAll() {
+
+        if (!session["group"]) {
+            redirect(uri:"/")
+            return
+        }
+
+        if (session["group"].identity == 75) {
+
+            def glist = ContestGroup.findAll([sort:"identity", order:"asc"])
+            glist.each { it ->
+                if (it.files && it.files.size() > 0) {
+                    def f = it.files[0] /// latest file
+                    println "-------- start to test group " + it.identity + " ----------"
+                    testFile(f)
+                    println "-------- end to test group " + it.identity + " ----------"
+                }
+            }
+
+            render "End of testAll"
+
+        } else {
+            render "You cannot do this, please!!!"
+        }
+
+    }
+
     def test() {
         if (!params["fid"] || !session["group"]) {
             redirect(uri:"/")
@@ -16,13 +53,7 @@ class RunnerController {
         def f = UploadFile.findById(params.int("fid"))
         if (f) {
             if (session["group"].identity == 75){
-                def tester = new TestRunner(tarFileName:f.path, result:"")
-                def testSuite = new ParserTestSuite().getSuite("1") // get the first suite
-                tester.test(testSuite, f.group)
-                f.result = tester.result
-                ///println tester.result
-                f.save(flush:true)
-                renderResult(tester.result)
+                render testFile(f)
             } else {
                 render "You cannot do this, please!!!"
             }
