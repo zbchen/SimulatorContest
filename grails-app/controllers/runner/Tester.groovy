@@ -69,7 +69,7 @@ class STestSuite {
 class ParserTestSuite extends STestSuite {
 
     def getSuite(String suiteName) {
-        def caseList = TestCase.findAllBySuite(suiteName)
+        def caseList = TestCase.findAllBySuite(suiteName, [sort:"id", order:"asc"])
 
         List suite = new ArrayList()
 
@@ -143,7 +143,7 @@ class STestCase extends AbstractTestCase {
     }
 
     def command() {
-        if (memoryFile.isEmpty()) {
+        if (memoryFile && memoryFile.isEmpty()) {
             return " -i " + instructionFile + " -o " + outputFile
         } else {
             return " -i " + instructionFile + " -m " + memoryFile + " -o " + outputFile
