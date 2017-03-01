@@ -53,7 +53,7 @@ class RunnerController {
         def f = UploadFile.findById(params.int("fid"))
         if (f) {
             if (session["group"].identity == 75){
-                render testFile(f)
+                renderResult(testFile(f))
             } else {
                 render "You cannot do this, please!!!"
             }

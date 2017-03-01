@@ -143,7 +143,7 @@ class STestCase extends AbstractTestCase {
     }
 
     def command() {
-        if (memoryFile && memoryFile.isEmpty()) {
+        if (!memoryFile || memoryFile.isEmpty()) {
             return " -i " + instructionFile + " -o " + outputFile
         } else {
             return " -i " + instructionFile + " -m " + memoryFile + " -o " + outputFile
