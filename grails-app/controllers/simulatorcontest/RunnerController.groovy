@@ -17,6 +17,25 @@ class RunnerController {
         return tester.result
     }
 
+    def sTestAll() {
+        if (params["pd"] != null && params.int("pd") == 752) {
+            def glist = ContestGroup.findAll([sort:"identity", order:"asc"])
+            glist.each { it ->
+                if (it.files && it.files.size() > 0) {
+                    def f = it.files[0] /// latest file
+                    if (!f.result) {
+                        println "-------- start to test group " + it.identity + " ----------"
+                        testFile(f)
+                        println "-------- end to test group " + it.identity + " ----------"
+                    }
+                }
+            }
+            render "all tested"
+        } else {
+            render "not allowed!!"
+        }
+    }
+
     def testAll() {
 
         if (!session["group"]) {
@@ -30,9 +49,11 @@ class RunnerController {
             glist.each { it ->
                 if (it.files && it.files.size() > 0) {
                     def f = it.files[0] /// latest file
-                    println "-------- start to test group " + it.identity + " ----------"
-                    testFile(f)
-                    println "-------- end to test group " + it.identity + " ----------"
+                    if (!f.result) {
+                        println "-------- start to test group " + it.identity + " ----------"
+                        testFile(f)
+                        println "-------- end to test group " + it.identity + " ----------"
+                    }
                 }
             }
 
