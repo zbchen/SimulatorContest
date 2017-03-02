@@ -26,6 +26,13 @@ class TestSuiteController {
         def suite = TestCase.findById(params.int("sid"))
 
         if (suite) {
+            // delete the files
+            suite.paras.each { it ->
+                File f = new File(it.path)
+                if (f.exists()) {
+                    f.delete()
+                }
+            }
             suite.delete(flush:true)
             redirect(uri:"/testsuite")
         } else {

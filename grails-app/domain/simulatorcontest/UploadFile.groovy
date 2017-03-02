@@ -7,6 +7,17 @@ class UploadFile {
     String path
     String result
 
+    boolean isPass() {
+        if (result) {
+            if (result.count("succeeds") == 10) {
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
+    }
+
     static belongsTo = [group: ContestGroup]
 
     static constraints = {

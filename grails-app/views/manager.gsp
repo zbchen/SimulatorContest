@@ -76,7 +76,7 @@
                                             <th>${g.identity}</th>
                                             <th>${g.name}</th>
                                             <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
-                                            <th>${f.result?"已测试":"未测试"}</th>
+                                            <th>${f.result?"已测试"+(f.isPass()?"(已通过)":"(未通过)"):"未测试"}</th>
                                             <th>${f.uploadDate}</th>
                                             <th><a href="/Runner/test?fid=${f.id}">测试</a>&nbsp;
                                                 <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
@@ -129,11 +129,11 @@
     $(function () {
         $('#table1').DataTable({
             "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": false,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
             "info": true,
-            "autoWidth": false
+            "autoWidth": true
         });
     });
 </script>
