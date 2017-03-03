@@ -146,19 +146,23 @@ class CloneDetectorController {
             String[] groups = groupStr.split(";")
             String result = "<table><tr><th></th>"
             groups.each {
-                result  = result + "<th>" + ("第" + it + "组") + "</th>"
+                result  = result + "<th>" + it + "</th>"
             }
+            result  = result + "<th>total</th>"
             result += "</tr>"
             for (int i = 0; i < groups.size(); i++) {
                 result += "<tr>"
-                result  = result + "<th>" + ("第" + groups[i] + "组") + "</th>"
+                result  = result + "<th>" + groups[i]  + "</th>"
+                float total = 0.0;
                 for (int j = 0 ; j < groups.size(); j ++) {
                     if (j == i) {
                         result  = result + "<th>  </th>"
                     } else {
                         result  = result + "<th>" + program.get_similarity().getSimilarity(i,j) + "%</th>"
+                        total += program.get_similarity().getSimilarity(i,j)
                     }
                 }
+                result  = result + "<th>" + total + "</th>"
                 result += "</tr>"
             }
             result += "</table>"
