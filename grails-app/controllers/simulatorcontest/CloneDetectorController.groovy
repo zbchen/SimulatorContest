@@ -154,14 +154,14 @@ class CloneDetectorController {
                 String eachGroup = ""
                 for (int j = 0 ; j < groups.size(); j ++) {
                     if (j == i) {
-                        eachGroup  = result + "<th>  </th>"
+                        eachGroup  = eachGroup + "<th>  </th>"
                     } else {
-                        eachGroup  = result + "<th>" + program.get_similarity().getSimilarity(i,j) + "%</th>"
+                        eachGroup  = eachGroup + "<th>" + program.get_similarity().getSimilarity(i,j) + "%</th>"
                         total += program.get_similarity().getSimilarity(i,j)
                     }
                 }
                 result += "<tr>"
-                result += result + "<th>" + groups[i] + "(" + total + ")"  + "</th>"
+                result += ("<th>" + groups[i] + "(" + total + ")"  + "</th>")
                 result += eachGroup
                 result += "</tr>"
             }
