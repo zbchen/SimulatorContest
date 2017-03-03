@@ -106,7 +106,7 @@ class CloneDetectorController {
         // unpack the latest files of all groups
         def glist = ContestGroup.findAll()
         glist.each { it ->
-            if (it.files.size() > 0) {
+            if (it.identity <= 50 && it.files.size() > 0) { // do not include the admin group
                 // Unpack the latest file of each group
                 String tarFileName = it.files[0].path
                 String destination = folderName + "/" + it.identity
