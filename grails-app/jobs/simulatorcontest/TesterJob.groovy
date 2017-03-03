@@ -1,5 +1,8 @@
 package simulatorcontest
 
+import runner.ParserTestSuite
+import runner.TestRunner
+
 class TesterJob {
 
     static triggers = {
@@ -16,7 +19,12 @@ class TesterJob {
                 def f = it.files[0] /// latest file
                 if (!f.result) {
                     println "-------- start to test group " + it.identity + " ----------"
-                    testFile(f)
+                    def tester = new TestRunner(tarFileName:f.path, result:"")
+                    def testSuite = new ParserTestSuite().getSuite("1") // get the first suite
+                    tester.test(testSuite, f.group)
+                    f.result = tester.result
+                    ///println tester.result
+                    f.save(flush:true)
                     println "-------- end to test group " + it.identity + " ----------"
                 }
             }
