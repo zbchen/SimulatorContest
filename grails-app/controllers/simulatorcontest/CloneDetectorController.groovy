@@ -148,23 +148,24 @@ class CloneDetectorController {
             groups.each {
                 result  = result + "<th>" + it + "</th>"
             }
-            result  = result + "<th>total</th>"
             result += "</tr>"
             for (int i = 0; i < groups.size(); i++) {
-                result += "<tr>"
-                result  = result + "<th>" + groups[i]  + "</th>"
-                float total = 0.0;
+                float total = 0.0
+                String eachGroup = ""
                 for (int j = 0 ; j < groups.size(); j ++) {
                     if (j == i) {
-                        result  = result + "<th>  </th>"
+                        eachGroup  = result + "<th>  </th>"
                     } else {
-                        result  = result + "<th>" + program.get_similarity().getSimilarity(i,j) + "%</th>"
+                        eachGroup  = result + "<th>" + program.get_similarity().getSimilarity(i,j) + "%</th>"
                         total += program.get_similarity().getSimilarity(i,j)
                     }
                 }
-                result  = result + "<th>" + total + "</th>"
+                result += "<tr>"
+                result += result + "<th>" + groups[i] + "(" + total + ")"  + "</th>"
+                result += eachGroup
                 result += "</tr>"
             }
+
             result += "</table>"
 
             // pack the result files
@@ -193,7 +194,7 @@ class CloneDetectorController {
             } else {
                 cloneResult = new CloneResult(date:dateStr, result:result, path:resultTarName)
             }
-            cloneResult.save(true)
+            cloneResult.save(flush:true)
 
         } catch (ExitException var3) {
             System.out.println("Error: " + var3.getReport())

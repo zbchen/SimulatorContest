@@ -46,7 +46,6 @@
                         <div class="box-header">
                             <h3 class="box-title"></h3>
                         </div>
-                        <a href="/CloneDetector/start">开始查重</a>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table id="table1" class="table table-bordered table-hover">
