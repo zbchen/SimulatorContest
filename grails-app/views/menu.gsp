@@ -6,6 +6,10 @@
         <a href="/admin">测试</a>
         <a href="/gadmin">组管理</a>
         <a href="/testsuite">测试例</a>
+        <a href="/clone">查重</a>
+        <%}%>
+        <%if (session["group"] && session["group"].identity != 75) {%>
+        <a href="/viewclone">查重结果</a>
         <%}%>
         <a href="/Login/logout">注销</a>
     </h1>

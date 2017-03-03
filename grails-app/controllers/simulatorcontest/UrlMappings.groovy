@@ -18,6 +18,8 @@ class UrlMappings {
         "/testsuite"(view:"/testsuite")
         "/addcase"(view:"/addcase")
         "/addpara"(view:"/addpara")
+        "/clone"(view:"/clone")
+        "/viewclone"(view:"/viewclone")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

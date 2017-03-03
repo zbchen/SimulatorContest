@@ -1,16 +1,90 @@
 package simulatorcontest
 
-class CloneDetectorController {
+import jplag.ExitException
+import jplag.JPlag
+import jplag.Program
+import jplag.options.CommandLineOptions
+import jplag.options.Options
 
-    def test() {
-        println  servletContext.getRealPath("/")
-        render "abc"
+class MyCloneDetector extends Program {
+    public MyCloneDetector(){
+        super(null)
+    }
+    public MyCloneDetector(Options options) throws ExitException {
+        super(options)
     }
 
-    def index() {
+    public String getSumissionString() {
+        return super.allValidSubmissions(";")
+    }
+}
+
+class CloneDetectorController {
+
+    def download() {
+        if (params["cid"] == null || !session["group"] || session["group"].identity != 75) {
+            render "not valid"
+            return
+        }
+
+        def r = CloneResult.findById(params.int("cid"))
+        if (r) {
+            def file = new File(r.path)
+            if (file.exists()) {
+                response.setContentType("application/octet-stream")
+                response.setHeader("Content-disposition", "filename=${file.name}")
+                response.outputStream << file.bytes
+                return
+            } else {
+                render "File does not exist!!"
+            }
+        } else {
+            render "not valid"
+        }
+    }
+
+    def view() {
+        if (params["cid"] == null || !session["group"]) {
+            render "not valid"
+            return
+        }
+
+        def r = CloneResult.findById(params.int("cid"))
+        if (r) {
+            render r.result
+        } else {
+            render "not valid"
+        }
+    }
+
+    def delete(){
+        if (params["cid"] == null || !session["group"] || session["group"].identity != 75) {
+            render "not valid"
+            return
+        }
+
+        def r = CloneResult.findById(params.int("cid"))
+        if (r) {
+            def f = new File(r.path)
+            if (f.exists()) {
+                f.delete()
+            }
+            r.delete(flush:true)
+            redirect(uri:"/clone")
+        } else {
+            render "not valid"
+        }
+    }
+
+    def start() {
+        if (!session["group"] || session["group"].identity != 75) {
+            render "not valid"
+            return
+        }
+
         // create a folder for clone detection
         def d = new Date()
-        def dateStr = d.format("yyyyMMdd")
+        def dateStr = d.format("yyyy-MM-dd")
         Random random = new Random()
         def folderName =  servletContext.getResource("/").getPath() + "clone_" + dateStr
         def folder = new File(folderName)
@@ -56,22 +130,76 @@ class CloneDetectorController {
             }
         }
 
-        // invoke jplag to do detection
+        // invoke jplag to do detect
 
-        println folderName
-        def jplagCommand = "java -jar /Users/czb/Downloads/jplag-2.11.8.jar -l c/c++ -s " + folderName + " -r " + resultName
-        def jplagProcess = jplagCommand.execute()
-        def out = new StringBuffer()
-        def err = new StringBuffer()
-        jplagProcess.consumeProcessOutput(out, err)
-        jplagProcess.waitFor()
-        println out.toString()
-        println err.toString()
+        String command = "-l c/c++ -s " + folderName + " -r " + resultName
 
-        //TODO move the results files to the public folder
-        //TODO maybe extract the information later
+        try {
+            CommandLineOptions ex = new CommandLineOptions(command.split(" "), (String)null)
+            ex.clustering = true
+            ex.clusterType = 3
+            MyCloneDetector program = new MyCloneDetector(ex)
+            System.out.println("initialize ok")
+            program.run()
+            // generate the table of similarity
+            String groupStr = program.getSumissionString()
+            String[] groups = groupStr.split(";")
+            String result = "<table><tr><th></th>"
+            groups.each {
+                result  = result + "<th>" + ("第" + it + "组") + "</th>"
+            }
+            result += "</tr>"
+            for (int i = 0; i < groups.size(); i++) {
+                result += "<tr>"
+                result  = result + "<th>" + ("第" + groups[i] + "组") + "</th>"
+                for (int j = 0 ; j < groups.size(); j ++) {
+                    if (j == i) {
+                        result  = result + "<th>  </th>"
+                    } else {
+                        result  = result + "<th>" + program.get_similarity().getSimilarity(i,j) + "%</th>"
+                    }
+                }
+                result += "</tr>"
+            }
+            result += "</table>"
 
-        render "clone index"
+            // pack the result files
+            def resultTarName = "/CloneResults/clone_" + dateStr + "_result.tar.gz"
+            def file = new File(resultTarName)
+            if (file.exists()) {
+                file.delete()
+            }
+            def tarCommand = "tar -czf " + resultTarName + " -C " + resultName + " ."
+            println tarCommand
+            def tarProcess = tarCommand.execute()
+            def out = new StringBuffer()
+            def err = new StringBuffer()
+            tarProcess.consumeProcessOutput(out, err)
+            tarProcess.waitFor()
+            if (tarProcess.exitValue() != 0) {
+                println out.toString()
+                println err.toString()
+            }
+
+            // Save the result to database
+            def cloneResult = CloneResult.findByDate(dateStr)
+            if (cloneResult) {
+                cloneResult.result = result
+                cloneResult.path = resultTarName
+            } else {
+                cloneResult = new CloneResult(date:dateStr, result:result, path:resultTarName)
+            }
+            cloneResult.save(true)
+
+        } catch (ExitException var3) {
+            System.out.println("Error: " + var3.getReport())
+        }
+
+        // remove the folders
+        folder.deleteDir()
+        resultFolder.deleteDir()
+
+        redirect(uri:"/clone")
     }
 
 }

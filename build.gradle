@@ -46,6 +46,7 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.2.Final"
     compile "org.hibernate:hibernate-ehcache:5.1.2.Final"
     compile 'org.grails.plugins:quartz:2.0.9'
+    compile files("libs/jplag-2.11.8.jar")
     console "org.grails:grails-console"
     profile "org.grails.profiles:web"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.6"
