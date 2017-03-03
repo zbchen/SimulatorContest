@@ -86,7 +86,7 @@ class CloneDetectorController {
         def d = new Date()
         def dateStr = d.format("yyyy-MM-dd")
         Random random = new Random()
-        def folderName =  servletContext.getResource("/").getPath() + "clone_" + dateStr
+        def folderName =  "/CloneResults/" + "clone_" + dateStr
         def folder = new File(folderName)
         // one day has just one folder for clone detection
         if (folder.exists()) {
@@ -95,7 +95,7 @@ class CloneDetectorController {
             folder.mkdirs()
         }
 
-        def resultName = servletContext.getResource("/").getPath() + "clone_" + dateStr + "_result"
+        def resultName = "/CloneResults/" + "clone_" + dateStr + "_result"
         def resultFolder = new File(resultName)
         if (resultFolder.exists()) {
             resultFolder.deleteDir()
