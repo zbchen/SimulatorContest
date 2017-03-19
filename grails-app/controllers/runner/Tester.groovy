@@ -127,7 +127,7 @@ class STestCase extends AbstractTestCase {
     def construct(TestCase c) {
 
         timeout = c.timeout
-        outputFile = "output_" + index;
+        outputFile = "output_" + index
 
         c.paras.each { it->
             if (it.name == "-i") {
@@ -139,6 +139,33 @@ class STestCase extends AbstractTestCase {
             if (it.name == "-o") {
                 oracleFile = it.path
             }
+        }
+
+    }
+
+    /// copy instruction and memory files
+    /// set the instrudctionFile and memoryFile to the copied files
+    def copyFiles(String folder) {
+        // println folder
+        // copy instruction file
+        if (instructionFile) {
+            def icpCommand = "cp " + instructionFile.toString() + " "
+            instructionFile = folder + "/program_" + index
+            icpCommand += instructionFile
+            /// do copy
+            // println icpCommand
+            def icpProcess = icpCommand.execute()
+            icpProcess.waitFor()
+        }
+
+        // copy memory file
+        if (memoryFile) {
+            def cpCommand = "cp " + memoryFile + " "
+            memoryFile = folder + "/memory_" + index
+            cpCommand += memoryFile
+            /// do copy
+            def cpProcess = cpCommand.execute()
+            cpProcess.waitFor()
         }
     }
 
@@ -225,6 +252,7 @@ class TestRunner {
         // execute the simulator for test cases
         tests.each { it ->
             def test = new STestCase(it)
+            test.copyFiles(compiler.programPath) /// this step is important, copy test files to the local folders
             test.outputFile = compiler.programPath + File.separator + test.outputFile
             int r = test.execute(compiler.programPath + "/DLXSimulator" + (group.identity.intValue()<10?"0":"") + group.identity.toString())
             result += "The execution of test case " + it.index
