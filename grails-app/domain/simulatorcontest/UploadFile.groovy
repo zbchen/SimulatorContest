@@ -20,6 +20,8 @@ class UploadFile {
 
     static belongsTo = [group: ContestGroup]
 
+    static hasMany = [results: TestResult]
+
     static constraints = {
         result blank: true, nullable: true
     }

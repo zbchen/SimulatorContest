@@ -2,6 +2,7 @@ package runner
 
 import simulatorcontest.ContestGroup
 import simulatorcontest.TestCase
+import simulatorcontest.TestResult
 
 class Compiler {
     def programPath = ""
@@ -78,6 +79,7 @@ class ParserTestSuite extends STestSuite {
             def c = new STestCase()
             c.index = i
             c.construct(it)
+            c.caseObject = it // attach the database object
             suite.add(c)
             i++
         }
@@ -103,6 +105,8 @@ class STestCase extends AbstractTestCase {
     def oracleFile
     def timeout // in seconds
     def result = ""
+    def caseObject
+    Float executionTime = -1
 
     STestCase(){}
 
@@ -206,15 +210,21 @@ class STestCase extends AbstractTestCase {
         def executionProcess = executionCommand.execute()
         executionProcess.waitFor()
         String resultText = executionProcess.err.text
-        println executionProcess.in.text
+        String inResult = executionProcess.in.text
+        println inResult
         println resultText
         println executionProcess.exitValue()
         if (executionProcess.exitValue() == 0) {
             // successfully execute
             // Parse the result
             if (compare() == 0) {
-                // The result is right
-                //TODO parse the result of execution time
+                // The result is right, parse the result of execution time
+                String timeStr = resultText.substring(0, resultText.indexOf("user"))
+                String[] r = timeStr.split(" ")
+                if (r.length > 0) {
+                    println r.last()
+                    executionTime = r.last().toFloat()
+                }
                 return 0
             } else {
                 // The result is not right
@@ -234,6 +244,8 @@ class STestCase extends AbstractTestCase {
 }
 
 class TestRunner {
+
+    def fileObject
 
     def tarFileName
     def result
@@ -255,13 +267,37 @@ class TestRunner {
             test.copyFiles(compiler.programPath) /// this step is important, copy test files to the local folders
             test.outputFile = compiler.programPath + File.separator + test.outputFile
             int r = test.execute(compiler.programPath + "/DLXSimulator" + (group.identity.intValue()<10?"0":"") + group.identity.toString())
-            result += "The execution of test case " + it.index
+
+            String resultStr = "The execution of test case " + it.index
+
             if (r == -1)
-                result += " fails\n"
+                resultStr += " fails\n"
             else
-                result += " succeeds\n"
+                resultStr += " succeeds\n"
+
+            resultStr += test.result
+
+            result += resultStr
             result += test.result
             result += "\n"
+
+            /// Save the result
+            def resultObject = TestResult.findByFileAndTestcase(fileObject, it.caseObject)
+
+            if (resultObject) {
+                resultObject.time = test.executionTime
+                resultObject.result = resultStr
+            } else {
+//                println test.executionTime
+//                println resultStr
+//                println fileObject
+//                println it.caseObject
+                resultObject = new TestResult(time:test.executionTime, result:resultStr, file:fileObject, testcase: it.caseObject)
+            }
+//            println resultObject
+
+            resultObject.save(true)
+
         }
 
         // remove the temp folder recursively

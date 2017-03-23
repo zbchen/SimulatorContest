@@ -20,6 +20,7 @@ class TesterJob {
                 if (!f.result) {
                     println "-------- start to test group " + it.identity + " ----------"
                     def tester = new TestRunner(tarFileName:f.path, result:"")
+                    tester.fileObject = f  // attach the file object
                     def testSuite = new ParserTestSuite().getSuite("2") // get the first suite
                     tester.test(testSuite, f.group)
                     f.result = tester.result

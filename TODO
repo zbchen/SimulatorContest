@@ -4,12 +4,12 @@ BUG:
 New feature:
  1. Delete test case files when deleting a test case (done)
  2. Show the file's status of testing (done)
- 3. Parser the result
- 4. Calculate the grades
- 5. Provide update functionality, e.g., user & group information, test case information
+ 3. Parser the result (done)
+ 4. Calculate the grades (done)
  6. change the test page displaying all the groups (done)
  7. Detect clones using jplag-2.11.8 (done)
  8. crate a scheduled (one hour) job for executing test cases for untestd files (done)
+ 5. Provide update functionality, e.g., user & group information, test case information
 
 
 

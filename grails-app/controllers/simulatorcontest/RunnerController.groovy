@@ -9,6 +9,7 @@ class RunnerController {
 
     def testFile(UploadFile f) {
         def tester = new TestRunner(tarFileName:f.path, result:"")
+        tester.fileObject = f  // attach the file object
         def testSuite = new ParserTestSuite().getSuite("2") // get the second suite
         tester.test(testSuite, f.group)
         f.result = tester.result
