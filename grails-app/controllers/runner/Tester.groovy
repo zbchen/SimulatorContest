@@ -278,10 +278,10 @@ class TestRunner {
             else
                 resultStr += " succeeds\n"
 
-            resultStr += test.result
+            if (!test.result.isEmpty())
+                resultStr += test.result + "\n"
 
             result += resultStr
-            result += test.result
             result += "\n"
 
             /// Save the result
