@@ -103,7 +103,21 @@ class RunnerController {
             println  session["group"].identity
             if (f.group.id == session["group"].id || session["group"].identity == 75) {
                 if (f.result && !f.result.isEmpty()) {
-                    renderResult(f.result)
+                    def rList = TestResult.findAllByFile(f, [sort:"id", order:"asc"])
+                    if (rList.size() > 0) {
+                        int i = 1
+                        String result = ""
+                        rList.each { it ->
+                            result += "The result of test case " + i + " is : \n"
+                            result += "Output: " + it.result
+                            result += "Time: " + it.time + "s\n"
+                            result += "\n"
+                            i++
+                        }
+                        renderResult(result)
+                    } else {
+                        renderResult(f.result)
+                    }
                 } else {
                     render "No result until now"
                 }

@@ -9,6 +9,7 @@ New feature:
  6. change the test page displaying all the groups (done)
  7. Detect clones using jplag-2.11.8 (done)
  8. crate a scheduled (one hour) job for executing test cases for untestd files (done)
+ 9. provide the detailed view of execution (done)
  5. Provide update functionality, e.g., user & group information, test case information
 
 
