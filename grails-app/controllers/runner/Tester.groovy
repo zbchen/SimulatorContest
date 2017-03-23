@@ -219,11 +219,14 @@ class STestCase extends AbstractTestCase {
             // Parse the result
             if (compare() == 0) {
                 // The result is right, parse the result of execution time
-                String timeStr = resultText.substring(0, resultText.indexOf("user"))
+                String timeStr = resultText.substring(0, resultText.indexOf("elapsed")) // Specially for ubuntu
                 String[] r = timeStr.split(" ")
                 if (r.length > 0) {
-                    println r.last()
-                    executionTime = r.last().toFloat()
+                    String time = r.last()
+                    String[] l = time.split(":") // e.g., "00:01.00"
+                    if (l.size() == 2) { // first part is minute, second part is second
+                        executionTime = (l[0].toInteger().intValue() * 60 + l[1].toFloat().floatValue())
+                    }
                 }
                 return 0
             } else {
