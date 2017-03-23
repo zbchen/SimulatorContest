@@ -109,8 +109,9 @@ class RunnerController {
                         String result = ""
                         rList.each { it ->
                             result += "The result of executing test case " + i + " is : \n"
+                            println it.result + "-------"
                             result += "Output: " + it.result
-                            if (it.result.readLines().size() == 1) result += "\n"
+                            if (it.result.charAt(it.result.size() - 1) != '\n') result += "\n"
                             result += "Time: " + it.time + "s\n"
                             result += "\n"
                             i++
