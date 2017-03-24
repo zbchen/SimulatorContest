@@ -18,18 +18,15 @@ class RunnerController {
         return tester.result
     }
 
-    /*
     def sTestAll() {
         if (params["pd"] != null && params.int("pd") == 752) {
             def glist = ContestGroup.findAll([sort:"identity", order:"asc"])
             glist.each { it ->
                 if (it.files && it.files.size() > 0) {
                     def f = it.files[0] /// latest file
-                    if (!f.result) {
-                        println "-------- start to test group " + it.identity + " ----------"
-                        testFile(f)
-                        println "-------- end to test group " + it.identity + " ----------"
-                    }
+                    println "-------- start to test group " + it.identity + " ----------"
+                    testFile(f)
+                    println "-------- end to test group " + it.identity + " ----------"
                 }
             }
             render "all tested"
@@ -37,7 +34,7 @@ class RunnerController {
             render "not allowed!!"
         }
         render("N")
-    }*/
+    }
 
     def testAll() {
 
@@ -139,7 +136,7 @@ class RunnerController {
         def gList = ContestGroup.findAll([sort:"identity", order:"asc"])
         int size = 0
         gList.each {it ->
-            if (it.files && it.files.size() > 0) { //TODO: the file after...
+            if (it.identity != 75 && it.files && it.files.size() > 0) { //TODO: the file after...
                 def f = it.files[0] // latest file
                 def resultList = TestResult.findAllByFile(f, [sort:"id", order:"asc"])
                 if (resultList.size() > 0) {
