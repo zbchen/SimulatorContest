@@ -18,6 +18,7 @@ class RunnerController {
         return tester.result
     }
 
+    /*
     def sTestAll() {
         if (params["pd"] != null && params.int("pd") == 752) {
             def glist = ContestGroup.findAll([sort:"identity", order:"asc"])
@@ -35,7 +36,8 @@ class RunnerController {
         } else {
             render "not allowed!!"
         }
-    }
+        render("N")
+    }*/
 
     def testAll() {
 
@@ -109,7 +111,7 @@ class RunnerController {
                         String result = ""
                         rList.each { it ->
                             result += "The result of executing test case " + i + " is : \n"
-                            println it.result + "-------"
+                            //println it.result + "-------"
                             result += "Output: " + it.result
                             if (it.result.charAt(it.result.size() - 1) != '\n') result += "\n"
                             result += "Time: " + it.time + "s\n"
@@ -129,6 +131,92 @@ class RunnerController {
         } else {
             render "The upload file of this ID does not exist!"
         }
+    }
+
+    def rank() {
+        // get the result table first [group -> resultList]
+        def resultTable = [:]
+        def gList = ContestGroup.findAll([sort:"identity", order:"asc"])
+        int size = 0
+        gList.each {it ->
+            if (it.files && it.files.size() > 0) { //TODO: the file after...
+                def f = it.files[0] // latest file
+                def resultList = TestResult.findAllByFile(f, [sort:"id", order:"asc"])
+                if (resultList.size() > 0) {
+                    size = resultList.size()
+                    def gResult = new ArrayList()
+                    resultList.each { re ->
+                        //println re.result
+                        if (re.isSuccess()) {
+                            gResult.add(re.time.toString())
+                        } else if (re.isTimeout()) {
+                            gResult.add("Timeout")
+                        } else {
+                            gResult.add("Fails")
+                        }
+                    }
+                    resultTable[it] = gResult
+                }
+            }
+        }
+
+        // Order or rank the groups
+        def weightMap = [0:1, 1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:3, 8:3, 9:3]
+        def gradeMap = [:]   //resultTable
+        // Generate the grade (only failing or timeout is considered)
+        resultTable.keySet().each { g ->
+            def rList = resultTable[g]
+            float grade = 0
+            for (int i = 0; i < rList.size(); i++) {
+                if (rList[i] != "Fails" && rList[i] != "Timeout") {
+                    /// normal results
+                    grade = grade + rList[i].toString().toFloat().floatValue() * weightMap[i]
+                } else {
+                    if (i >= 0 && i <= 7) {
+                        /// the first 7 cases
+                        grade = Float.MAX_VALUE
+                        break
+                    } else {
+                        /// timeout (120s)
+                        grade = grade + 120 * weightMap[i]
+                    }
+                }
+            }
+            gradeMap[g] = grade
+        }
+        // sort the map
+        gradeMap = gradeMap.sort {it.value}
+
+        // println gradeMap
+        // get the ranked map
+        def rankMap = [:]
+        gradeMap.each {
+            rankMap.put(it.key, resultTable[it.key])
+        }
+
+        // generate the result table
+        String result = "<table><tr><th></th>"
+        for (int j = 1 ; j <= size; j++) {
+            result  = result + "<th>T" + j + "</th>"
+        }
+        result += "<th>Rank</th>"
+        result += "</tr>"
+        int r = 1
+        rankMap.keySet().each { g ->
+            def rList = rankMap[g]
+            result += "<tr>"
+            result += "<th>Group" + g.identity + "</th>"
+            rList.each { rstr ->
+                result += "<th>" + rstr + "</th>"
+            }
+            result += "<th>" + r + "</th>"
+            result += "</tr>"
+            r++
+        }
+
+        result += "</table>"
+
+        render result
     }
 
     def index() {

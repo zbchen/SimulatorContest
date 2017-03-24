@@ -11,6 +11,9 @@
         <%if (session["group"] && session["group"].identity != 75) {%>
         <a href="/viewclone">查重结果</a>
         <%}%>
+        <%if (session["group"]) {%>
+        <a href="/Runner/rank">排名</a>
+        <%}%>
         <a href="/Login/logout">注销</a>
     </h1>
     <h1>列表</h1>
