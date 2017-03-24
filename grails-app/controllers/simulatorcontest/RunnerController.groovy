@@ -131,6 +131,11 @@ class RunnerController {
     }
 
     def rank() {
+        if (!session["group"]) {
+            redirect(uri:"/")
+            return
+        }
+
         // get the result table first [group -> resultList]
         def resultTable = [:]
         def gList = ContestGroup.findAll([sort:"identity", order:"asc"])
