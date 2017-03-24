@@ -10,7 +10,7 @@ class RunnerController {
     def testFile(UploadFile f) {
         def tester = new TestRunner(tarFileName:f.path, result:"")
         tester.fileObject = f  // attach the file object
-        def testSuite = new ParserTestSuite().getSuite("2") // get the second suite
+        def testSuite = new ParserTestSuite().getSuite(servletContext["testsuite"])
         tester.test(testSuite, f.group)
         f.result = tester.result
         ///println tester.result
@@ -143,7 +143,14 @@ class RunnerController {
         gList.each {it ->
             if (it.identity != 75 && it.files && it.files.size() > 0) { //TODO: the file after...
                 def f = it.files[0] // latest file
-                def resultList = TestResult.findAllByFile(f, [sort:"id", order:"asc"])
+                def allList = TestResult.findAllByFile(f, [sort:"id", order:"asc"])
+                def resultList = []
+                // just load the results of current test suite
+                allList.each { r ->
+                    if (r.testcase.suite == servletContext["testsuite"]) {
+                        resultList.add(r)
+                    }
+                }
                 if (resultList.size() > 0) {
                     size = resultList.size()
                     def gResult = new ArrayList()
