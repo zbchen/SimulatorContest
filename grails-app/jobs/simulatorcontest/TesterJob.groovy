@@ -21,7 +21,7 @@ class TesterJob {
                     println "-------- start to test group " + it.identity + " ----------"
                     def tester = new TestRunner(tarFileName:f.path, result:"")
                     tester.fileObject = f  // attach the file object
-                    def testSuite = new ParserTestSuite().getSuite(servletContext["testsuite"])
+                    def testSuite = new ParserTestSuite().getSuite("3")
                     tester.test(testSuite, f.group)
                     f.result = tester.result
                     ///println tester.result
