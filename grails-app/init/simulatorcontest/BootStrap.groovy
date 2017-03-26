@@ -14,7 +14,7 @@ class BootStrap {
             adminGroup.save(flush:true)
             println adminGroup
         }
-        servletContext["testsuite"] = "2" // the second suite, to be configed
+        servletContext["testsuite"] = "3" // the second suite, to be configured
     }
 
     def destroy = {
