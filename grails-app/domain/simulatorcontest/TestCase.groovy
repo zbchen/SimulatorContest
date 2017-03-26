@@ -13,7 +13,7 @@ class TestCase {
         return paraStr
     }
 
-    static hasMany = [paras: Parameter]
+    static hasMany = [paras: Parameter, results: TestResult]
 
     static mapping = {
         paras sort : "id", order : "asc"
