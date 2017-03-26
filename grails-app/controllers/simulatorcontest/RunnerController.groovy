@@ -107,13 +107,15 @@ class RunnerController {
                         int i = 1
                         String result = ""
                         rList.each { it ->
-                            result += "The result of executing test case " + i + " is : \n"
-                            //println it.result + "-------"
-                            result += "Output: " + it.result
-                            if (it.result.charAt(it.result.size() - 1) != '\n') result += "\n"
-                            result += "Time: " + it.time + "s\n"
-                            result += "\n"
-                            i++
+                            if (it.testcase.suite == servletContext["testsuite"]) {
+                                result += "The result of executing test case " + i + " is : \n"
+                                //println it.result + "-------"
+                                result += "Output: " + it.result
+                                if (it.result.charAt(it.result.size() - 1) != '\n') result += "\n"
+                                result += "Time: " + it.time + "s\n"
+                                result += "\n"
+                                i++
+                            }
                         }
                         renderResult(result)
                     } else {
