@@ -157,7 +157,7 @@ class RunnerController {
                     size = resultList.size()
                     def gResult = new ArrayList()
                     resultList.each { re ->
-                        //println re.result
+                        println re.result
                         if (re.isSuccess()) {
                             gResult.add(re.time.toString())
                         } else if (re.isTimeout()) {
@@ -195,10 +195,12 @@ class RunnerController {
             }
             gradeMap[g] = grade
         }
+        println gradeMap
+
         // sort the map
         gradeMap = gradeMap.sort {it.value}
 
-        // println gradeMap
+        println gradeMap
         // get the ranked map
         def rankMap = [:]
         gradeMap.each {
