@@ -178,14 +178,14 @@ class RunnerController {
         resultTable.keySet().each { g ->
             def rList = resultTable[g]
             float grade = 0
-            println g
-            println rList
+            //println g
+            //println rList
             for (int i = 0; i < rList.size(); i++) {
                 if (rList[i] != "Fails" && rList[i] != "Timeout") {
                     /// normal results
                     grade = grade + rList[i].toString().toFloat().floatValue() * weightMap[i]
                 } else {
-                    if (i >= 0 && i <= 7) {
+                    if (i >= 0 && i <= 6) {
                         /// the first 7 cases
                         grade = Float.MAX_VALUE
                         break
@@ -197,12 +197,11 @@ class RunnerController {
             }
             gradeMap[g] = grade
         }
-        println gradeMap
 
         // sort the map
         gradeMap = gradeMap.sort {it.value}
 
-        println gradeMap
+        // println gradeMap
         // get the ranked map
         def rankMap = [:]
         gradeMap.each {
