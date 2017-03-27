@@ -205,7 +205,8 @@ class STestCase extends AbstractTestCase {
      * @param program
      */
     def execute(String program) {
-        def executionCommand = "time timeout " + timeout + "s " + program + command()
+        def str = "time timeout " + timeout + "s " + program + command()
+        def executionCommand = ["/bin/bash", "-c", "ulimit -v 1024000; " + str ] // limit the memory to be 1G
         println executionCommand
         def executionProcess = executionCommand.execute()
         executionProcess.waitFor()
