@@ -157,7 +157,7 @@ class RunnerController {
                     size = resultList.size()
                     def gResult = new ArrayList()
                     resultList.each { re ->
-                        println re.result
+                        //println re.result
                         if (re.isSuccess()) {
                             gResult.add(re.time.toString())
                         } else if (re.isTimeout()) {
@@ -178,6 +178,8 @@ class RunnerController {
         resultTable.keySet().each { g ->
             def rList = resultTable[g]
             float grade = 0
+            println g
+            println rList
             for (int i = 0; i < rList.size(); i++) {
                 if (rList[i] != "Fails" && rList[i] != "Timeout") {
                     /// normal results
