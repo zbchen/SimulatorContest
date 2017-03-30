@@ -18,6 +18,7 @@ class UrlMappings {
         "/testsuite"(view:"/testsuite")
         "/addcase"(view:"/addcase")
         "/addpara"(view:"/addpara")
+        "/changepasswd"(view:"/changepasswd")
         "/clone"(view:"/clone")
         "/viewclone"(view:"/viewclone")
         "500"(view:'/error')

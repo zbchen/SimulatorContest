@@ -30,4 +30,31 @@ class RegisterController {
         }
     }
 
+    def changePasswd() {
+        if (!session["group"]) {
+            redirect(uri:"/")
+            return
+        }
+
+        if (params.get("oldpassword") != null && params.get("newpassword") != null) {
+            def g = session["group"]
+            def group = ContestGroup.findById(g.id)
+            if (group) {
+                if (group.password == params.get("oldpassword")) {
+                    println group
+                    println params.get("newpassword")
+                    group.password = params.get("newpassword")
+                    group.save(flush: true)
+                    render "Change successfully"
+                } else {
+                    render "Old passwd is wrong"
+                }
+            } else {
+                render "Invalid"
+            }
+        } else {
+            render "Invalid submission"
+        }
+    }
+
 }

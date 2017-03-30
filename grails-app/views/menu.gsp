@@ -14,6 +14,9 @@
         <%if (session["group"]) {%>
         <a href="/Runner/rank">排名</a>
         <%}%>
+        <%if (session["group"]) {%>
+        <a href="" onclick="window.showModalDialog('/changepasswd')">密码</a>
+        <%}%>
         <a href="/Login/logout">注销</a>
     </h1>
     <h1>列表</h1>
