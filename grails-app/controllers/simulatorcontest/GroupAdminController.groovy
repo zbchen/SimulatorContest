@@ -2,6 +2,25 @@ package simulatorcontest
 
 class GroupAdminController {
 
+    def grade() {
+
+        if (!params["gid"] || !session["group"] || session["group"].identity != 75) {
+            redirect(uri:"/")
+            return
+        }
+
+        int gid = params.int("gid")
+        def g = ContestGroup.findById(gid)
+        if (g) {
+            g.grade = params["grade"].toString().toFloat()
+            g.save(flush:true)
+            render "Grade is updated"
+        } else {
+            render "Group does not exist"
+        }
+
+    }
+
     def remove() {
         /// check the authority
         if (!params["gid"] || !session["group"] || session["group"].identity != 75) {

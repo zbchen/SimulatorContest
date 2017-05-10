@@ -21,6 +21,8 @@ class UrlMappings {
         "/changepasswd"(view:"/changepasswd")
         "/clone"(view:"/clone")
         "/viewclone"(view:"/viewclone")
+        "/comment"(view:"/comment")
+        "/updategrade"(view:"/updategrade")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

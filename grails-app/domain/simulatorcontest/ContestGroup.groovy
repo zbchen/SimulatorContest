@@ -7,7 +7,7 @@ class ContestGroup {
     Integer identity
     Float grade
 
-    static hasMany = [students: Student, files: UploadFile]
+    static hasMany = [students: Student, files: UploadFile, comments: Comment]
 
     static mapping = {
         files sort : "id", order : "desc"

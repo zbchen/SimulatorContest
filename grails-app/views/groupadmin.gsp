@@ -57,6 +57,7 @@
                                     <th>学号1</th>
                                     <th>学生2</th>
                                     <th>学号2</th>
+                                    <th>成绩</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -75,8 +76,10 @@
                                             <th>${g.students[0].identity}</th>
                                             <th>${g.students[1].name}</th>
                                             <th>${g.students[1].identity}</th>
+                                            <th>${g.grade}</th>
                                             <th>
                                                 <a href="/groupAdmin/remove?gid=${g.id}">删除</a>
+                                                <a href="#" onclick="window.showModalDialog('/updategrade?gid=${g.id}')">成绩</a>
                                             </th>
                                         </tr>
                                 </g:each>

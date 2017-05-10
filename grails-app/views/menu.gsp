@@ -18,6 +18,16 @@
         <a href="" onclick="window.showModalDialog('/changepasswd')">密码</a>
         <%}%>
         <a href="/Login/logout">注销</a>
+        <%if (session["group"]) {%>
+            <%
+                def comments = simulatorcontest.Comment.findAllByGroup(session["group"])
+            %>
+            <%if (comments && comments.size() > 0) {%>
+                成绩：<%=session["group"].grade%>
+            <%} else {%>
+                <a href="/comment" onclick="">成绩</a>
+            <%}%>
+        <%}%>
     </h1>
     <h1>列表</h1>
 </section>
