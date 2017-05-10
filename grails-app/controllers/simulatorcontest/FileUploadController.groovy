@@ -50,6 +50,9 @@ class FileUploadController {
       if (!params["fid"] || !session["group"]) {
         redirect(uri:"/")
         return
+      } else {
+        render "remove is disabled"
+        return
       }
 
       def f = UploadFile.findById(params.int("fid"))

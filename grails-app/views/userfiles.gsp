@@ -73,7 +73,7 @@
                                         <th>${f.uploadDate}</th>
                                         <th>
                                             <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
-                                            <a href="/FileUpload/remove?fid=${f.id}">删除</a>
+                                            <!--a href="/FileUpload/remove?fid=${f.id}">删除</a-->
                                         </th>
                                     </tr>
 
