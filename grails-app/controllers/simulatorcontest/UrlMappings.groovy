@@ -23,6 +23,7 @@ class UrlMappings {
         "/viewclone"(view:"/viewclone")
         "/comment"(view:"/comment")
         "/updategrade"(view:"/updategrade")
+        "/groupcomment"(view:"/groupcomment")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
