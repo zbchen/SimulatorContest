@@ -6,6 +6,9 @@ class FileUploadController {
       if (!session["group"]) {
         redirect(uri:"/")
         return
+      } else {
+        render "upload is disabled"
+        return
       }
 
       //println "getting file"
