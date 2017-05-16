@@ -7,6 +7,7 @@
         <a href="/gadmin">组管理</a>
         <a href="/testsuite">测试例</a>
         <a href="/clone">查重</a>
+        <a href="/gradelist">成绩</a>
         <a href="/groupcomment">意见</a>
         <%}%>
         <%if (session["group"] && session["group"].identity != 75) {%>

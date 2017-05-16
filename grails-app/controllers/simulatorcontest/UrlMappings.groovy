@@ -24,6 +24,7 @@ class UrlMappings {
         "/comment"(view:"/comment")
         "/updategrade"(view:"/updategrade")
         "/groupcomment"(view:"/groupcomment")
+        "/gradelist"(view:"/gradelist")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
