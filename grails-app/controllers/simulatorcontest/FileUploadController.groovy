@@ -22,9 +22,10 @@ class FileUploadController {
         // Do file copy
         // make sure the "uploadFiles" folder exists
         def prefix = servletContext.getRealPath("/uploadFiles/")
+        println prefix
         def folder = new File(prefix)
         if (!folder.exists()) {
-          folder.createNewFile()
+          folder.mkdirs()
         }
         def d = new Date()
         def dateStr = d.format("yyyyMMddHHmmss")

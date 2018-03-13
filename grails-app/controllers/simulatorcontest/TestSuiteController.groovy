@@ -64,12 +64,12 @@ class TestSuiteController {
             def prefix = servletContext.getRealPath("/TestCases/") //"/TestCases/"
             def folder = new File(prefix)
             if (!folder.exists()) {
-                folder.createNewFile()
+                folder.mkdirs()
             }
             def d = new Date()
             def dateStr = d.format("yyyyMMddHHmmss")
             Random random = new Random()
-            def fileName =  prefix + dateStr + random.nextInt(1000)
+            def fileName =  prefix  +  dateStr + random.nextInt(1000)
             f.transferTo(new File(fileName))
 
             // record the uploaded file
