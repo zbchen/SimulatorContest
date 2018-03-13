@@ -61,7 +61,7 @@ class TestSuiteController {
         } else {
             // Do file copy
             // make sure the "uploadFiles" folder exists
-            def prefix = "/TestCases/"
+            def prefix = servletContext.getRealPath("/TestCases/") //"/TestCases/"
             def folder = new File(prefix)
             if (!folder.exists()) {
                 folder.createNewFile()
