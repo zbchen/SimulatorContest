@@ -10,7 +10,7 @@ class RegisterController {
     def reg() {
         //int number = params.int("groupnum")
         //def g = ContestGroup.findByIdentity(number)
-        int identity = params.int("num1")
+        String identity = params.get("num1")
         def s = Student.findByIdentity(identity)
         if (s) {
             render "The group of this identity already exists"
