@@ -72,8 +72,9 @@
                                         <th>${f.result?"已测试":"未测试"}</th>
                                         <th>${f.uploadDate}</th>
                                         <th>
+                                            <a href="/Runner/test?fid=${f.id}">测试</a>&nbsp;
                                             <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
-                                            <!--a href="/FileUpload/remove?fid=${f.id}">删除</a-->
+                                            <a href="/FileUpload/remove?fid=${f.id}">删除</a>
                                         </th>
                                     </tr>
 

@@ -6,10 +6,11 @@ class FileUploadController {
       if (!session["group"]) {
         redirect(uri:"/")
         return
-      } else {
-        render "upload is disabled"
-        return
       }
+//      else {
+//        render "upload is disabled"
+//        return
+//      }
 
       //println "getting file"
       def f = request.getFile("myFile")
@@ -20,7 +21,7 @@ class FileUploadController {
       } else {
         // Do file copy
         // make sure the "uploadFiles" folder exists
-        def prefix = "/UploadFiles/"//servletContext.getRealPath("/uploadFiles/")
+        def prefix = servletContext.getRealPath("/uploadFiles/")
         def folder = new File(prefix)
         if (!folder.exists()) {
           folder.createNewFile()
@@ -29,6 +30,7 @@ class FileUploadController {
         def dateStr = d.format("yyyyMMddHHmmss")
         Random random = new Random()
         def fileName =  prefix + dateStr + random.nextInt(1000) + ".tar"
+        println f
         f.transferTo(new File(fileName))
 
         // record the uploaded file
@@ -50,10 +52,11 @@ class FileUploadController {
       if (!params["fid"] || !session["group"]) {
         redirect(uri:"/")
         return
-      } else {
-        render "remove is disabled"
-        return
       }
+//      else {
+//        render "remove is disabled"
+//        return
+//      }
 
       def f = UploadFile.findById(params.int("fid"))
       if (f) {

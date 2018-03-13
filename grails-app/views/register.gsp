@@ -67,10 +67,10 @@
                                 <label class="sr-only" for="form-groupname">组名</label>
                                 <input type="text" name="groupname" placeholder="组名" class="form-username form-control" id="form-username">
                             </div>
-                            <div class="form-group">
+                            <!--div class="form-group">
                                 <label class="sr-only" for="form-gpnum">组号</label>
                                 <input type="text" name="groupnum" placeholder="组号" class="form-username form-control" id="form-gpnum">
-                            </div>
+                            </div-->
                             <div class="form-group">
                                 <label class="sr-only" for="form-password">密码</label>
                                 <input type="password" name="password" placeholder="密码" class="form-password form-control" id="form-password">
@@ -80,21 +80,21 @@
                                 <input type="password" name="password2" placeholder="确认密码" class="form-password form-control" id="form-password2">
                             </div>
                             <div class="form-group">
-                                <label class="sr-only" for="form-name1">组员一姓名</label>
-                                <input type="text" name="name1" placeholder="组员一姓名" class="form-username form-control" id="form-name1">
+                                <label class="sr-only" for="form-name1">组员姓名</label>
+                                <input type="text" name="name1" placeholder="组员姓名" class="form-username form-control" id="form-name1">
                             </div>
                             <div class="form-group">
-                                <label class="sr-only" for="form-num1">组员一学号</label>
-                                <input type="text" name="num1" placeholder="组员一学号" class="form-username form-control" id="form-num1">
+                                <label class="sr-only" for="form-num1">组员学号</label>
+                                <input type="text" name="num1" placeholder="组员学号" class="form-username form-control" id="form-num1">
                             </div>
-                            <div class="form-group">
+                            <!--div class="form-group">
                                 <label class="sr-only" for="form-name2">组员二姓名</label>
                                 <input type="text" name="name2" placeholder="组员二姓名" class="form-username form-control" id="form-name2">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-num2">组员二学号</label>
                                 <input type="text" name="num2" placeholder="组员二学号" class="form-username form-control" id="form-num2">
-                            </div>
+                            </div-->
 
                             <input type="hidden" value="go" name="dest">
                             <div id="form-alert" class="alert alert-info">

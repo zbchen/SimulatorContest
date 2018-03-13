@@ -53,10 +53,8 @@
                                 <tr>
                                     <th>组号</th>
                                     <th>组名</th>
-                                    <th>学生1</th>
-                                    <th>学号1</th>
-                                    <th>学生2</th>
-                                    <th>学号2</th>
+                                    <th>学生</th>
+                                    <th>学号</th>
                                     <th>成绩</th>
                                     <th>操作</th>
                                 </tr>
@@ -70,12 +68,10 @@
                                         /// only list the latest file of each group
                                     %>
                                         <tr>
-                                            <th>${g.identity}</th>
+                                            <th>${g.id}</th>
                                             <th>${g.name}</th>
                                             <th>${g.students[0].name}</th>
                                             <th>${g.students[0].identity}</th>
-                                            <th>${g.students[1].name}</th>
-                                            <th>${g.students[1].identity}</th>
                                             <th>${g.grade}</th>
                                             <th>
                                                 <a href="/groupAdmin/remove?gid=${g.id}">删除</a>

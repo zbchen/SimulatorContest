@@ -18,7 +18,7 @@ class TesterJob {
             if (it.files && it.files.size() > 0) {
                 def f = it.files[0] /// latest file
                 if (!f.result) {
-                    println "-------- start to test group " + it.identity + " ----------"
+                    println "-------- start to test group " + it.id + " ----------"
                     def tester = new TestRunner(tarFileName:f.path, result:"")
                     tester.fileObject = f  // attach the file object
                     def testSuite = new ParserTestSuite().getSuite("3")
@@ -26,7 +26,7 @@ class TesterJob {
                     f.result = tester.result
                     ///println tester.result
                     f.save(flush:true)
-                    println "-------- end to test group " + it.identity + " ----------"
+                    println "-------- end to test group " + it.id + " ----------"
                 }
             }
         }

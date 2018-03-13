@@ -271,7 +271,7 @@ class TestRunner {
             def test = new STestCase(it)
             test.copyFiles(compiler.programPath) /// this step is important, copy test files to the local folders
             test.outputFile = compiler.programPath + File.separator + test.outputFile
-            int r = test.execute(compiler.programPath + "/DLXSimulator" + (group.identity.intValue()<10?"0":"") + group.identity.toString())
+            int r = test.execute(compiler.programPath + "/DLXSimulator" + (group.id.intValue()<10?"00":group.id.intValue()<100?"0":"") + group.id.toString())
 
             String resultStr = "The execution of test case " + it.index
 

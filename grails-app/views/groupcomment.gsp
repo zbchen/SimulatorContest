@@ -60,7 +60,7 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        def glist = simulatorcontest.ContestGroup.findAll([sort:"identity", order:"asc"])
+                                        def glist = simulatorcontest.ContestGroup.findAll([id:"identity", order:"asc"])
                                     %>
                                 <g:each in="${glist}" var="g">
                                     <%
@@ -68,7 +68,7 @@
                                         def clist = simulatorcontest.Comment.findAllByGroup(g)
                                     %>
                                         <tr>
-                                            <th>${g.identity}</th>
+                                            <th>${g.id}</th>
                                             <th>${g.students[0].name}</th>
                                             <th>${g.students[1].name}</th>
                                             <th>${g.grade}</th>

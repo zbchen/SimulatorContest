@@ -73,7 +73,7 @@
                                             def f = g.files[0]
                                     %>
                                         <tr>
-                                            <th>${g.identity}</th>
+                                            <th>${g.id}</th>
                                             <th>${g.name}</th>
                                             <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
                                             <th>${f.result?"已测试"+(f.isPass()?"(已通过)":"(未通过)"):"未测试"}</th>
