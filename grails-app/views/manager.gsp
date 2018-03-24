@@ -54,6 +54,8 @@
                                 <tr>
                                     <th>组号</th>
                                     <th>组名</th>
+                                    <th>姓名</th>
+                                    <th>学号</th>
                                     <th>文件名</th>
                                     <th>状态</th>
                                     <th>提交时间</th>
@@ -75,6 +77,8 @@
                                         <tr>
                                             <th>${g.id}</th>
                                             <th>${g.name}</th>
+                                            <th>${g.students[0].name}</th>
+                                            <th>${g.students[0].identity}</th>
                                             <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
                                             <th>${f.result?"已测试"+(f.isPass()?"(已通过)":"(未通过)"):"未测试"}</th>
                                             <th>${f.uploadDate}</th>
