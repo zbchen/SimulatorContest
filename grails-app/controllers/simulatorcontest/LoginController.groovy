@@ -4,7 +4,7 @@ class LoginController {
 
     def log() {
         def student = Student.findByName(params.get("username"))
-        if (student) {
+        if (student && student.name.equals("czb")) {
             if (student.group.password == params.get("password")) {
                 //login success, record in session
                 //if (student.group.identity == 75) {

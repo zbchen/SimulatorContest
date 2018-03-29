@@ -4,6 +4,7 @@ import runner.ParserTestSuite
 import runner.STestCase
 import runner.STestSuite
 import runner.TestRunner
+import runner.FLRunner
 
 class RunnerController {
 
@@ -17,6 +18,16 @@ class RunnerController {
         f.save(flush:true)
         return tester.result
     }
+
+    def flFile(UploadFile f) {
+        def fl = new FLRunner(tarFileName:f.path, result:"")
+        fl.fileObject = f  // attach the file object
+        def testSuite = new ParserTestSuite().getSuite(servletContext["testsuite"])
+        def debugOraclePath = servletContext.getRealPath("/DebugFiles/")
+        fl.fl(testSuite, f.group, debugOraclePath)
+        return fl.result
+    }
+
 
     def sTestAll() {
         if (params["pd"] != null && params.int("pd") == 752) {
@@ -77,6 +88,26 @@ class RunnerController {
                 renderResult(testFile(f))
             //} else {
                 //render "You cannot do this, please!!!"
+            //}
+        } else {
+            render "The upload file of this ID does not exist!"
+        }
+    }
+
+    def fl() {
+        if (!params["fid"] || !session["group"]) {
+            redirect(uri:"/")
+            return
+        }
+
+        def f = UploadFile.findById(params.int("fid"))
+        if (f) {
+            //if (session["group"].identity == 75){
+            //renderResult(testFile(f))
+            def result = flFile(f)
+            renderResult(result)
+            //} else {
+            //render "You cannot do this, please!!!"
             //}
         } else {
             render "The upload file of this ID does not exist!"

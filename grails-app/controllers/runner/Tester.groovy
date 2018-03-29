@@ -4,6 +4,8 @@ import simulatorcontest.ContestGroup
 import simulatorcontest.TestCase
 import simulatorcontest.TestResult
 
+import javax.servlet.ServletContext
+
 class Compiler {
     def programPath = ""
     def result = ""
@@ -102,6 +104,7 @@ class STestCase extends AbstractTestCase {
     def instructionFile
     def memoryFile
     String outputFile
+    String debugFile = ""
     def oracleFile
     def timeout // in seconds
     def result = ""
@@ -174,11 +177,18 @@ class STestCase extends AbstractTestCase {
     }
 
     def command() {
+        String cmd
         if (!memoryFile || memoryFile.isEmpty()) {
-            return " -i " + instructionFile + " -o " + outputFile
+            cmd = " -i " + instructionFile + " -o " + outputFile
         } else {
-            return " -i " + instructionFile + " -m " + memoryFile + " -o " + outputFile
+            cmd = " -i " + instructionFile + " -m " + memoryFile + " -o " + outputFile
         }
+
+        if (debugFile.isEmpty() == false) {
+            cmd = " -d " + debugFile
+        }
+
+        return cmd
     }
 
     /**
@@ -248,6 +258,82 @@ class STestCase extends AbstractTestCase {
 
 }
 
+class FLRunner {
+    def fileObject
+
+    def tarFileName
+    def result = ""
+
+    def fl(List<STestCase> tests, ContestGroup group, String debugFileFolder) {
+        // compile
+        def compiler = new Compiler()
+        int i = compiler.compile(tarFileName)
+
+        if (i != 0) {
+            // compiling fails
+            result = compiler.result
+            return -1
+        }
+
+        // execute the simulator for test cases
+        tests.each { it ->
+            def test = new STestCase(it)
+            test.copyFiles(compiler.programPath) /// this step is important, copy test files to the local folders
+            test.outputFile = compiler.programPath + File.separator + test.outputFile
+            test.debugFile =  compiler.programPath + File.separator + "debug_" + test.index
+            int r = test.execute(compiler.programPath + "/DLXSimulator" + (group.id.intValue()<10?"00":group.id.intValue()<100?"0":"") + group.id.toString())
+
+
+            if (r == -1) {
+                if (test.result.equals("The output of this test case is wrong")) {
+                    /// we only consider the wrong case where output is not right
+
+                    /// compare oracle debug file with the output file
+                    String resultStr = "The fault localization w.r.t. the running of test case " + it.index + ": \n"
+
+                    def output_debug_file = new File(test.outputFile)
+                    def oracle_debug_file = new File(debugFileFolder + test.index)
+                    if (!output_debug_file.exists() || !oracle_debug_file.exists()) {
+                        resultStr = "failed to localize"
+                        result += resultStr
+                        return
+                    }
+
+                    List<String> outputLines = output_debug_file.readLines()
+                    List<String> oracleLines = oracle_debug_file.readLines()
+                    //if (oracleLines.size() != outputLines.size()) return -1
+
+                    for (int j = 0; i < oracleLines.size(); j++) {
+                        String oracle = outputLines[j].trim()
+                        String[] strArrray = oracle.split("%")[1]
+                        if (strArrray.size() >= 2) {
+                            String instr = strArrray[0]
+                            String rstate = strArrray[1]
+                            if (rstate != outputLines[j].trim()) {
+                                resultStr = "The following instruction is not right: " + instr
+                                break
+                            }
+                        }
+                    }
+
+                    result += resultStr
+                    result += "\n"
+
+                }
+            }
+        }
+
+        // remove the temp folder recursively
+//        def folder = new File(compiler.programPath)
+//        if (folder.exists()) {
+//            folder.deleteDir()
+//        }
+
+        return 0
+    }
+
+}
+
 class TestRunner {
 
     def fileObject
@@ -311,7 +397,7 @@ class TestRunner {
 //            folder.deleteDir()
 //        }
 
-        return 0;
+        return 0
     }
 
 }
