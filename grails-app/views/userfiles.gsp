@@ -75,7 +75,7 @@
                                             <a href="/Runner/test?fid=${f.id}">测试</a>&nbsp;
                                             <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
                                         <!--%if (session["group"] && session["group"].identity == 75) {%-->
-                                            <a href="/Runner/fl?fid=${f.id}">错误定位</a>&nbsp;
+                                            <a href="/Runner/fl?fid=${f.id}">缺陷定位</a>&nbsp;
                                         <!--%}%-->
                                             <a href="/FileUpload/remove?fid=${f.id}">删除</a>
                                         </th>
