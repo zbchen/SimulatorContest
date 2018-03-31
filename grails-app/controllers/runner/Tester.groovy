@@ -304,13 +304,30 @@ class FLRunner {
                     //if (oracleLines.size() != outputLines.size()) return -1
 
                     for (int j = 0; i < oracleLines.size(); j++) {
-                        String oracle = outputLines[j].trim()
-                        String[] strArrray = oracle.split("%")[1]
-                        if (strArrray.size() >= 2) {
-                            String instr = strArrray[0]
-                            String rstate = strArrray[1]
-                            if (rstate != outputLines[j].trim()) {
-                                resultStr = "The following instruction is not right: " + instr
+                        String oracle = oracleLines[j].trim()
+                        String output = outputLines[j].trim()
+                        String[] oracle_strArrray = oracle.split("#")
+                        String[] output_strArrray = oracle.split("#")
+                        if (oracle_strArrray.size() >= 2 && output_strArrray.size() >= 2) {
+                            String oracle_instr = oracle_strArrray[0]
+                            String oracle_rstate = oracle_strArrray[1]
+                            String output_instr = output_strArrray[0]
+                            String output_rstate = output_strArrray[1]
+                            if (oracle_instr.equals(output_instr)) {
+                                if (oracle_rstate.equals(output_rstate) == false) {
+                                    resultStr = "The following instruction is maybe not right: " + oracle_instr + "\n"
+                                    if (j > 0) {
+                                        resultStr = "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
+                                        resultStr = "\n"
+                                    }
+                                    break
+                                }
+                            } else {
+                                resultStr = "The instruction is different: " + oracle_instr + "(oracle):" + output_instr+"(yours)\n"
+                                if (j > 0) {
+                                    resultStr = "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
+                                    resultStr = "\n"
+                                }
                                 break
                             }
                         }
