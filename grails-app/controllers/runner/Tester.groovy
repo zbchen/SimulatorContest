@@ -318,7 +318,7 @@ class FLRunner {
                                     resultStr = "The following instruction is maybe not right: " + oracle_instr + "\n"
                                     if (j > 0) {
                                         resultStr = "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
-                                        resultStr = "\n"
+                                        resultStr += "\n"
                                     }
                                     break
                                 }
@@ -326,7 +326,7 @@ class FLRunner {
                                 resultStr = "The instruction is different: " + oracle_instr + "(oracle):" + output_instr+"(yours)\n"
                                 if (j > 0) {
                                     resultStr = "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
-                                    resultStr = "\n"
+                                    resultStr += "\n"
                                 }
                                 break
                             }
