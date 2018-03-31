@@ -250,8 +250,18 @@ class STestCase extends AbstractTestCase {
             // Fail or timeout, record the result
             if (executionProcess.exitValue() == 124)
                 result = "The execution of this test case is timeout"
-            else
-                result = resultText
+            else {
+                if (resultText.readLines().size() >= 10) {
+                    /// only last 10 lines
+                    /// protect test case sources
+                    result = ""
+                    for (int i = 0; i < 10; i++) {
+                        result += resultText.readLines()[i - 10 + i] + "\n"
+                    }
+                } else {
+                    result = resultText
+                }
+            }
             return -1
         }
     }
