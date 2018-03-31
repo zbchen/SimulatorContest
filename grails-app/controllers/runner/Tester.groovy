@@ -264,7 +264,7 @@ class FLRunner {
     def tarFileName
     def result = ""
 
-    def fl(List<STestCase> tests, ContestGroup group, String debugFileFolder) {
+    def fl(List<STestCase> tests, ContestGroup group, String debugFileFolder, String suiteName) {
         // compile
         def compiler = new Compiler()
         int i = compiler.compile(tarFileName)
@@ -299,7 +299,7 @@ class FLRunner {
                     String resultStr = "The fault localization w.r.t. the running of test case " + it.index + ": \n"
 
                     def output_debug_file = new File(test.outputFile)
-                    def oracle_debug_file = new File(debugFileFolder + test.caseObject.suite + "-" + test.index)
+                    def oracle_debug_file = new File(debugFileFolder + suiteName + "-" + test.index)
                     if (!output_debug_file.exists() || !oracle_debug_file.exists()) {
                         resultStr = "failed to localize"
                         result += resultStr

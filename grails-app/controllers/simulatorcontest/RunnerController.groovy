@@ -24,7 +24,7 @@ class RunnerController {
         fl.fileObject = f  // attach the file object
         def testSuite = new ParserTestSuite().getSuite(servletContext["testsuite"])
         def debugOraclePath = servletContext.getRealPath("/DebugFiles/")
-        fl.fl(testSuite, f.group, debugOraclePath)
+        fl.fl(testSuite, f.group, debugOraclePath, servletContext["testsuite"])
         return fl.result
     }
 
