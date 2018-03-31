@@ -332,7 +332,12 @@ class FLRunner {
                             } else {
                                 resultStr += "The instruction is different: " + oracle_instr + "(oracle):" + output_instr+"(yours)\n"
                                 if (j > 0) {
-                                    resultStr += "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
+                                    String tmp = ""
+                                    for (int k = 0; k < j ; k++) {
+                                        tmp += oracleLines[k].substring(0, oracleLines[j - 1].indexOf('#')) + ";"
+                                    }
+                                    resultStr += "The before instruction seq is : " + tmp
+
                                     resultStr += "\n"
                                 }
                                 break
