@@ -278,6 +278,13 @@ class FLRunner {
         // execute the simulator for test cases
         tests.each { it ->
             def test = new STestCase(it)
+
+            if (test.index == 3) { /// skip the third one
+                return
+            }
+
+            test.timeout *= 2 /// double the timeout for fault localization
+
             test.copyFiles(compiler.programPath) /// this step is important, copy test files to the local folders
             test.outputFile = compiler.programPath + File.separator + test.outputFile
             test.debugFile =  compiler.programPath + File.separator + "debug_" + test.index
