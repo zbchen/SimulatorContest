@@ -298,7 +298,7 @@ class FLRunner {
                     /// compare oracle debug file with the output file
                     String resultStr = "The fault localization w.r.t. the running of test case " + it.index + ": \n"
 
-                    def output_debug_file = new File(test.outputFile)
+                    def output_debug_file = new File(test.debugFile)
                     def oracle_debug_file = new File(debugFileFolder + suiteName + "-" + test.index)
                     if (!output_debug_file.exists() || !oracle_debug_file.exists()) {
                         resultStr = "failed to localize"
