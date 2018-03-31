@@ -322,17 +322,17 @@ class FLRunner {
                             String output_rstate = output_strArrray[1].trim()
                             if (oracle_instr.toLowerCase().equals(output_instr.toLowerCase())) {
                                 if (oracle_rstate.equals(output_rstate) == false) {
-                                    resultStr = "The following instruction is maybe not right: " + oracle_instr + "\n"
+                                    resultStr += "The following instruction is maybe not right: " + oracle_instr + "\n"
                                     if (j > 0) {
-                                        resultStr = "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
+                                        resultStr += "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
                                         resultStr += "\n"
                                     }
                                     break
                                 }
                             } else {
-                                resultStr = "The instruction is different: " + oracle_instr + "(oracle):" + output_instr+"(yours)\n"
+                                resultStr += "The instruction is different: " + oracle_instr + "(oracle):" + output_instr+"(yours)\n"
                                 if (j > 0) {
-                                    resultStr = "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
+                                    resultStr += "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
                                     resultStr += "\n"
                                 }
                                 break
@@ -341,7 +341,7 @@ class FLRunner {
                     }
 
                     result += resultStr
-                    result += "\n"
+                    result += "--------------------------------------------\n"
 
                 }
             }
