@@ -309,11 +309,11 @@ class FLRunner {
                         String[] oracle_strArrray = oracle.split("#")
                         String[] output_strArrray = oracle.split("#")
                         if (oracle_strArrray.size() >= 2 && output_strArrray.size() >= 2) {
-                            String oracle_instr = oracle_strArrray[0]
-                            String oracle_rstate = oracle_strArrray[1]
-                            String output_instr = output_strArrray[0]
-                            String output_rstate = output_strArrray[1]
-                            if (oracle_instr.equals(output_instr)) {
+                            String oracle_instr = oracle_strArrray[0].trim()
+                            String oracle_rstate = oracle_strArrray[1].trim()
+                            String output_instr = output_strArrray[0].trim()
+                            String output_rstate = output_strArrray[1].trim()
+                            if (oracle_instr.toLowerCase().equals(output_instr.toLowerCase())) {
                                 if (oracle_rstate.equals(output_rstate) == false) {
                                     resultStr = "The following instruction is maybe not right: " + oracle_instr + "\n"
                                     if (j > 0) {
