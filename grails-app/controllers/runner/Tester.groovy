@@ -185,7 +185,7 @@ class STestCase extends AbstractTestCase {
         }
 
         if (debugFile.isEmpty() == false) {
-            cmd = " -d " + debugFile
+            cmd += " -d " + debugFile
         }
 
         return cmd
