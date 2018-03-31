@@ -324,7 +324,11 @@ class FLRunner {
                                 if (oracle_rstate.equals(output_rstate) == false) {
                                     resultStr += "The following instruction is maybe not right: " + oracle_instr + "\n"
                                     if (j > 0) {
-                                        resultStr += "The last instruction is : " + oracleLines[j - 1].substring(0, oracleLines[j - 1].indexOf('#'))
+                                        String tmp = ""
+                                        for (int k = 0; k < j ; k++) {
+                                            tmp += oracleLines[k].substring(0, oracleLines[k].indexOf('#')) + ";"
+                                        }
+                                        resultStr += "The before instruction sequence is : " + tmp
                                         resultStr += "\n"
                                     }
                                     break
@@ -336,7 +340,7 @@ class FLRunner {
                                     for (int k = 0; k < j ; k++) {
                                         tmp += oracleLines[k].substring(0, oracleLines[k].indexOf('#')) + ";"
                                     }
-                                    resultStr += "The before instruction seq is : " + tmp
+                                    resultStr += "The before instruction sequence is : " + tmp
 
                                     resultStr += "\n"
                                 }
