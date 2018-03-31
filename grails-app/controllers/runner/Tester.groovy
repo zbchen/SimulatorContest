@@ -307,7 +307,7 @@ class FLRunner {
                         String oracle = oracleLines[j].trim()
                         String output = outputLines[j].trim()
                         String[] oracle_strArrray = oracle.split("#")
-                        String[] output_strArrray = oracle.split("#")
+                        String[] output_strArrray = output.split("#")
                         if (oracle_strArrray.size() >= 2 && output_strArrray.size() >= 2) {
                             String oracle_instr = oracle_strArrray[0].trim()
                             String oracle_rstate = oracle_strArrray[1].trim()
