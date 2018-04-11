@@ -75,6 +75,8 @@
                                             def f = g.files[0]
                                             boolean b = false
                                             f.results.each { it ->
+                                                println it.testcase.suite
+                                                println request.servletContext["testsuite"]
                                                 if (it.testcase.suite.equals(request.servletContext["testsuite"]) {
                                                     b = true
                                                 }
