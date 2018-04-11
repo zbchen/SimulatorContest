@@ -77,7 +77,7 @@
                                             f.results.each { it ->
                                                 println it.testcase.suite
                                                 println request.servletContext["testsuite"]
-                                                if (it.testcase.suite.equals(request.servletContext["testsuite"]) {
+                                                if (it.testcase.suite.equals(request.servletContext["testsuite"])) {
                                                     b = true
                                                 }
                                             }
