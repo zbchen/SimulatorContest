@@ -77,6 +77,9 @@ class CloneDetectorController {
     }
 
     def start() {
+
+        boolean considerLastYear = true
+
         if (!session["group"] || session["group"].identity != 75) {
             render "not valid"
             return
@@ -130,6 +133,21 @@ class CloneDetectorController {
             }
         }
 
+        // unpack the files of 2017
+
+        if (considerLastYear) {
+            def tarCommand = "tar -xf /root/2017.tar -C " + folderName
+            def tarProcess = tarCommand.execute()
+            def out = new StringBuffer()
+            def err = new StringBuffer()
+            tarProcess.consumeProcessOutput(out, err)
+            tarProcess.waitFor()
+            if (tarProcess.exitValue() != 0) {
+                println out.toString()
+                println err.toString()
+            }
+        }
+
         // invoke jplag to do detect
 
         String command = "-l c/c++ -s " + folderName + " -r " + resultName
@@ -150,20 +168,22 @@ class CloneDetectorController {
             }
             result += "</tr>"
             for (int i = 0; i < groups.size(); i++) {
-                float total = 0.0
-                String eachGroup = ""
-                for (int j = 0 ; j < groups.size(); j ++) {
-                    if (j == i) {
-                        eachGroup  = eachGroup + "<th>  </th>"
-                    } else {
-                        eachGroup  = eachGroup + "<th>" + program.get_similarity().getSimilarity(i,j) + "%</th>"
-                        total += program.get_similarity().getSimilarity(i,j)
+                if (groups[i].contains("-") == false) { /// only consider current year
+                    float total = 0.0
+                    String eachGroup = ""
+                    for (int j = 0 ; j < groups.size(); j ++) {
+                        if (j == i) {
+                            eachGroup  = eachGroup + "<th>  </th>"
+                        } else {
+                            eachGroup  = eachGroup + "<th>" + program.get_similarity().getSimilarity(i,j) + "%</th>"
+                            total += program.get_similarity().getSimilarity(i,j)
+                        }
                     }
+                    result += "<tr>"
+                    result += ("<th>" + groups[i] + "(" + total + ")"  + "</th>")
+                    result += eachGroup
+                    result += "</tr>"
                 }
-                result += "<tr>"
-                result += ("<th>" + groups[i] + "(" + total + ")"  + "</th>")
-                result += eachGroup
-                result += "</tr>"
             }
 
             result += "</table>"
