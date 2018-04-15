@@ -14,7 +14,7 @@
         <a href="/viewclone">查重结果</a>
         <%}%>
         <%if (session["group"]) {%>
-        <!--a href="/Runner/rank">排名</a-->
+        <a href="/Runner/rank">排名</a>
         <%}%>
         <%if (session["group"]) {%>
         <a href="" onclick="window.showModalDialog('/changepasswd')">密码</a>
