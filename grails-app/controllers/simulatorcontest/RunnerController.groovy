@@ -12,9 +12,23 @@ class RunnerController {
         def tester = new TestRunner(tarFileName:f.path, result:"")
         tester.fileObject = f  // attach the file object
         def testSuite = new ParserTestSuite().getSuite(servletContext["testsuite"])
+        def oldSuite = null
+        if (servletContext["testsuite"] == "003") {
+            oldSuite = new ParserTestSuite().getSuite("002")
+        }
+        /// do the current test suite
         tester.test(testSuite, f.group)
         f.result = tester.result
         ///println tester.result
+
+        /// do the Regression testing if possible
+        if (oldSuite != null) {
+            tester.result = ""
+            tester.test(oldSuite, f.group) {
+                f.result += "--------------------------Results of the 2nd testsuite (Regression Testing)-----------------------------\n"
+                f.result += tester.result
+            }
+        }
         f.save(flush:true)
         return tester.result
     }
@@ -178,15 +192,23 @@ class RunnerController {
                 def f = it.files[0] // latest file
                 def allList = TestResult.findAllByFile(f, [sort:"id", order:"asc"])
                 def resultList = []
+                def regressionList = []
                 // just load the results of current test suite
                 allList.each { r ->
                     if (r.testcase.suite == servletContext["testsuite"]) {
                         resultList.add(r)
                     }
+
+                    /// get the results of the 2nd testsuite
+                    if (r.testcase.suite == "002") {
+                        regressionList.add(r)
+                    }
                 }
+
                 if (resultList.size() > 0) {
                     size = resultList.size()
                     def gResult = new ArrayList()
+                    /// add the 3rd testing results
                     resultList.each { re ->
                         //println re.result
                         if (re.isSuccess()) {
@@ -197,8 +219,24 @@ class RunnerController {
                             gResult.add("Fails")
                         }
                     }
+                    /// add the 2nd testing results
+                    if (regressionList.size() > 0) {
+                        size += regressionList.size()
+                        regressionList.each { re ->
+                            //println re.result
+                            if (re.isSuccess()) {
+                                gResult.add(re.time.toString())
+                            } else if (re.isTimeout()) {
+                                gResult.add("Timeout")
+                            } else {
+                                gResult.add("Fails")
+                            }
+                        }
+                    }
+
                     resultTable[it] = gResult
                 }
+
             }
         }
 
@@ -214,9 +252,11 @@ class RunnerController {
             for (int i = 0; i < rList.size(); i++) {
                 if (rList[i] != "Fails" && rList[i] != "Timeout") {
                     /// normal results
-                    grade = grade + rList[i].toString().toFloat().floatValue() * weightMap[i]
+                    if (i >= 0 && i <=9 ) { /// only consider the 3rd testsuite for ranking
+                        grade = grade + rList[i].toString().toFloat().floatValue() * weightMap[i]
+                    }
                 } else {
-                    if (i >= 0 && i <= 6) {
+                    if ((i >= 0 && i <= 6) || (i >= 10 && i <= 19)) {
                         /// the first 7 cases
                         grade = Float.MAX_VALUE
                         break
@@ -241,20 +281,25 @@ class RunnerController {
 
         // generate the result table
         String result = "<table><tr><th></th>"
-        for (int j = 1 ; j <= size; j++) {
+        for (int j = 1 ; j <= 10; j++) {
             result  = result + "<th>T" + j + "</th>"
         }
         result += "<th>Rank</th>"
+        for (int j = 1 ; j <= 10; j++) {
+            result  = result + "<th>T" + j + "</th>"
+        }
         result += "</tr>"
         int r = 1
         rankMap.keySet().each { g ->
             def rList = rankMap[g]
             result += "<tr>"
             result += "<th>Group" + g.identity + "</th>"
-            rList.each { rstr ->
+            rList.eachWithIndex { rstr, index ->
                 result += "<th>" + rstr + "</th>"
+                if (index == 9) { /// add the rank
+                    result += "<th>" + r + "</th>"
+                }
             }
-            result += "<th>" + r + "</th>"
             result += "</tr>"
             r++
         }
