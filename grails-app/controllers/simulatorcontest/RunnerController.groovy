@@ -164,6 +164,22 @@ class RunnerController {
                                 i++
                             }
                         }
+
+                        result += "--------------------------Results of the 2nd testsuite (Regression Testing)-----------------------------\n\n"
+                        i = 1
+                        rList.each { it ->
+                            if (it.testcase.suite == "002") {
+                                result += "The result of executing test case " + i + " is : \n"
+                                //println it.result + "-------"
+                                result += "Output: " + it.result
+                                if (it.result.charAt(it.result.size() - 1) != '\n') result += "\n"
+                                result += "Time: " + it.time + "s\n"
+                                result += "\n"
+                                i++
+                            }
+                        }
+
+
                         renderResult(result)
                     } else {
                         renderResult(f.result)
