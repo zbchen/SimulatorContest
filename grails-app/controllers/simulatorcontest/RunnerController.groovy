@@ -295,7 +295,7 @@ class RunnerController {
         rankMap.keySet().each { g ->
             def rList = rankMap[g]
             result += "<tr>"
-            result += "<th>Group" + g.identity + "</th>"
+            result += "<th>Group" + (g.id.intValue()<10?"00":g.id.intValue()<100?"0":"") + g.id.toString() + "</th>"
             rList.eachWithIndex { rstr, index ->
                 result += "<th>" + rstr + "</th>"
                 if (index == 9) { /// add the rank
