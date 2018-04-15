@@ -9,6 +9,7 @@ import runner.FLRunner
 class RunnerController {
 
     def testFile(UploadFile f) {
+        String result = ""
         def tester = new TestRunner(tarFileName:f.path, result:"")
         tester.fileObject = f  // attach the file object
         def testSuite = new ParserTestSuite().getSuite(servletContext["testsuite"])
@@ -19,18 +20,19 @@ class RunnerController {
         /// do the current test suite
         tester.test(testSuite, f.group)
         f.result = tester.result
+        result = tester.result
         ///println tester.result
 
         /// do the Regression testing if possible
         if (oldSuite != null) {
             tester.result = ""
-            tester.test(oldSuite, f.group) {
-                f.result += "--------------------------Results of the 2nd testsuite (Regression Testing)-----------------------------\n"
-                f.result += tester.result
-            }
+            tester.test(oldSuite, f.group)
+            f.result += "--------------------------Results of the 2nd testsuite (Regression Testing)-----------------------------\n"
+            f.result += tester.result
+            result = f.result
         }
         f.save(flush:true)
-        return tester.result
+        return result
     }
 
     def flFile(UploadFile f) {
