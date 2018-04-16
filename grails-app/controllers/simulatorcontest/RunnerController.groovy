@@ -308,8 +308,24 @@ class RunnerController {
         }
         result += "</tr>"
         int r = 1
+        boolean under = false
         rankMap.keySet().each { g ->
             def rList = rankMap[g]
+
+            if (gradeMap[g] == Float.MAX_VALUE && under == false) { /// add the separator
+                result += "<tr>"
+                for (int i = 0; i < 22; i++) {
+                    result += "<th>-</th>"
+                }
+                result += "</tr>"
+                result += "<tr>"
+                for (int i = 0; i < 22; i++) {
+                    result += "<th>-</th>"
+                }
+                result += "</tr>"
+                under = true
+            }
+
             result += "<tr>"
             result += "<th>Group" + (g.id.intValue()<10?"00":g.id.intValue()<100?"0":"") + g.id.toString() + "</th>"
             rList.eachWithIndex { rstr, index ->
