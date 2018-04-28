@@ -40,8 +40,12 @@ class RunnerController {
         fl.fileObject = f  // attach the file object
         def testSuite = new ParserTestSuite().getSuite(servletContext["testsuite"])
         def debugOraclePath = servletContext.getRealPath("/DebugFiles/")
+        String result = ""
+
+        result += "-------------------------------The Following is the fault localization result of 3rd test suite\n\n"
+
         fl.fl(testSuite, f.group, debugOraclePath, servletContext["testsuite"])
-        String result = fl.result
+        result += fl.result
 
         result += "\n\n"
         result += "-------------------------------The Following is the fault localization result of 2nd test suite\n\n"
