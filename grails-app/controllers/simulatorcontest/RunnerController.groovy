@@ -41,7 +41,16 @@ class RunnerController {
         def testSuite = new ParserTestSuite().getSuite(servletContext["testsuite"])
         def debugOraclePath = servletContext.getRealPath("/DebugFiles/")
         fl.fl(testSuite, f.group, debugOraclePath, servletContext["testsuite"])
-        return fl.result
+        String result = fl.result
+
+        result += "\n\n"
+        result += "-------------------------------The Following is the fault localization result of 2nd test suite\n\n"
+
+        testSuite = new ParserTestSuite().getSuite("002")
+        fl.fl(testSuite, f.group, debugOraclePath, "002")
+        result += fl.result
+
+        return result
     }
 
 

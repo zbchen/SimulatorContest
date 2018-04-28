@@ -289,7 +289,11 @@ class FLRunner {
         tests.each { it ->
             def test = new STestCase(it)
 
-            if (test.index == 3) { /// skip the third one
+            if (test.index == 3 && suiteName == "002") { /// skip the third one of the testsuite 2
+                return
+            }
+
+            if ((test.index in [1, 2, 5, 6, 7]) == false  && suiteName == "003") { /// skip the third one of the testsuite 2
                 return
             }
 
