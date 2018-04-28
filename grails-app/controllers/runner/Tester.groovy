@@ -324,7 +324,7 @@ class FLRunner {
                     List<String> oracleLines = oracle_debug_file.readLines()
                     //if (oracleLines.size() != outputLines.size()) return -1
 
-                    for (int j = 0; i < oracleLines.size(); j++) {
+                    for (int j = 0; j < oracleLines.size(); j++) {
                         String oracle = oracleLines[j].trim()
                         String output = outputLines[j].trim()
                         String[] oracle_strArrray = oracle.split("#")
