@@ -7,7 +7,7 @@ class LoginController {
         if (student /*&& student.name.equals("czb")*/) {
             if (student.group.password == params.get("password")) {
                 //login success, record in session
-                if (student.group.identity == 1) {
+                if (student.group.identity == 75) {
                     session["group"] = student.group
                     session["student"] = student
                     redirect(uri: "/user")
