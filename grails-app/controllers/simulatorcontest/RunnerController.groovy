@@ -311,7 +311,7 @@ class RunnerController {
         }
 
         // generate the result table
-        String result = "<table><tr><th></th>"
+        String result = "<table><tr><th></th><th></th>"
         for (int j = 1 ; j <= 10; j++) {
             result  = result + "<th>T" + j + "</th>"
         }
@@ -340,6 +340,7 @@ class RunnerController {
             }
 
             result += "<tr>"
+            result += "<th>Group" + g.students[0].identity + "</th>"
             result += "<th>Group" + (g.id.intValue()<10?"00":g.id.intValue()<100?"0":"") + g.id.toString() + "</th>"
             rList.eachWithIndex { rstr, index ->
                 result += "<th>" + rstr + "</th>"
