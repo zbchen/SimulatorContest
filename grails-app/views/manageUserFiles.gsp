@@ -61,7 +61,9 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        def flist = simulatorcontest.UploadFile.findAllByGroup(params["gid"], [sort:"id", order:"desc"])
+                                        int gid = params.int("gid")
+                                        def g = simulatorcontest.ContestGroup.findById(gid)
+                                        def flist = simulatorcontest.UploadFile.findAllByGroup(g, [sort:"id", order:"desc"])
                                         def i = 1
                                     %>
                                 <g:each in="${flist}" var="f">
