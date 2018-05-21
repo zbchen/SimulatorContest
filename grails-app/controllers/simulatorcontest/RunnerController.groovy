@@ -109,6 +109,9 @@ class RunnerController {
         if (!params["fid"] || !session["group"]) {
             redirect(uri:"/")
             return
+        } else {
+            render "test is disabled"
+            return
         }
 
         def f = UploadFile.findById(params.int("fid"))
@@ -126,6 +129,9 @@ class RunnerController {
     def fl() {
         if (!params["fid"] || !session["group"]) {
             redirect(uri:"/")
+            return
+        } else {
+            render "fault localization is disabled"
             return
         }
 
