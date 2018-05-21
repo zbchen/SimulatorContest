@@ -61,7 +61,7 @@ class FileUploadController {
 
       def f = UploadFile.findById(params.int("fid"))
       if (f) {
-        if (f.group.id == session["group"].id) {
+        if (f.group.id == session["group"].id || session["group"].identity == 75) {
           String fileName = f.path
           f.delete(flush:true)
           def file = new File(fileName)
