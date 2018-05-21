@@ -13,6 +13,7 @@ class UrlMappings {
         "/register"(view:"/register")
         "/user"(view:"/userfiles")
         "/admin"(view:"/manager")
+        "/muserfile"(view:"/manageUserFiles")
         "/menu"(view:"/menu")
         "/gadmin"(view:"/groupadmin")
         "/testsuite"(view:"/testsuite")
