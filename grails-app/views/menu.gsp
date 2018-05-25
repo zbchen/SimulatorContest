@@ -27,7 +27,7 @@
             <%if (comments && comments.size() > 0) {%>
                 成绩：<%=session["group"].grade%>
             <%} else {%>
-                <!--a href="/comment" onclick="">成绩</a-->
+                <a href="/comment" onclick="">成绩</a>
             <%}%>
         组号：<%=session["group"].id%>
         <%}%>
