@@ -70,7 +70,7 @@
                                         <tr>
                                             <th>${g.id}</th>
                                             <th>${g.students[0].name}</th>
-                                            <th>${g.students[1].name}</th>
+                                            <th></th>
                                             <th>${g.grade}</th>
                                             <th>
                                                 <%if (clist.size() > 0) {%>
