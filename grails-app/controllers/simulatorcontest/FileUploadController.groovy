@@ -7,7 +7,7 @@ class FileUploadController {
         redirect(uri:"/")
         return
       } else {
-        if (session["student"].grade >= 60) {
+        if (session["group"].grade >= 60) {
           render "You have passed, so upload is disabled"
           return
         }

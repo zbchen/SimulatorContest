@@ -110,7 +110,7 @@ class RunnerController {
             redirect(uri:"/")
             return
         } else {
-            if (session["student"].grade > 60) {
+            if (session["group"].grade > 60) {
                 render "You have passed; test is disabled"
                 return
             }

@@ -70,7 +70,7 @@
                                 <g:each in="${glist}" var="g">
                                     <%
                                         /// only list the latest file of each group
-                                        if (g.students[0].grade < 60) {
+                                        if (g.grade < 60) {
                                         if (g.files.size() > 0) {
                                             //def fileList = simulatorcontest.UploadFile.findAllByGroup(g, [sort:"id", order:"desc"])
                                             def f = g.files[0]

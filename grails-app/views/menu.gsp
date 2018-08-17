@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>
         <a href="/user">用户</a>
-        <%if (session["student"] && session["student"].grade < 60) {%>
+        <%if (session["group"] && session["group"].grade < 60) {%>
         <a href="/FileUpload">上载</a>
         <%}%>
         <%if (session["group"] && session["group"].identity == 75) {%>
