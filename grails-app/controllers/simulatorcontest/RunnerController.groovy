@@ -110,8 +110,10 @@ class RunnerController {
             redirect(uri:"/")
             return
         } else {
-            render "test is disabled"
-            return
+            if (session["student"].grade > 60) {
+                render "You have passed; test is disabled"
+                return
+            }
         }
 
         def f = UploadFile.findById(params.int("fid"))

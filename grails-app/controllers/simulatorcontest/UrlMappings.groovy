@@ -12,6 +12,7 @@ class UrlMappings {
         "/"(view:"/index")
         "/register"(view:"/register")
         "/user"(view:"/userfiles")
+        "/bukao"(view:"/bukao")
         "/admin"(view:"/manager")
         "/muserfile"(view:"/manageUserFiles")
         "/menu"(view:"/menu")

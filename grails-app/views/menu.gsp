@@ -1,10 +1,11 @@
 <section class="content-header">
     <h1>
         <a href="/user">用户</a>
-        <%if (session["group"] && session["group"].students[0].grade < 60) {%>
+        <%if (session["student"] && session["student"].grade < 60) {%>
         <a href="/FileUpload">上载</a>
         <%}%>
         <%if (session["group"] && session["group"].identity == 75) {%>
+        <a href="/bukao">补考</a>
         <a href="/admin">测试</a>
         <a href="/gadmin">组管理</a>
         <a href="/testsuite">测试例</a>
