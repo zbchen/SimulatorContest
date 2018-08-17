@@ -7,8 +7,10 @@ class FileUploadController {
         redirect(uri:"/")
         return
       } else {
-        render "upload is disabled"
-        return
+        if (session["group"].students[0].grade >= 60) {
+          render "upload is disabled"
+          return
+        }
       }
 
       //println "getting file"
