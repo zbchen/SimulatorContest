@@ -10,6 +10,9 @@ class FileUploadController {
         if (session["group"].grade >= 60) {
           render "You have passed, so upload is disabled"
           return
+        } else {
+          render "disabled"
+          return
         }
       }
 
