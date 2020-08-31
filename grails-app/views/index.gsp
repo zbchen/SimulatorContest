@@ -38,7 +38,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>程序设计课程设计</strong></h1>
+                    <h1><strong>程序设计综合实践</strong></h1>
                 </div>
             </div>
             <div class="row">
