@@ -6,15 +6,16 @@ class FileUploadController {
       if (!session["group"]) {
         redirect(uri:"/")
         return
-      } else {
-        if (session["group"].grade >= 60) {
-          render "You have passed, so upload is disabled"
-          return
-        } else {
-          render "disabled"
-          return
-        }
       }
+//      else {
+//        if (session["group"].grade >= 60) {
+//          render "You have passed, so upload is disabled"
+//          return
+//        } else {
+//          render "disabled"
+//          return
+//        }
+//      }
 
       //println "getting file"
       def f = request.getFile("myFile")
@@ -57,10 +58,11 @@ class FileUploadController {
       if (!params["fid"] || !session["group"]) {
         redirect(uri:"/")
         return
-      } else {
-        render "remove is disabled"
-        return
       }
+//      else {
+//        render "remove is disabled"
+//        return
+//      }
 
       def f = UploadFile.findById(params.int("fid"))
       if (f) {
