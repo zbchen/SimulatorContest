@@ -13,6 +13,12 @@
         <a href="/gradelist">成绩</a>
         <a href="/groupcomment">意见</a>
         <%}%>
+        <%if (session["group"] && session["group"].identity != 75) {%>
+        <a href="/viewclone">查重结果</a>
+        <%}%>
+        <%if (session["group"]) {%>
+        <a href="/Runner/rank">排名</a>
+        <%}%>
         <%if (session["group"]) {%>
         <a href="" onclick="window.showModalDialog('/changepasswd')">密码</a>
         <%}%>
