@@ -343,17 +343,21 @@ class FLRunner {
                         }
 
                         if (oracle_strArrray.size() >= 2 && output_strArrray.size() >= 2) {
-                            String oracle_instr = oracle_strArrray[0].trim()
-                            String oracle_rstate = oracle_strArrray[1].trim()
-                            String output_instr = output_strArrray[0].trim()
-                            String output_rstate = output_strArrray[1].trim()
+                            String oracle_instr = oracle_strArrray[1].trim()
+                            oracle_instr = oracle_instr.substring(0, inst.indexOf(' ') - 1)
+                            String oracle_rstate = oracle_strArrray[0].trim()
+                            String output_instr = output_strArrray[1].trim()
+                            output_instr = output_instr.substring(0, inst.indexOf(' ') - 1)
+                            String output_rstate = output_strArrray[0].trim()
                             if (oracle_instr.toLowerCase().equals(output_instr.toLowerCase())) {
                                 if (oracle_rstate.equals(output_rstate) == false) {
                                     resultStr += "The following instruction is maybe not right: " + oracle_instr + "\n"
                                     if (j > 0) {
                                         String tmp = ""
                                         for (int k = 0; k < j ; k++) {
-                                            tmp += oracleLines[k].substring(0, oracleLines[k].indexOf('#')) + ";"
+                                            //tmp += oracleLines[k].substring(0, oracleLines[k].indexOf('#')) + ";"
+                                            String inst = oracleLines[k].substring(oracleLines[k].lastIndexOf(':') + 1)
+                                            tmp += inst.substring(0, inst.indexOf(' ') - 1)+ ";"
                                         }
                                         resultStr += "The before instruction sequence is : " + tmp
                                         resultStr += "\n"
@@ -365,7 +369,8 @@ class FLRunner {
                                 if (j > 0) {
                                     String tmp = ""
                                     for (int k = 0; k < j ; k++) {
-                                        tmp += oracleLines[k].substring(0, oracleLines[k].indexOf('#')) + ";"
+                                        String inst = oracleLines[k].substring(oracleLines[k].lastIndexOf(':') + 1)
+                                        tmp += inst.substring(0, inst.indexOf(' ') - 1)+ ";"
                                     }
                                     resultStr += "The before instruction sequence is : " + tmp
 
