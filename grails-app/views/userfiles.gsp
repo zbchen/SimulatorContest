@@ -75,7 +75,10 @@
                                             <%if (session["group"].grade < 60) {%>
                                             <a href="/Runner/test?fid=${f.id}">测试</a>&nbsp;
                                             <%}%>
-                                            <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
+                                            <a href="/Runner/result?fid=${f.id}">查看结果</a>
+                                            <%if (session["group"].grade < 60) {%>
+                                            <a href="/Runner/fl?fid=${f.id}">缺陷定位</a>
+                                            <%}%>
                                             <!--a href="/FileUpload/remove?fid=${f.id}">删除</a-->
                                         </th>
                                     </tr>
