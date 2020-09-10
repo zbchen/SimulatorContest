@@ -327,8 +327,21 @@ class FLRunner {
                     for (int j = 0; j < oracleLines.size(); j++) {
                         String oracle = oracleLines[j].trim()
                         String output = outputLines[j].trim()
-                        String[] oracle_strArrray = oracle.split("#")
-                        String[] output_strArrray = output.split("#")
+//                        String[] oracle_strArrray = oracle.split("#")
+//                        String[] output_strArrray = output.split("#")
+                        String[] oracle_strArrray = new String[1];
+                        String[] output_strArrray = new String[1];
+                        if (oracle.lastIndexOf(":") >= 0) {
+                            oracle_strArrray = new String[2];
+                            oracle_strArrray[0] = oracle.substring(0, oracle.lastIndexOf(":") - 1)
+                            oracle_strArrray[1] = oracle.substring(oracle.lastIndexOf(":") + 1)
+                        }
+                        if (output.lastIndexOf(":") >= 0) {
+                            output_strArrray = new String[2];
+                            output_strArrray[0] = output.substring(0, output.lastIndexOf(":") - 1)
+                            output_strArrray[1] = output.substring(output.lastIndexOf(":") + 1)
+                        }
+
                         if (oracle_strArrray.size() >= 2 && output_strArrray.size() >= 2) {
                             String oracle_instr = oracle_strArrray[0].trim()
                             String oracle_rstate = oracle_strArrray[1].trim()
