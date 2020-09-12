@@ -342,12 +342,17 @@ class FLRunner {
                             output_strArrray[1] = output.substring(output.lastIndexOf(":") + 1)
                         }
 
+                        //println(oracle_strArrray[1] + "----:----" + oracle_strArrray[0])
+
+
                         if (oracle_strArrray.size() >= 2 && output_strArrray.size() >= 2) {
                             String oracle_instr = oracle_strArrray[1].trim()
-                            oracle_instr = oracle_instr.substring(0, oracle_instr.indexOf(' ') - 1)
+                            if (oracle_instr.indexOf(' ') >= 0)
+				oracle_instr = oracle_instr.substring(0, oracle_instr.indexOf(' ') - 1)
                             String oracle_rstate = oracle_strArrray[0].trim()
                             String output_instr = output_strArrray[1].trim()
-                            output_instr = output_instr.substring(0, output_instr.indexOf(' ') - 1)
+			    if (output_instr.indexOf(' ') >= 0)
+                            	output_instr = output_instr.substring(0, output_instr.indexOf(' ') - 1)
                             String output_rstate = output_strArrray[0].trim()
                             if (oracle_instr.toLowerCase().equals(output_instr.toLowerCase())) {
                                 if (oracle_rstate.equals(output_rstate) == false) {
