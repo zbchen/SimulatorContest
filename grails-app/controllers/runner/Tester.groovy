@@ -356,7 +356,7 @@ class FLRunner {
                             String output_rstate = output_strArrray[0].trim()
                             if (oracle_instr.toLowerCase().equals(output_instr.toLowerCase())) {
                                 if (oracle_rstate.equals(output_rstate) == false) {
-                                    resultStr += "The following instruction is maybe not right: " + oracle_instr + "\n"
+                                    resultStr += "The registers are different. \n"// + oracle_instr + "\n"
                                     if (j > 0) {
                                         String tmp = ""
                                         for (int k = 0; k < j ; k++) {
@@ -366,6 +366,7 @@ class FLRunner {
                                         }
                                         resultStr += "The before instruction sequence is : " + tmp
                                         resultStr += "\n"
+                                        resultStr += "The implementation of the last one may be wrong.\n"
                                     }
                                     break
                                 }
@@ -378,8 +379,8 @@ class FLRunner {
                                         tmp += inst.substring(0, inst.indexOf(' '))+ ";"
                                     }
                                     resultStr += "The before instruction sequence is : " + tmp
-
                                     resultStr += "\n"
+                                    resultStr += "The implementation of the last one may be wrong.\n"
                                 }
                                 break
                             }
