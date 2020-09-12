@@ -362,7 +362,7 @@ class FLRunner {
                                         for (int k = 0; k < j ; k++) {
                                             //tmp += oracleLines[k].substring(0, oracleLines[k].indexOf('#')) + ";"
                                             String inst = oracleLines[k].substring(oracleLines[k].lastIndexOf(':') + 1)
-                                            tmp += inst.substring(0, inst.indexOf(' ') - 1)+ ";"
+                                            tmp += inst.substring(0, inst.indexOf(' '))+ ";"
                                         }
                                         resultStr += "The before instruction sequence is : " + tmp
                                         resultStr += "\n"
@@ -375,7 +375,7 @@ class FLRunner {
                                     String tmp = ""
                                     for (int k = 0; k < j ; k++) {
                                         String inst = oracleLines[k].substring(oracleLines[k].lastIndexOf(':') + 1)
-                                        tmp += inst.substring(0, inst.indexOf(' ') - 1)+ ";"
+                                        tmp += inst.substring(0, inst.indexOf(' '))+ ";"
                                     }
                                     resultStr += "The before instruction sequence is : " + tmp
 
