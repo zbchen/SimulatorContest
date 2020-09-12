@@ -50,6 +50,7 @@ class RunnerController {
         result += "\n\n"
         result += "-------------------------------The Following is the fault localization result of 2nd test suite\n\n"
 
+        fl.result = ""
         testSuite = new ParserTestSuite().getSuite("002")
         fl.fl(testSuite, f.group, debugOraclePath, "002")
         result += fl.result
