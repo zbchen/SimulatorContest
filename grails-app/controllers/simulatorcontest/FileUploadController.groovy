@@ -109,7 +109,7 @@ class FileUploadController {
     }
 
     def all() {
-      if (!session["group"]) {
+      if (!session["group"] || session["group"].identity != 75) {
         redirect(uri: "/")
         return
       }
