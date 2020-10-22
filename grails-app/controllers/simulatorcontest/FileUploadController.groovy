@@ -1,5 +1,7 @@
 package simulatorcontest
 
+import javafx.scene.Group
+
 class FileUploadController {
 
     def upload() {
@@ -104,6 +106,29 @@ class FileUploadController {
       } else {
         render "The upload file of this ID does not exist!"
       }
+    }
+
+    def all() {
+      if (!session["group"]) {
+        redirect(uri: "/")
+        return
+      }
+
+      def commandStr = ""
+
+      def groupList = ContestGroup.findAll([sort:"id", order:"asc"])
+      groupList.each { g ->
+        if (g.identity != 75 && g.files && g.files.size() > 0 && g.id <= 83) {
+          def f = g.files[0]
+          /// suppose only tar file
+
+          def command = "cp " + f.path + " /root/2020/" + g.id + ".tar"
+          commandStr += command + "\n"
+          command.execute()
+        }
+      }
+
+      render commandStr
     }
 
     def index() {
