@@ -68,16 +68,16 @@
                                     <tr>
                                         <th>${i++}</th>
                                         <th>${f.group.name}</th>
-                                        <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
+                                        <th><!--a href="/FileUpload/download?fid=${f.id}"-->${f.name}<!--/a--></th>
                                         <th>${f.result?"已测试"+((f.isPass() && application["testsuite"] != "003")?"(已通过)":"(未通过)"):"未测试"}</th>
                                         <th>${f.uploadDate}</th>
                                         <th>
                                             <%if (session["group"].grade < 60) {%>
-                                            <a href="/Runner/test?fid=${f.id}">测试</a>&nbsp;
+                                            <!--a href="/Runner/test?fid=${f.id}">测试</a-->&nbsp;
                                             <%}%>
                                             <a href="/Runner/result?fid=${f.id}">查看结果</a>
                                             <%if (session["group"].grade < 60) {%>
-                                            <a href="/Runner/fl?fid=${f.id}">缺陷定位</a>
+                                            <!--a href="/Runner/fl?fid=${f.id}">缺陷定位</a-->
                                             <%}%>
                                             <!--a href="/FileUpload/remove?fid=${f.id}">删除</a-->
                                         </th>
