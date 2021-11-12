@@ -3,19 +3,11 @@
 <head>
     <title>用户登录</title>
     <asset:stylesheet href="element-ui.css"/>
-    <asset:stylesheet src="login-register.css"/>
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+%{--    <asset:stylesheet src="login-register.css"/>--}%
 </head>
 
 <body>
-<div id="login">
-    <div class="project_name">
-        <h1>程序设计综合实践</h1>
-    </div>
-
+<div id="changepassword">
     <div class="login-form">
         <div class="login-title">用户登录</div>
 
@@ -42,7 +34,7 @@
 <asset:javascript src="element-ui.js"/>
 <script>
     const Login = new Vue({
-        el: '#login',
+        el: '#changepassword',
         data:{
             username:'',
             password:'',

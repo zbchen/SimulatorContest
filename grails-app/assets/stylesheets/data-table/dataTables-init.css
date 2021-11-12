@@ -1,0 +1,53 @@
+
+/** 控制器标签颜色设置 **/
+/*显示结果条数*/
+.dataTables_wrapper .dataTables_length,
+/*搜索*/
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_processing,
+/*显示结果详情*/
+.dataTables_wrapper .dataTables_info{
+    color: #868e96;
+}
+/*搜索框位置*/
+.dataTables_wrapper .dataTables_filter{
+}
+
+/** 当前激活的分页按钮样式 **/
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+    outline: none;
+    background-color: #1e2bda !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1e2bda),
+    color-stop(100%, #1720a4));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #1e2bda 0%, #1720a4 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -moz-linear-gradient(top, #1e2bda 0%, #1720a4 100%);
+    /* FF3.6+ */
+    background: -ms-linear-gradient(top, #1e2bda 0%, #1720a4 100%);
+    /* IE10+ */
+    background: -o-linear-gradient(top, #1e2bda 0%, #1720a4 100%);
+    /* Opera 11.10+ */
+    background: linear-gradient(to bottom, #1e2bda 0%, #1720a4 100%);
+    /* W3C */
+    box-shadow: inset 0 0 3px #111;
+}
+/* 分页按钮鼠标移入时的样式 */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: 1px solid #1822ad;
+    background-color: #6a72ea;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6a72ea),
+    color-stop(100%, #1822ad));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #6a72ea 0%, #1822ad 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -moz-linear-gradient(top, #6a72ea 0%, #1822ad 100%);
+    /* FF3.6+ */
+    background: -ms-linear-gradient(top, #6a72ea 0%, #1822ad 100%);
+    /* IE10+ */
+    background: -o-linear-gradient(top, #6a72ea 0%, #1822ad 100%);
+    /* Opera 11.10+ */
+    background: linear-gradient(to bottom, #6a72ea 0%, #1822ad 100%);
+    /* W3C */
+}

@@ -1,7 +1,6 @@
 package simulatorcontest
 
 class UrlMappings {
-
     static mappings = {
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
@@ -9,10 +8,10 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
+        "/"(view: "/index")
         "/register"(view:"/register")
         "/user"(view:"/userfiles")
-        "/bukao"(view:"/bukao")
+        "/bukao"(view:"/bukao");
         "/admin"(view:"/manager")
         "/muserfile"(view:"/manageUserFiles")
         "/menu"(view:"/menu")
@@ -27,6 +26,7 @@ class UrlMappings {
         "/updategrade"(view:"/updategrade")
         "/groupcomment"(view:"/groupcomment")
         "/gradelist"(view:"/gradelist")
+        "/navbar"(view:"/NavBar")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
