@@ -15,125 +15,231 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
 
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="adminlte/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="adminlte/css/skins/_all-skins.min.css">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
+    %{--    <!-- Bootstrap 3.3.6 -->--}%
+    %{--    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">--}%
+    %{--    <!-- Theme style -->--}%
+    %{--    <link rel="stylesheet" href="adminlte/css/AdminLTE.min.css">--}%
+    %{--    <!-- AdminLTE Skins. Choose a skin from the css/skins--}%
+    %{--         folder instead of downloading all of them to reduce the load. -->--}%
+    %{--    <link rel="stylesheet" href="adminlte/css/skins/_all-skins.min.css">--}%
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+    <g:include view="template/css.gsp"/>
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="fileList">
 
     <!-- Content Wrapper. Contains page content -->
     <div class="wrapper">
         <!-- Content Header (Page header) -->
-        <g:include view="/menu" />
+        <div class="user-panel">
+            <el-dropdown>
+                <span class="el-dropdown-link">
+                    用户操作<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>
+                        <a href="" onclick="window.showModalDialog('/changepasswd')">修改密码</a>
+                    </el-dropdown-item>
+                    <el-dropdown-item>
+                        <a href="/Login/logout">注销</a>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </div>
+        <el-menu class="el-menu-demo top-position" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="1">
+                <a href="/user">用户</a>
+            </el-menu-item>
+            <% if (session["group"] /*&& session["group"].grade < 60*/) { %>
+            <el-menu-item index="2">
+                <a href="/FileUpload">上载</a>
+            </el-menu-item>
+            <% } %>
+            <% if (session["group"] && session["group"].identity == 75) { %>
+            <el-menu-item index="3">
+                <a href="/bukao">补考</a>
+            </el-menu-item>
+            <el-menu-item index="4">
+                <a href="/admin">测试</a>
+            </el-menu-item>
+            <el-menu-item index="5">
+                <a href="/gadmin">组管理</a>
+            </el-menu-item>
+            <el-menu-item index="6">
+                <a href="/testsuite">测试例</a>
+            </el-menu-item>
+            <el-menu-item index="7">
+                <a href="/clone">查重</a>
+            </el-menu-item>
+            <el-menu-item index="8">
+                <a href="/gradelist">成绩</a>
+            </el-menu-item>
+            <el-menu-item index="9">
+                <a href="/groupcomment">意见</a>
+            </el-menu-item>
+
+            <% } %>
+            <% if (session["group"] && session["group"].identity != 75) { %>
+            <el-menu-item index="10">
+                <a href="/viewclone">查重结果</a>
+            </el-menu-item>
+
+            <% } %>
+            <% if (session["group"]) { %>
+            <el-menu-item index="11">
+                <a href="/Runner/rank">排名</a>
+            </el-menu-item>
+            <% } %>
+            %{--        <% if (session["group"]) { %>--}%
+            %{--        <a href="" onclick="window.showModalDialog('/changepasswd')">密码</a>--}%
+            %{--        <% } %>--}%
+            %{--        <a href="/Login/logout">注销</a>--}%
+            <% if (session["group"]) { %>
+            <%
+                    def comments = simulatorcontest.Comment.findAllByGroup(session["group"])
+            %>
+            <% if (comments && comments.size() > 0) { %>
+            成绩：<%=session["group"].grade%>
+            <% } else { %>
+            <el-menu-item index="12">
+                <a href="/comment" onclick="">意见</a>
+            </el-menu-item>
+            <% } %>
+            <el-menu-item index="13" disabled>
+                组号：<%=session["group"].id%>
+            </el-menu-item>
+            <% } %>
+        </el-menu>
 
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-xs-8">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title"></h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <table id="table1" class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th>编号</th>
-                                    <th>组名</th>
-                                    <th>文件名</th>
-                                    <th>状态</th>
-                                    <th>提交时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <%
-                                        int gid = params.int("gid")
-                                        def g = simulatorcontest.ContestGroup.findById(gid)
-                                        def flist = simulatorcontest.UploadFile.findAllByGroup(g, [sort:"id", order:"desc"])
-                                        def i = 1
-                                    %>
-                                <g:each in="${flist}" var="f">
-                                    <tr>
-                                        <th>${i++}</th>
-                                        <th>${f.group.name}</th>
-                                        <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
-                                        <th>${f.result?"已测试"+((f.isPass() && application["testsuite"] != "003")?"(已通过)":"(未通过)"):"未测试"}</th>
-                                        <th>${f.uploadDate}</th>
-                                        <th>
-                                            <a href="/Runner/test?fid=${f.id}">测试</a>&nbsp;
-                                            <a href="/Runner/result?fid=${f.id}">查看结果</a>&nbsp;
-                                        <!--%if (session["group"] && session["group"].identity == 75) {%-->
-                                            <a href="/Runner/fl?fid=${f.id}">缺陷定位</a>&nbsp;
-                                        <!--%}%-->
-                                            <a href="/FileUpload/remove?fid=${f.id}">删除</a>
-                                        </th>
-                                    </tr>
-
-                                </g:each>
-                                </tbody>
-
-                            </table>
-                            
-                        </div>
-                        <!-- /.box-body -->
+                %{--                <div class="col-xs-8">--}%
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">文件列表</h3>
                     </div>
-                    <!-- /.box -->
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="table1" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>组名</th>
+                                <th>文件名</th>
+                                <th>状态</th>
+                                <th>提交时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                                int gid = params.int("gid")
+                                def g = simulatorcontest.ContestGroup.findById(gid)
+                                def flist = simulatorcontest.UploadFile.findAllByGroup(g, [sort: "id", order: "desc"])
+                                def i = 1
+                            %>
+                            <g:each in="${flist}" var="f">
+                                <tr>
+                                    <th>${i++}</th>
+                                    <th>${f.group.name}</th>
+                                    <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
+                                    <th>${f.result ? "已测试" + ((f.isPass() && application["testsuite"] != "003") ? "(已通过)" : "(未通过)") : "未测试"}</th>
+                                    <th>${f.uploadDate}</th>
+                                    <th>
+                                        <a href="/Runner/test?fid=${f.id}">
+                                            <el-button type="primary" plain size="small" >测试</el-button>
+                                        </a>
+                                        <a href="/Runner/result?fid=${f.id}">
+                                            <el-button type="primary" plain size="small">查看结果</el-button>
+                                        </a>
+                                        <!--%if (session["group"] && session["group"].identity == 75) {%-->
+                                        <a href="/Runner/fl?fid=${f.id}">
+                                        <el-button type="primary" plain size="small">缺陷定位</el-button>
+                                    </a>
+                                    <!--%}%-->
+                                        <a href="/FileUpload/remove?fid=${f.id}">
+                                        <el-button type="danger" plain size="small">删除</el-button>
+                                    </a>
+
+                                    </th>
+                                </tr>
+
+                            </g:each>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.col -->
+                <!-- /.box -->
             </div>
+            <!-- /.col -->
+            %{--            </div>--}%
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
 </div>
+<g:include view="template/js.gsp"/>
 <!-- ./wrapper -->
 <!-- jQuery 2.2.3 -->
-<script src="plugins/jQuery-2.2.3/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="adminlte/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="adminlte/js/demo.js"></script>
-<!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+%{--<script src="plugins/jQuery-2.2.3/jquery-2.2.3.min.js"></script>--}%
+%{--<!-- Bootstrap 3.3.6 -->--}%
+%{--<script src="bootstrap/js/bootstrap.min.js"></script>--}%
+%{--<!-- FastClick -->--}%
+%{--<script src="plugins/fastclick/fastclick.js"></script>--}%
+%{--<!-- AdminLTE App -->--}%
+%{--<script src="adminlte/js/app.min.js"></script>--}%
+%{--<!-- AdminLTE for demo purposes -->--}%
+%{--<script src="adminlte/js/demo.js"></script>--}%
+%{--<!-- DataTables -->--}%
+%{--<script src="plugins/datatables/jquery.dataTables.min.js"></script>--}%
+%{--<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>--}%
 
-<script src="plugins/jquery-form/jquery.form.js"></script>
-<!-- Slimscroll -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+%{--<script src="plugins/jquery-form/jquery.form.js"></script>--}%
+%{--<!-- Slimscroll -->--}%
+%{--<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>--}%
 
 
-<!-- page script -->
+%{--<!-- page script -->--}%
+%{--<script>--}%
+%{--    $(function () {--}%
+%{--        $('#table1').DataTable({--}%
+%{--            "paging": true,--}%
+%{--            "lengthChange": false,--}%
+%{--            "searching": false,--}%
+%{--            "ordering": false,--}%
+%{--            "info": true,--}%
+%{--            "autoWidth": false--}%
+%{--        });--}%
+%{--    });--}%
+%{--</script>--}%
+<asset:javascript src="vue.js"/>
+<asset:javascript src="element-ui.js"/>
 <script>
-    $(function () {
-        $('#table1').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": false,
-            "info": true,
-            "autoWidth": false
-        });
-    });
+    const FileList = new Vue({
+        el: '#fileList',
+        data() {
+            return {
+                activeIndex: '1',
+                activeIndex2: '1'
+            };
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        }
+    })
 </script>
-
 </body>
 </html>

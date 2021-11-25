@@ -19,7 +19,7 @@ class UrlMappings {
         "/testsuite"(view:"/testsuite")
         "/addcase"(view:"/addcase")
         "/addpara"(view:"/addpara")
-        "/changepasswd"(view:"/changepasswd")
+        "/changepasswd"(view:"/changepassword")
         "/clone"(view:"/clone")
         "/viewclone"(view:"/viewclone")
         "/comment"(view:"/comment")

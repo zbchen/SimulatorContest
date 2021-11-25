@@ -73,7 +73,6 @@
                 if(this.error_password == true || this.error_username == true){
                     window.event.returnValue = false
                 }
-
             }
         }
     })

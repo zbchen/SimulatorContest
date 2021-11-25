@@ -8,13 +8,13 @@ body {
     margin: 130px 0 40px;
 }
 
-.login-title {
+.login-title ,.change-title{
     font-size: 24px;
     text-align: center;
     margin: 10px;
 }
 
-.login-form {
+.login-form{
     background: #fff;
     width: 600px;
     border: 1px solid #ccc;

@@ -136,8 +136,8 @@
                 if (this.error_groupname == true || this.error_password == true
                     || this.error_password1 == true || this.error_name1 == true
                     || this.error_num1 == true) {
+                    window.event.returnValue = false
                 }
-                window.event.returnValue = false
             }
 
         }

@@ -1,33 +1,38 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>用户登录</title>
+    <title>修改密码</title>
     <asset:stylesheet href="element-ui.css"/>
-%{--    <asset:stylesheet src="login-register.css"/>--}%
+    <asset:stylesheet src="login-register.css"/>
+    <style>
+    #changepassword{
+        margin: 130px auto;
+    }
+</style>
 </head>
 
 <body>
 <div id="changepassword">
     <div class="login-form">
-        <div class="login-title">用户登录</div>
+        <div class="login-title">修改密码</div>
 
-        <form role="form" action="/Login/log" method="post" @submit="on_submit">
+        <form role="form" action="/Register/changePasswd" method="post" @submit="on_submit">
             <div class="form-control">
-                <input class="input-style" type="text" name="username"
-                       placeholder="请输入用户名" v-model="username" @blur="check_username">
-                <div class="text-error" v-show="error_username">{{ error_username_message }}</div>
-            </div>
+                <input class="input-style" type="password" name="oldpassword"
+                       placeholder="请输入原密码" v-model="password" @blur="check_password">
 
-            <div class="form-control">
-                <input class="input-style" type="password" name="password"
-                       placeholder="请输入密码" v-model="password" @blur="check_password">
                 <div class="text-error" v-show="error_password">{{ error_password_message }}</div>
             </div>
-            <button type="submit" class="login-button">登  录</button>
+
+            <div class="form-control">
+                <input class="input-style" type="password" name="newpassword"
+                       placeholder="请输入新密码" v-model="password2" @blur="check_password2">
+
+                <div class="text-error" v-show="error_password2">{{ error_password2_message }}</div>
+            </div>
+
+            <button type="submit" class="login-button">修 改</button>
         </form>
-        <div class="register-link">
-            <span>还没有账户 ? <a href="register"> 点击此处</a></span>
-        </div>
     </div>
 </div>
 <asset:javascript src="vue.js"/>
@@ -35,38 +40,44 @@
 <script>
     const Login = new Vue({
         el: '#changepassword',
-        data:{
-            username:'',
-            password:'',
-            error_username:false,
-            error_password:false,
-            error_username_message:'请输入用户名',
-            error_password_message:'请输入密码'
-
+        data: {
+            password: '',
+            password2: '',
+            error_password: false,
+            error_password2: false,
+            error_password_message: '密请输入密码',
+            error_password2_message: '请输入新密码',
         },
-        methods:{
-            check_username(){
-                if(this.username === ''){
-                    this.error_username = true
-                }else{
-                    this.error_username = false
-                }
-            },
-            check_password(){
-                if(this.password === ''){
+        methods: {
+            check_password() {
+                if (this.password === '') {
                     this.error_password = true
-                }else{
+                } else if (this.password.length < 6) {
+                    this.error_password_message = '密码长度不能小于6位'
+                    this.error_password = true
+                } else {
                     this.error_password = false
                 }
+
             },
-            on_submit(){
-                this.check_username()
+            check_password2() {
+                if (this.password2 === '') {
+                    this.error_password2 = true
+                }else if (this.password2.length < 6) {
+                    this.error_password2_message = '密码长度不能小于6位'
+                    this.error_password2 = true
+                }else {
+                    this.error_password2 = false
+                }
+            },
+            on_submit() {
                 this.check_password()
-                if(this.error_password == true || this.error_username == true){
+                this.check_password2()
+                if (this.error_password == true || this.error_password2 == true) {
                     window.event.returnValue = false
                 }
-
             }
+
         }
     })
 </script>

@@ -10,8 +10,8 @@ class LoginController {
                 //if (student.group.identity == 75) {
                     session["group"] = student.group
                     session["student"] = student
-//                    redirect(uri:"/user")
-                    redirect(uri: "/navbar")
+                    redirect(uri:"/user")
+//                    redirect(uri: "/navbar")
                 //} else {
                 //    render "Login is not enabled now"
                 //}

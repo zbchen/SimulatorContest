@@ -1,0 +1,249 @@
+a, a:hover {
+    text-decoration: none;
+}
+
+.user-panel {
+    position: fixed;
+    right: 10px;
+    top: 20px;
+    z-index:999;
+}
+
+.el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+}
+
+.el-icon-arrow-down {
+    font-size: 12px;
+}
+.content{
+    width: 100%;
+}
+.box{
+    width: 80%;
+    margin: 0 auto;
+}
+.box-header{
+    margin: 30px auto;
+}
+.box-title{
+    text-align: center;
+}
+/*表格样式*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+.bootstrap-data-table-panel .dataTables_filter {
+    text-align: right;
+}
+.bootstrap-data-table-panel .dataTables_filter input{
+    border:1px solid #868e96;
+}
+.bootstrap-data-table-panel .dataTables_filter input:focus{
+    border:none;
+}
+.bootstrap-data-table-panel .dataTables_filter .form-control {
+    margin-left: 10px;
+}
+.bootstrap-data-table-panel .dataTables_filter .form-control:hover,
+.bootstrap-data-table-panel .dataTables_filter .form-control:focus {
+    background: transparent;
+}
+.dataTables_length {
+    display: inline-block;
+    float: left;
+    margin-right: 30px;
+}
+.dt-buttons {
+    margin-bottom: 15px;
+}
+.dt-buttons .dt-button {
+    background-image: none;
+    background: #ffffff;
+    color: #373757;
+    border-color: #e7e7e7;
+    margin-right: 10px;
+    padding: 7px 20px;
+    border-radius: 0px;
+}
+.dt-buttons .dt-button:hover:not(.disabled),
+.dt-buttons .dt-button:focus,
+.dt-buttons .dt-button.active {
+    background-image: none;
+    background: #5873fe;
+    color: #ffffff;
+}
+button.dt-button:hover:not(.disabled),
+div.dt-button:hover:not(.disabled),
+a.dt-button:hover:not(.disabled) {
+    background-color: #5873fe;
+    background-image: none;
+    border: 1px solid #5873fe;
+    box-shadow: none;
+    color: #ffffff;
+}
+button.dt-button:focus:not(.disabled),
+div.dt-button:focus:not(.disabled),
+a.dt-button:focus:not(.disabled) {
+    background-color: #5873fe;
+    background-image: none;
+    border: 1px solid #5873fe;
+    box-shadow: none;
+    color: #ffffff;
+}
+button.dt-button:active:hover:not(.disabled):not(.disabled),
+button.dt-button.active:hover:not(.disabled):not(.disabled),
+div.dt-button:active:hover:not(.disabled):not(.disabled),
+div.dt-button.active:hover:not(.disabled):not(.disabled),
+a.dt-button:active:hover:not(.disabled):not(.disabled),
+a.dt-button.active:hover:not(.disabled):not(.disabled) {
+    background-color: #5873fe;
+    background-image: none;
+    border: 1px solid #5873fe;
+    box-shadow: none;
+    color: #ffffff;
+}
+button.dt-button:active:not(.disabled),
+button.dt-button.active:not(.disabled),
+div.dt-button:active:not(.disabled),
+div.dt-button.active:not(.disabled),
+a.dt-button:active:not(.disabled),
+a.dt-button.active:not(.disabled) {
+    background-color: #5873fe;
+    background-image: none;
+    border: 1px solid #5873fe;
+    box-shadow: none;
+    color: #ffffff;
+}
+@media (max-width: 767px) {
+    .dataTables_length {
+        margin-left: 10px;
+    }
+    select.input-sm {
+        width: 167px;
+    }
+    .bootstrap-data-table-panel .dataTables_filter {
+        margin-left: 12px;
+        text-align: left;
+        padding-right: 10px;
+    }
+    .bootstrap-data-table-panel .dataTables_filter .form-control {
+        margin-left: 0px;
+    }
+}
+
+thead tr th {
+    background: #94bafc;
+    color: #373757;
+    font-weight: 500;
+}
+thead tr th:last-child {
+    text-align: right;
+}
+tbody tr th {
+    color: #373757;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+}
+tbody tr td {
+    font-family: 'Roboto', sans-serif;
+    color: #868e96;
+}
+tbody tr th:last-child {
+    text-align: right;
+}
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+    line-height: 32px;
+    vertical-align: top;
+}
+.table > thead > tr > th {
+    border-bottom: 1px solid #e7e7e7;
+    font-weight: 600;
+    border-top: 0;
+}
+.table {
+    margin-bottom: 0;
+}
+.table .badge {
+    text-transform: uppercase;
+}
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: rgba(88, 115, 254, 0.04);
+    color: #868e96;
+    font-size: 14px;
+}
+
+a,button {
+    outline: none!important;
+    text-decoration: none!important;
+    color: #868e96;
+    transition: all 0.2s ease 0s;
+}
+
+a.active,
+button.active,
+a:focus,
+button:focus,
+a:hover,
+button:hover {
+    color: #252525;
+    outline: none!important;
+    text-decoration: none!important;
+}
+
+/*测试页按钮*/
+.ele-button{
+    margin-bottom: 10px;
+}
+
+
+/** 当前激活的分页按钮样式 **/
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+    outline: none;
+    background-color: #409EFF !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #409EFF),
+    color-stop(100%, #409EFF));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #1e2bda 0%, #409EFF 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -moz-linear-gradient(top, #1e2bda 0%, #409EFF 100%);
+    /* FF3.6+ */
+    background: -ms-linear-gradient(top, #1e2bda 0%, #409EFF 100%);
+    /* IE10+ */
+    background: -o-linear-gradient(top, #1e2bda 0%, #409EFF 100%);
+    /* Opera 11.10+ */
+    background: linear-gradient(to bottom, #1e2bda 0%, #409EFF 100%);
+    /* W3C */
+    /*box-shadow: inset 0 0 3px #111;*/
+}
+/* 分页按钮鼠标移入时的样式 */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    color: white !important;
+    border: 1px solid #409EFF;
+    background-color: #409EFF;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #409EFF),
+    color-stop(100%, #409EFF));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #6a72ea 0%, #409EFF 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -moz-linear-gradient(top, #6a72ea 0%, #409EFF 100%);
+    /* FF3.6+ */
+    background: -ms-linear-gradient(top, #6a72ea 0%, #409EFF 100%);
+    /* IE10+ */
+    background: -o-linear-gradient(top, #6a72ea 0%, #409EFF 100%);
+    /* Opera 11.10+ */
+    background: linear-gradient(to bottom, #6a72ea 0%, #409EFF 100%);
+    /* W3C */
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button .current{
+    background: red;
+}

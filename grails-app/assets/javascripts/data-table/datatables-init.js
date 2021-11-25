@@ -11,7 +11,7 @@
     $('#bootstrap-data-table').DataTable({
         lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
     });
-    $('#table1').DataTable({
+    $('#bootstrap-data-table-export').DataTable({
         language: {
             "processing": "处理中...",
             "lengthMenu": "显示 _MENU_ 项结果",

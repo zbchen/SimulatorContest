@@ -6,37 +6,38 @@
     </g:javascript>
 </g:if>
 
-%{--<html>--}%
-%{--<head>--}%
-%{--    <meta charset="utf-8">--}%
-%{--    <meta http-equiv="X-UA-Compatible" content="IE=edge">--}%
-%{--    <title>学生成绩</title>--}%
-%{--    <!-- Tell the browser to be responsive to screen width -->--}%
-%{--    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">--}%
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>学生成绩</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
 
-%{--    <!-- Bootstrap 3.3.6 -->--}%
-%{--    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">--}%
-%{--    <!-- Theme style -->--}%
-%{--    <link rel="stylesheet" href="adminlte/css/AdminLTE.min.css">--}%
-%{--    <!-- AdminLTE Skins. Choose a skin from the css/skins--}%
-%{--         folder instead of downloading all of them to reduce the load. -->--}%
-%{--    <link rel="stylesheet" href="adminlte/css/skins/_all-skins.min.css">--}%
-%{--        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->--}%
-%{--        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->--}%
-%{--        <!--[if lt IE 9]>--}%
-%{--        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>--}%
-%{--        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>--}%
-%{--        <![endif]-->--}%
-%{--</head>--}%
+    <!-- Bootstrap 3.3.6 -->
+    %{--    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">--}%
+    %{--    <!-- Theme style -->--}%
+    %{--    <link rel="stylesheet" href="adminlte/css/AdminLTE.min.css">--}%
+    %{--    <!-- AdminLTE Skins. Choose a skin from the css/skins--}%
+    %{--         folder instead of downloading all of them to reduce the load. -->--}%
+    %{--    <link rel="stylesheet" href="adminlte/css/skins/_all-skins.min.css">--}%
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <g:include view="/template/css.gsp"/>
+</head>
 
-%{--<body class="hold-transition sidebar-mini">--}%
-%{--<div class="wrapper">--}%
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
 
     <!-- Content Wrapper. Contains page content -->
     <div class="wrapper">
         <!-- Content Header (Page header) -->
-%{--        <g:include view="/menu" />--}%
+        <g:include view="/NavBar.gsp"/>
 
         <!-- Main content -->
         <section class="content">
@@ -47,30 +48,32 @@
                             <h3 class="box-title">成绩</h3>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            <table id="table1" class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th>姓名</th>
-                                    <th>学号</th>
-                                    <th>成绩</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        <div class="bootstrap-data-table-panel">
+                            <div class="box-body">
+                                <table id="bootstrap-data-table-export" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>姓名</th>
+                                        <th>学号</th>
+                                        <th>成绩</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
                                     <%
-                                        def slist = simulatorcontest.Student.findAll([sort:"identity", order:"asc"])
+                                        def slist = simulatorcontest.Student.findAll([sort: "identity", order: "asc"])
                                     %>
-                                <g:each in="${slist}" var="s">
+                                    <g:each in="${slist}" var="s">
                                         <tr>
                                             <th>${s.name}</th>
                                             <th>${s.identity}</th>
                                             <th>${s.group.grade}</th>
                                         </tr>
-                                </g:each>
-                                </tbody>
+                                    </g:each>
+                                    </tbody>
 
-                            </table>
-                            
+                                </table>
+
+                            </div>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -83,9 +86,9 @@
     </div>
     <!-- /.content-wrapper -->
 
-%{--</div>--}%
-%{--<!-- ./wrapper -->--}%
-%{--<!-- jQuery 2.2.3 -->--}%
+</div>
+<!-- ./wrapper -->
+<!-- jQuery 2.2.3 -->
 %{--<script src="plugins/jQuery-2.2.3/jquery-2.2.3.min.js"></script>--}%
 %{--<!-- Bootstrap 3.3.6 -->--}%
 %{--<script src="bootstrap/js/bootstrap.min.js"></script>--}%
@@ -117,6 +120,6 @@
 %{--        });--}%
 %{--    });--}%
 %{--</script>--}%
-
-%{--</body>--}%
-%{--</html>--}%
+<g:include view="template/js.gsp"/>
+</body>
+</html>
