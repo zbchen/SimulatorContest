@@ -109,7 +109,7 @@
             成绩：<%=session["group"].grade%>
             <% } else { %>
             <el-menu-item index="12">
-                <a href="/comment" onclick="">意见</a>
+                <a href="/comment" onclick="">提交意见</a>
             </el-menu-item>
             <% } %>
             <el-menu-item index="13" disabled>
@@ -158,9 +158,13 @@
                                             <a href="#" onclick="window.showModalDialog('/addpara?sid=${s.id}')">
                                                 <el-button type="primary" plain size="small">添加参数</el-button>
                                             </a>
-                                            <a href="/TestSuite/remove?sid=${s.id}">
-                                                <el-button type="danger" plain size="small">删除</el-button>
+                                            %{--                                            <a href="/TestSuite/remove?sid=${s.id}">--}%
+                                            <a href="#">
+                                                <el-button type="danger" plain size="small"
+                                                           onclick="deleteItem(${s.id})">删除</el-button>
                                             </a>
+
+                                            %{--                                            </a>--}%
 
                                             %{--                                            <div class="button-list">--}%
                                             %{--                                                <button type="button" class="btn btn-sm btn-primary btn-rounded m-b-10 m-l-5">--}%
@@ -255,6 +259,35 @@
 //                                    }
 //                                    window.hasOpenWindow = true;
             window.myNewWindow = window.open(url);
+        }
+    }
+</script>
+<script>
+    function deleteItem(sid) {
+        console.log(sid);
+        removeProject(sid)
+        function removeProject(sid) {
+            var result = confirm("确定要删除所选项目？")
+            if (result) {
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    cache: false,
+                    url: "TestSuite/remove",
+                    data: {sid: sid},
+                    success: function (data) {
+                        if (data === "1") {
+                            var result = confirm("是否跳转至项目列表？")
+                            if (result) {
+                                window.location.reload()
+                            }
+                        }
+                    },
+                    error: function (xmlhttp, state, msg) {
+                        alert(state + ":" + msg);
+                    }
+                });
+            }
         }
     }
 </script>

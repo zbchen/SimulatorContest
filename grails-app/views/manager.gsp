@@ -108,7 +108,7 @@
             成绩：<%=session["group"].grade%>
             <% } else { %>
             <el-menu-item index="12">
-                <a href="/comment" onclick="">意见</a>
+                <a href="/comment" onclick="">提交意见</a>
             </el-menu-item>
             <% } %>
             <el-menu-item index="13" disabled>

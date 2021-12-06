@@ -244,6 +244,3 @@ button:hover {
     background: linear-gradient(to bottom, #6a72ea 0%, #409EFF 100%);
     /* W3C */
 }
-.dataTables_wrapper .dataTables_paginate .paginate_button .current{
-    background: red;
-}

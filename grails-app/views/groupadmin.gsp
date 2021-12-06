@@ -104,7 +104,7 @@
         成绩：<%=session["group"].grade%>
         <% } else { %>
         <el-menu-item index="12">
-            <a href="/comment" onclick="">意见</a>
+            <a href="/comment" onclick="">提交意见</a>
         </el-menu-item>
         <% } %>
         <el-menu-item index="13" disabled>
@@ -231,5 +231,18 @@
     })
 </script>
 <g:include view="template/js.gsp"/>
+<script type="text/javascript">
+    //定义window.showModalDialog如果它不存在
+    if (window.showModalDialog == undefined) {
+        window.showModalDialog = function (url) {
+//                                    if(window.hasOpenWindow){
+//                                        alert("您已经打开了一个窗口！请先处理它");//避免多次点击会弹出多个窗口
+//                                        window.myNewWindow.focus();
+//                                    }
+//                                    window.hasOpenWindow = true;
+            window.myNewWindow = window.open(url);
+        }
+    }
+</script>
 </body>
 </html>

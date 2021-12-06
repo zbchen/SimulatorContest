@@ -108,7 +108,7 @@
             成绩：<%=session["group"].grade%>
             <% } else { %>
             <el-menu-item index="12">
-                <a href="/comment" onclick="">意见</a>
+                <a href="/comment" onclick="">提交意见</a>
             </el-menu-item>
             <% } %>
             <el-menu-item index="13" disabled>
@@ -126,56 +126,58 @@
                         <h3 class="box-title">文件列表</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body">
-                        <table id="table1" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>编号</th>
-                                <th>组名</th>
-                                <th>文件名</th>
-                                <th>状态</th>
-                                <th>提交时间</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <%
-                                int gid = params.int("gid")
-                                def g = simulatorcontest.ContestGroup.findById(gid)
-                                def flist = simulatorcontest.UploadFile.findAllByGroup(g, [sort: "id", order: "desc"])
-                                def i = 1
-                            %>
-                            <g:each in="${flist}" var="f">
+                    <div class="bootstrap-data-table-panel">
+                        <div class="box-body">
+                            <table id="bootstrap-data-table-export" class="table table-bordered table-hover">
+                                <thead>
                                 <tr>
-                                    <th>${i++}</th>
-                                    <th>${f.group.name}</th>
-                                    <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
-                                    <th>${f.result ? "已测试" + ((f.isPass() && application["testsuite"] != "003") ? "(已通过)" : "(未通过)") : "未测试"}</th>
-                                    <th>${f.uploadDate}</th>
-                                    <th>
-                                        <a href="/Runner/test?fid=${f.id}">
-                                            <el-button type="primary" plain size="small" >测试</el-button>
-                                        </a>
-                                        <a href="/Runner/result?fid=${f.id}">
-                                            <el-button type="primary" plain size="small">查看结果</el-button>
-                                        </a>
-                                        <!--%if (session["group"] && session["group"].identity == 75) {%-->
-                                        <a href="/Runner/fl?fid=${f.id}">
-                                        <el-button type="primary" plain size="small">缺陷定位</el-button>
-                                    </a>
-                                    <!--%}%-->
-                                        <a href="/FileUpload/remove?fid=${f.id}">
-                                        <el-button type="danger" plain size="small">删除</el-button>
-                                    </a>
-
-                                    </th>
+                                    <th>编号</th>
+                                    <th>组名</th>
+                                    <th>文件名</th>
+                                    <th>状态</th>
+                                    <th>提交时间</th>
+                                    <th>操作</th>
                                 </tr>
+                                </thead>
+                                <tbody>
+                                <%
+                                    int gid = params.int("gid")
+                                    def g = simulatorcontest.ContestGroup.findById(gid)
+                                    def flist = simulatorcontest.UploadFile.findAllByGroup(g, [sort: "id", order: "desc"])
+                                    def i = 1
+                                %>
+                                <g:each in="${flist}" var="f">
+                                    <tr>
+                                        <th>${i++}</th>
+                                        <th>${f.group.name}</th>
+                                        <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
+                                        <th>${f.result ? "已测试" + ((f.isPass() && application["testsuite"] != "003") ? "(已通过)" : "(未通过)") : "未测试"}</th>
+                                        <th>${f.uploadDate}</th>
+                                        <th>
+                                            <a href="/Runner/test?fid=${f.id}">
+                                                <el-button type="primary" plain size="small">测试</el-button>
+                                            </a>
+                                            <a href="/Runner/result?fid=${f.id}">
+                                                <el-button type="primary" plain size="small">查看结果</el-button>
+                                            </a>
+                                            <!--%if (session["group"] && session["group"].identity == 75) {%-->
+                                            <a href="/Runner/fl?fid=${f.id}">
+                                                <el-button type="primary" plain size="small">缺陷定位</el-button>
+                                            </a>
+                                            <!--%}%-->
+                                            <a href="/FileUpload/remove?fid=${f.id}">
+                                                <el-button type="danger" plain size="small">删除</el-button>
+                                            </a>
 
-                            </g:each>
-                            </tbody>
+                                        </th>
+                                    </tr>
 
-                        </table>
+                                </g:each>
+                                </tbody>
 
+                            </table>
+
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -189,7 +191,6 @@
     <!-- /.content-wrapper -->
 
 </div>
-<g:include view="template/js.gsp"/>
 <!-- ./wrapper -->
 <!-- jQuery 2.2.3 -->
 %{--<script src="plugins/jQuery-2.2.3/jquery-2.2.3.min.js"></script>--}%
@@ -241,5 +242,6 @@
         }
     })
 </script>
+<g:include view="template/js.gsp"/>
 </body>
 </html>

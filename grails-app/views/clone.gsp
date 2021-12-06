@@ -1,4 +1,4 @@
-<%@ page import="simulatorcontest.UploadFile" %>
+﻿<%@ page import="simulatorcontest.UploadFile" %>
 
 <g:if test="${!session["group"] || session["group"].identity != 75}">
     <g:javascript>
@@ -81,7 +81,7 @@
                 <a href="/gradelist">成绩</a>
             </el-menu-item>
             <el-menu-item index="9">
-                <a href="/groupcomment">意见</a>
+                <a href="/groupcomment">提交意见</a>
             </el-menu-item>
 
             <% } %>

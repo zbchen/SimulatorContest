@@ -34,7 +34,8 @@ class TestSuiteController {
                 }
             }
             suite.delete(flush:true)
-            redirect(uri:"/testsuite")
+            render '1'
+//            redirect(uri:"/testsuite")
         } else {
             render "Test case does not exist!!"
         }
