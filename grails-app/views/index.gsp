@@ -8,10 +8,15 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+    [v-cloak]{
+        display: none;!important;
+    }
+</style>
 </head>
 
 <body>
-<div id="login">
+<div id="login" v-cloak>
     <div class="project_name">
         <h1>程序设计综合实践</h1>
     </div>

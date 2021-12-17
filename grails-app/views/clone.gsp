@@ -32,7 +32,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper" id="clone">
+<div class="wrapper" id="clone" v-cloak>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="wrapper">

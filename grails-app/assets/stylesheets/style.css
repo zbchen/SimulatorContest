@@ -208,6 +208,7 @@ button:hover {
 /** 当前激活的分页按钮样式 **/
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{
+    color: white !important;
     outline: none;
     background-color: #409EFF !important;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #409EFF),
@@ -243,4 +244,7 @@ button:hover {
     /* Opera 11.10+ */
     background: linear-gradient(to bottom, #6a72ea 0%, #409EFF 100%);
     /* W3C */
+}
+[v-cloak]{
+    display: none;!important;
 }

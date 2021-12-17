@@ -31,7 +31,7 @@
 
 <body class="hold-transition sidebar-mini">
 <!-- Content Wrapper. Contains page content -->
-<div class="wrapper" id="groupadmin">
+<div class="wrapper" id="groupadmin" v-cloak>
     <!-- Content Header (Page header) -->
     <div class="user-panel">
         <el-dropdown>
@@ -231,18 +231,5 @@
     })
 </script>
 <g:include view="template/js.gsp"/>
-<script type="text/javascript">
-    //定义window.showModalDialog如果它不存在
-    if (window.showModalDialog == undefined) {
-        window.showModalDialog = function (url) {
-//                                    if(window.hasOpenWindow){
-//                                        alert("您已经打开了一个窗口！请先处理它");//避免多次点击会弹出多个窗口
-//                                        window.myNewWindow.focus();
-//                                    }
-//                                    window.hasOpenWindow = true;
-            window.myNewWindow = window.open(url);
-        }
-    }
-</script>
 </body>
 </html>

@@ -8,11 +8,14 @@
     #changepassword{
         margin: 130px auto;
     }
+    [v-cloak]{
+        display: none;!important;
+    }
 </style>
 </head>
 
 <body>
-<div id="changepassword">
+<div id="changepassword" v-cloak>
     <div class="login-form">
         <div class="login-title">修改密码</div>
 

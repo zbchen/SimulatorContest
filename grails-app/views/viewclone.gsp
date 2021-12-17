@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>测试集管理</title>
+    <title>查重结果</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -32,7 +32,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper" id="viewclone">
+<div class="wrapper" id="viewclone" v-cloak>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="wrapper">

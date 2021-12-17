@@ -41,15 +41,16 @@
     opacity: 0;
 
 }
-.submit{
+
+.submit {
     width: 300px;
     text-align: center;
     margin: 10px auto;
 }
-.submit>button{
+
+.submit > button {
     margin-top: 10px;
 }
-
 </style>
 <html>
 <body>
@@ -61,6 +62,7 @@
             <span class="file-click ">点击此处上传文件</span>
             <input type="file" name="myFile" class="input-file"/>
         </div>
+
         <div class="submit">
             <input id="fileCover" type="text" class="form-control" style="display: none"/>
             <button class="btn btn-primary btn-outline m-b-10 m-l-5" type="submit">提交</button>
@@ -68,6 +70,7 @@
         %{--        <input type="submit"/>--}%
     </div>
 </g:uploadForm>
+
 <asset:javascript src="jquery-2.2.0.min.js"/>
 <script>
     $('input[type=file]').change(function () {

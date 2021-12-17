@@ -32,7 +32,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper" id="testsuite">
+<div class="wrapper" id="testsuite" v-cloak>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="wrapper">
@@ -277,7 +277,7 @@
                     data: {sid: sid},
                     success: function (data) {
                         if (data === "1") {
-                            var result = confirm("是否跳转至项目列表？")
+                            var result = confirm("是否跳转至测试例列表？")
                             if (result) {
                                 window.location.reload()
                             }

@@ -22,7 +22,7 @@ class UrlMappings {
         "/changepasswd"(view:"/changepassword")
         "/clone"(view:"/clone")
         "/viewclone"(view:"/viewclone")
-        "/comment"(view:"/comment")
+        "/comment"(view:"/comment1")
         "/updategrade"(view:"/updategrade")
         "/groupcomment"(view:"/groupcomment")
         "/gradelist"(view:"/gradelist")
