@@ -10,6 +10,7 @@ class TestSuiteController {
 
         def suite = new TestCase(suite:params["name"], timeout:params["timeout"])
         suite.save(true)
+//        render '1'
         render "Test case is added " + suite.id
     }
 
@@ -34,8 +35,8 @@ class TestSuiteController {
                 }
             }
             suite.delete(flush:true)
-            render '1'
-//            redirect(uri:"/testsuite")
+//            render '1'
+            redirect(uri:"/testsuite")
         } else {
             render "Test case does not exist!!"
         }

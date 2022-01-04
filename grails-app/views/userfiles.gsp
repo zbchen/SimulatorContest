@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>提交列表</title>
+    <title>用户</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -153,9 +153,10 @@
                                             <% if (session["group"].grade < 60) { %>
                                             <!--a href="/Runner/test?fid=${f.id}">测试</a-->&nbsp;
                                             <% } %>
-                                            <a href="/Runner/result?fid=${f.id}">
-                                                <el-button type="primary" plain size="small">查看结果</el-button>
-                                            </a>
+                                            <el-button type="primary" plain size="small" onclick="show(${f.id})">查看结果</el-button>
+%{--                                            <a href="/Runner/result?fid=${f.id}">--}%
+%{--                                                <el-button type="primary" plain size="small">查看结果</el-button>--}%
+%{--                                            </a>--}%
                                             <% if (session["group"].grade < 60) { %>
                                             <!--a href="/Runner/fl?fid=${f.id}">缺陷定位</a-->
                                             <% } %>

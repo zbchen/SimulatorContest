@@ -16,3 +16,20 @@
         }
     }
 </script>
+<script>
+    function show(id){
+        var x = window.screen.height;
+        var y = window.screen.width;
+        var h = 650;
+        var w = 800;
+        var model = "title=word,resizable=yes,scrollbars=yes," +
+            "height=" + h + ",width=" + w + "," +
+            "status=yes,toolbar=no,menubar=no,location=no," +
+            "top=" + (x-h)/2 + "," +
+            "left=" + (y-w)/2;
+        var url = "";
+        url = "Runner/result?fid="+id;
+        var oOpen = window.open(url,"adviceDetail",model);
+        oOpen.focus();
+    }
+</script>

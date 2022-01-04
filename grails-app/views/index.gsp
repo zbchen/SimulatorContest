@@ -23,7 +23,6 @@
 
     <div class="login-form">
         <div class="login-title">用户登录</div>
-
         <form role="form" action="/Login/log" method="post" @submit="on_submit">
             <div class="form-control">
                 <input class="input-style" type="text" name="username"
@@ -82,6 +81,6 @@
         }
     })
 </script>
-
+<g:include view="template/js.gsp"/>
 </body>
 </html>

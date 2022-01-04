@@ -3,6 +3,8 @@ package simulatorcontest
 class LoginController {
 
     def log() {
+        def data = params.data
+        print(data)
         def student = Student.findByName(params.get("username"))
         if (student /*&& student.name.equals("czb")*/) {
             if (student.group.password == params.get("password")) {
@@ -16,10 +18,13 @@ class LoginController {
                 //    render "Login is not enabled now"
                 //}
             } else {
-                render "Login Fails: password is incorrect"
+                redirect(uri:'/')
+              //  render "Login Fails: password is incorrect"
             }
-        } else {
-            render "Login Fails: user is not found"
+        }
+        else {
+            redirect(uri:'/')
+          //  render "Login Fails: user is not found"
         }
     }
 

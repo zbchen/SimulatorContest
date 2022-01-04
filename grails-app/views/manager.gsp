@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>提交列表</title>
+    <title>测试</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -173,15 +173,16 @@
                                         <th>${g.students[0].identity}</th>
                                         <th><a href="/FileUpload/download?fid=${f.id}">${f.name}</a></th>
                                         <th>${
-                                                f.result && b == true ? "已测试" + (f.isPass() ? "(已通过)" : "(未通过)") : "未测试"}</th>
+                                                f.result && b == true ? "已测试" + ( f.isPass ( ) ? "(已通过)": "(未通过)" ): "未测试"}</th>
                                         <th>${f.uploadDate}</th>
                                         <th>
                                             <a href="/Runner/test?fid=${f.id}">
                                                 <el-button type="primary" plain size="small">测试</el-button>
                                             </a>
-                                            <a href="/Runner/result?fid=${f.id}">
-                                                <el-button type="primary" plain size="small">查看结果</el-button>
-                                            </a>
+                                            %{--                                            <a href="/Runner/result?fid=${f.id}">--}%
+                                            <el-button type="primary" plain size="small"
+                                                       onclick="show(${f.id})">查看结果</el-button>
+                                            %{--                                            </a>--}%
                                             <a href="/FileUpload/remove?fid=${f.id}">
                                                 <el-button type="danger" plain size="small">删除</el-button>
                                             </a>

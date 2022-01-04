@@ -158,11 +158,13 @@
                                             <a href="#" onclick="window.showModalDialog('/addpara?sid=${s.id}')">
                                                 <el-button type="primary" plain size="small">添加参数</el-button>
                                             </a>
-                                            %{--                                            <a href="/TestSuite/remove?sid=${s.id}">--}%
-                                            <a href="#">
-                                                <el-button type="danger" plain size="small"
-                                                           onclick="deleteItem(${s.id})">删除</el-button>
+                                            <a href="/TestSuite/remove?sid=${s.id}">
+                                                <el-button type="danger" plain size="small">删除</el-button>
                                             </a>
+%{--                                            <a href="#">--}%
+%{--                                                <el-button type="danger" plain size="small"--}%
+%{--                                                           onclick="deleteItem(${s.id})">删除</el-button>--}%
+%{--                                            </a>--}%
 
                                             %{--                                            </a>--}%
 
@@ -262,34 +264,34 @@
         }
     }
 </script>
-<script>
-    function deleteItem(sid) {
-        console.log(sid);
-        removeProject(sid)
-        function removeProject(sid) {
-            var result = confirm("确定要删除所选项目？")
-            if (result) {
-                $.ajax({
-                    type: "POST",
-                    async: true,
-                    cache: false,
-                    url: "TestSuite/remove",
-                    data: {sid: sid},
-                    success: function (data) {
-                        if (data === "1") {
-                            var result = confirm("是否跳转至测试例列表？")
-                            if (result) {
-                                window.location.reload()
-                            }
-                        }
-                    },
-                    error: function (xmlhttp, state, msg) {
-                        alert(state + ":" + msg);
-                    }
-                });
-            }
-        }
-    }
-</script>
+%{--<script>--}%
+%{--    function deleteItem(sid) {--}%
+%{--        console.log(sid);--}%
+%{--        removeProject(sid)--}%
+%{--        function removeProject(sid) {--}%
+%{--            var result = confirm("确定要删除所选项目？")--}%
+%{--            if (result) {--}%
+%{--                $.ajax({--}%
+%{--                    type: "POST",--}%
+%{--                    async: true,--}%
+%{--                    cache: false,--}%
+%{--                    url: "TestSuite/remove",--}%
+%{--                    data: {sid: sid},--}%
+%{--                    success: function (data) {--}%
+%{--                        if (data === "1") {--}%
+%{--                            var result = confirm("是否跳转至测试例列表？")--}%
+%{--                            if (result) {--}%
+%{--                                window.location.reload()--}%
+%{--                            }--}%
+%{--                        }--}%
+%{--                    },--}%
+%{--                    error: function (xmlhttp, state, msg) {--}%
+%{--                        alert(state + ":" + msg);--}%
+%{--                    }--}%
+%{--                });--}%
+%{--            }--}%
+%{--        }--}%
+%{--    }--}%
+%{--</script>--}%
 </body>
 </html>

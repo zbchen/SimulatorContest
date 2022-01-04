@@ -1,22 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>用户注册</title>
+    <title>意见与建议</title>
     <asset:stylesheet href="element-ui.css"/>
     <asset:stylesheet src="login-register.css"/>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-    [v-cloak]{
-        display: none;!important;
-    }
-</style>
 </head>
 
 <body>
-<div id="register" v-cloak>
+<div id="register">
     <div class="project_name">
         <h1>意见与建议</h1>
     </div>

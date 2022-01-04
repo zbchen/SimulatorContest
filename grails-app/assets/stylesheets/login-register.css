@@ -98,6 +98,7 @@ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
 .login-button:hover {
     transform: translate(0, -1px);
     transition-delay: 0s !important;
+    box-shadow: 0 5px 5px #ccc;
 }
 .register-link{
     margin: 10px;
