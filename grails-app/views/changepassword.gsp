@@ -48,7 +48,7 @@
             password2: '',
             error_password: false,
             error_password2: false,
-            error_password_message: '密请输入密码',
+            error_password_message: '请输入密码',
             error_password2_message: '请输入新密码',
         },
         methods: {

@@ -110,7 +110,7 @@
                 <a href="/comment" onclick="">提交意见</a>
             </el-menu-item>
             <% } %>
-            <el-menu-item index="13" disabled>
+            <el-menu-item index="13">
                 组号：<%=session["group"].id%>
             </el-menu-item>
             <% } %>
@@ -153,10 +153,11 @@
                                             <% if (session["group"].grade < 60) { %>
                                             <!--a href="/Runner/test?fid=${f.id}">测试</a-->&nbsp;
                                             <% } %>
-                                            <el-button type="primary" plain size="small" onclick="show(${f.id})">查看结果</el-button>
-%{--                                            <a href="/Runner/result?fid=${f.id}">--}%
-%{--                                                <el-button type="primary" plain size="small">查看结果</el-button>--}%
-%{--                                            </a>--}%
+                                            <el-button type="primary" plain size="small"
+                                                       onclick="showResult(${f.id})">查看结果</el-button>
+                                            %{--                                            <a href="/Runner/result?fid=${f.id}">--}%
+                                            %{--                                                <el-button type="primary" plain size="small">查看结果</el-button>--}%
+                                            %{--                                            </a>--}%
                                             <% if (session["group"].grade < 60) { %>
                                             <!--a href="/Runner/fl?fid=${f.id}">缺陷定位</a-->
                                             <% } %>

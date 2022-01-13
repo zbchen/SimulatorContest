@@ -3,8 +3,6 @@ package simulatorcontest
 class LoginController {
 
     def log() {
-        def data = params.data
-        print(data)
         def student = Student.findByName(params.get("username"))
         if (student /*&& student.name.equals("czb")*/) {
             if (student.group.password == params.get("password")) {

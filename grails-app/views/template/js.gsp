@@ -17,7 +17,7 @@
     }
 </script>
 <script>
-    function show(id){
+    function openModel(url){
         var x = window.screen.height;
         var y = window.screen.width;
         var h = 650;
@@ -27,9 +27,19 @@
             "status=yes,toolbar=no,menubar=no,location=no," +
             "top=" + (x-h)/2 + "," +
             "left=" + (y-w)/2;
-        var url = "";
-        url = "Runner/result?fid="+id;
         var oOpen = window.open(url,"adviceDetail",model);
         oOpen.focus();
+    }
+    function showResult(id){
+        const url = "Runner/result?fid="+id
+        openModel(url)
+    }
+    function showGrade(id){
+        const url = " updategrade?gid="+id;
+        openModel(url)
+    }
+    function addPara(id){
+        const url = "/addpara?sid="+id
+        openModel(url)
     }
 </script>

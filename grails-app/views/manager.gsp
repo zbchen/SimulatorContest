@@ -181,7 +181,7 @@
                                             </a>
                                             %{--                                            <a href="/Runner/result?fid=${f.id}">--}%
                                             <el-button type="primary" plain size="small"
-                                                       onclick="show(${f.id})">查看结果</el-button>
+                                                       onclick="showResult(${f.id})">查看结果</el-button>
                                             %{--                                            </a>--}%
                                             <a href="/FileUpload/remove?fid=${f.id}">
                                                 <el-button type="danger" plain size="small">删除</el-button>

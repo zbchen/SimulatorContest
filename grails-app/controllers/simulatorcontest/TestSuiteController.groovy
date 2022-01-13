@@ -51,6 +51,7 @@ class TestSuiteController {
 
         //println "getting file"
         def f = request.getFile("myFile")
+
         if (f.empty) {
             def s = TestCase.findById(params.int("sid"))
             if (s) {
@@ -58,7 +59,9 @@ class TestSuiteController {
                 p.testcase = s
                 p.save(flush:true)
             }
-
+            response.setCharacterEncoding("gbk")
+            PrintWriter out=response.getWriter()
+            out.print("<script>self.opener.location.reload();window.close();</script>")
             render "param added successfully"
         } else {
             // Do file copy
@@ -81,7 +84,9 @@ class TestSuiteController {
                 p.testcase = s
                 p.save(flush:true)
             }
-
+            response.setCharacterEncoding("gbk")
+            PrintWriter out=response.getWriter()
+            out.print("<script>self.opener.location.reload();window.close();</script>")
             render "param added successfully"
 
         }

@@ -3,7 +3,6 @@ package simulatorcontest
 class GroupAdminController {
 
     def grade() {
-
         if (!params["gid"] || !session["group"] || session["group"].identity != 75) {
             redirect(uri:"/")
             return
@@ -14,6 +13,9 @@ class GroupAdminController {
         if (g) {
             g.grade = params["grade"].toString().toFloat()
             g.save(flush:true)
+            response.setCharacterEncoding("gbk")
+            PrintWriter out=response.getWriter()
+            out.print("<script>self.opener.location.reload();window.close();</script>")
             render "Grade is updated"
         } else {
             render "Group does not exist"

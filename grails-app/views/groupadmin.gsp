@@ -150,10 +150,11 @@
                                     <th>${g.students[0].identity}</th>
                                     <th>${g.grade}</th>
                                     <th>
-                                        <a href="#"
-                                           onclick="window.showModalDialog('/updategrade?gid=${g.id}')">
-                                            <el-button type="primary" plain size="small">成绩</el-button>
-                                        </a>
+%{--                                        <a href="#"--}%
+%{--                                           onclick="window.showModalDialog('/updategrade?gid=${g.id}')">--}%
+%{--                                            <el-button type="primary" plain size="small">成绩</el-button>--}%
+%{--                                        </a>--}%
+                                        <el-button type="primary" plain size="small" onclick="showGrade(${g.id})">成绩</el-button>
                                         <a href="/muserfile?gid=${g.id}">
                                             <el-button type="primary" plain size="small">文件列表</el-button>
                                         </a>

@@ -155,9 +155,10 @@
                                         <th>${s.timeout}</th>
                                         <th>${s.getParamsString()}</th>
                                         <th>
-                                            <a href="#" onclick="window.showModalDialog('/addpara?sid=${s.id}')">
-                                                <el-button type="primary" plain size="small">添加参数</el-button>
-                                            </a>
+%{--                                            <a href="#" onclick="window.showModalDialog('/addpara?sid=${s.id}')">--}%
+%{--                                                <el-button type="primary" plain size="small">添加参数</el-button>--}%
+%{--                                            </a>--}%
+                                            <el-button type="primary" plain size="small" onclick="addPara(${s.id})">添加参数</el-button>
                                             <a href="/TestSuite/remove?sid=${s.id}">
                                                 <el-button type="danger" plain size="small">删除</el-button>
                                             </a>
