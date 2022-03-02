@@ -32,60 +32,184 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="body_con">
+    <div class="body_top">程序设计综合实践</div>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="wrapper">
-        <!-- Content Header (Page header) -->
-        <g:include view="/NavBar.gsp"/>
+    <div class="body_left">
+        <ul class="body_left_list">
+            <li>
+                <label>
+                    <span>组号：<%=session["group"].id%></span>
+                    <a href="javascript:;"></a>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <span>测试</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <% if (session["group"] /*&& session["group"].grade < 60*/) { %>
+                    <li>
+                        <label>
+                            <span>上载</span>
+                            <a href="/FileUpload"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>组管理</span>
+                            <a href="/gadmin"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>测试列表</span>
+                            <a href="/admin"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>测试例</span>
+                            <a href="/testsuite"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>成绩</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>成绩列表</span>
+                            <a href="/gradelist"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                    <li>
+                        <label>
+                            <span>排名</span>
+                            <a href="/Runner/rank"></a>
+                        </label>
+                    </li>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>查重</span>
+                            <a href="/clone"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>补考</span>
+                            <a href="/bukao"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>意见</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <li>
+                        <label>
+                            <span>提交意见</span>
+                            <a href="/comment" onclick=""></a>
+                        </label>
+                    </li>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>意见列表</span>
+                            <a href="/groupcomment"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>用户</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <li>
+                        <label>
+                            <span>用户信息</span>
+                            <a href="/user"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>修改密码</span>
+                            <a href="" onclick="window.showModalDialog('/changepasswd')"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>注销</span>
+                            <a href="/Login/logout"></a>
+                        </label>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
-        <!-- Main content -->
+    <div class="body_right">
         <section class="content">
             <div class="row">
-%{--                <div class="col-xs-8">--}%
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">成绩</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="bootstrap-data-table-panel">
-                            <div class="box-body">
-                                <table id="bootstrap-data-table-export" class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>姓名</th>
-                                        <th>学号</th>
-                                        <th>成绩</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%
-                                        def slist = simulatorcontest.Student.findAll([sort: "identity", order: "asc"])
-                                    %>
-                                    <g:each in="${slist}" var="s">
-                                        <tr>
-                                            <th>${s.name}</th>
-                                            <th>${s.identity}</th>
-                                            <th>${s.group.grade}</th>
-                                        </tr>
-                                    </g:each>
-                                    </tbody>
-
-                                </table>
-
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
+                %{--                <div class="col-xs-8">--}%
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">成绩</h3>
                     </div>
-                    <!-- /.box -->
-                </div>
-                <!-- /.col -->
-%{--            </div>--}%
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+                    <!-- /.box-header -->
+                    <div class="bootstrap-data-table-panel">
+                        <div class="box-body">
+                            <table id="bootstrap-data-table-export" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>学号</th>
+                                    <th>成绩</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%
+                                    def slist = simulatorcontest.Student.findAll([sort: "identity", order: "asc"])
+                                %>
+                                <g:each in="${slist}" var="s">
+                                    <tr>
+                                        <th>${s.name}</th>
+                                        <th>${s.identity}</th>
+                                        <th>${s.group.grade}</th>
+                                    </tr>
+                                </g:each>
+                                </tbody>
 
+                            </table>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            %{--            </div>--}%
+        </section>
+    </div>
 </div>
 <!-- ./wrapper -->
 <!-- jQuery 2.2.3 -->

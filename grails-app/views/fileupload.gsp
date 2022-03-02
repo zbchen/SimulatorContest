@@ -5,6 +5,10 @@
         window.location.href = '/';
     </g:javascript>
 </g:if>
+<head>
+    <title>base</title>
+    <g:include view="template/css.gsp"/>
+</head>
 <style>
 .file {
     width: 50%;
@@ -54,22 +58,158 @@
 </style>
 <html>
 <body>
-<g:include view="NavBar.gsp"/>
-<g:uploadForm controller="FileUpload" action="upload">
-    <div class="file">
-        <div class="file-style">
-            <img src="${resource(dir: 'images', file: 'file.jpeg')}" alt="file" class="img-file">
-            <span class="file-click ">点击此处上传文件</span>
-            <input type="file" name="myFile" class="input-file"/>
-        </div>
-
-        <div class="submit">
-            <input id="fileCover" type="text" class="form-control" style="display: none"/>
-            <button class="btn btn-primary btn-outline m-b-10 m-l-5" type="submit">提交</button>
-        </div>
-        %{--        <input type="submit"/>--}%
+<div class="body_con">
+    <div class="body_top">程序设计综合实践</div>
+    <div class="body_left">
+        <ul class="body_left_list">
+            <li>
+                <label>
+                    <span>组号：<%=session["group"].id%></span>
+                    <a href="javascript:;"></a>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <span>测试</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <% if (session["group"] /*&& session["group"].grade < 60*/) { %>
+                    <li>
+                        <label>
+                            <span>上载</span>
+                            <a href="/FileUpload"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>组管理</span>
+                            <a href="/gadmin"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>测试列表</span>
+                            <a href="/admin"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>测试例</span>
+                            <a href="/testsuite"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>成绩</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>成绩列表</span>
+                            <a href="/gradelist"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                    <li>
+                        <label>
+                            <span>排名</span>
+                            <a href="/Runner/rank"></a>
+                        </label>
+                    </li>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>查重</span>
+                            <a href="/clone"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>补考</span>
+                            <a href="/bukao"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>意见</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <li>
+                        <label>
+                            <span>提交意见</span>
+                            <a href="/comment" onclick=""></a>
+                        </label>
+                    </li>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>意见列表</span>
+                            <a href="/groupcomment"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>用户</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <li>
+                        <label>
+                            <span>用户信息</span>
+                            <a href="/user"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>修改密码</span>
+                            <a href="" onclick="window.showModalDialog('/changepasswd')"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>注销</span>
+                            <a href="/Login/logout"></a>
+                        </label>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
-</g:uploadForm>
+
+    <div class="body_right">
+        <g:uploadForm controller="FileUpload" action="upload">
+            <div class="file">
+                <div class="file-style">
+                    <img src="${resource(dir: 'images', file: 'file.jpeg')}" alt="file" class="img-file">
+                    <span class="file-click ">点击此处上传文件</span>
+                    <input type="file" name="myFile" class="input-file"/>
+                </div>
+
+                <div class="submit">
+                    <input id="fileCover" type="text" class="form-control" style="display: none"/>
+                    <button class="btn btn-primary btn-outline m-b-10 m-l-5" type="submit">提交</button>
+                </div>
+                %{--        <input type="submit"/>--}%
+            </div>
+        </g:uploadForm>
+    </div>
+</div>
+
 
 <asset:javascript src="jquery-2.2.0.min.js"/>
 <script>

@@ -32,13 +32,140 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper" id="resit" v-cloak>
+<div class="body_con">
+    <div class="body_top">程序设计综合实践</div>
+    <div class="body_left">
+        <ul class="body_left_list">
+            <li>
+                <label>
+                    <span>组号：<%=session["group"].id%></span>
+                    <a href="javascript:;"></a>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <span>测试</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <% if (session["group"] /*&& session["group"].grade < 60*/) { %>
+                    <li>
+                        <label>
+                            <span>上载</span>
+                            <a href="/FileUpload"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>组管理</span>
+                            <a href="/gadmin"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>测试列表</span>
+                            <a href="/admin"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>测试例</span>
+                            <a href="/testsuite"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>成绩</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>成绩列表</span>
+                            <a href="/gradelist"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                    <li>
+                        <label>
+                            <span>排名</span>
+                            <a href="/Runner/rank"></a>
+                        </label>
+                    </li>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>查重</span>
+                            <a href="/clone"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>补考</span>
+                            <a href="/bukao"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>意见</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <li>
+                        <label>
+                            <span>提交意见</span>
+                            <a href="/comment" onclick=""></a>
+                        </label>
+                    </li>
+                    <% if (session["group"] && session["group"].identity == 75) { %>
+                    <li>
+                        <label>
+                            <span>意见列表</span>
+                            <a href="/groupcomment"></a>
+                        </label>
+                    </li>
+                    <% } %>
+                </ul>
+            </li>
+            <li>
+                <label>
+                    <span>用户</span>
+                    <a href="javascript:;"></a>
+                </label>
+                <ul>
+                    <li>
+                        <label>
+                            <span>用户信息</span>
+                            <a href="/user"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>修改密码</span>
+                            <a href="" onclick="window.showModalDialog('/changepasswd')"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>注销</span>
+                            <a href="/Login/logout"></a>
+                        </label>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="wrapper">
-        <!-- Content Header (Page header) -->
-        <g:include view="/NavBar.gsp"/>
-        <!-- Main content -->
+    <div class="body_right" id="resit" v-cloak>
         <section class="content">
             <div class="row">
                 %{--                <div class="col-xs-8">--}%
@@ -99,7 +226,7 @@
                                             </a>
                                             %{--                                            <a href="/Runner/result?fid=${f.id}">--}%
                                             <el-button type="primary" plain size="small"
-                                                       onclick="show(${f.id})">查看结果</el-button>
+                                                       onclick="showResult(${f.id})">查看结果</el-button>
                                             %{--                                            </a>--}%
                                             <a href="/FileUpload/remove?fid=${f.id}">
                                                 <el-button type="danger" plain size="small">删除</el-button>
@@ -125,12 +252,9 @@
             <!-- /.col -->
             %{--            </div>--}%
         </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
 </div>
-<!-- ./wrapper -->
+
 <!-- jQuery 2.2.3 -->
 %{--<script src="plugins/jQuery-2.2.3/jquery-2.2.3.min.js"></script>--}%
 %{--<!-- Bootstrap 3.3.6 -->--}%
