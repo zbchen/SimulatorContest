@@ -108,6 +108,12 @@
                     </li>
                     <li>
                         <label>
+                            <span>查重结果</span>
+                            <a href="/viewclone"></a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
                             <span>补考</span>
                             <a href="/bukao"></a>
                         </label>
@@ -152,7 +158,7 @@
                     <li>
                         <label>
                             <span>修改密码</span>
-                            <a href="" onclick="window.showModalDialog('/changepasswd')"></a>
+                            <a href="/changepasswd"></a>
                         </label>
                     </li>
                     <li>

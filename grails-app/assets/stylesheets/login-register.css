@@ -1,28 +1,33 @@
-body {
+.login,.register{
     background: linear-gradient(rgba(13, 106, 173, 0.5), rgba(102, 51, 153, 0.5));
     color: #2f2e2e;
 }
 
-.project_name {
+.project_name{
     text-align: center;
     margin: 130px 0 40px;
 }
+.comment-name{
+    text-align: center;
+    margin: 50px 0 40px;
+    font-size: 24px;
+}
 
-.login-title ,.change-title{
+.login-title ,.change-title,.comment-title{
     font-size: 24px;
     text-align: center;
     margin: 10px;
 }
 
-.login-form{
+.login-form,.comment-form{
     background: #fff;
     width: 600px;
-    border: 1px solid #ccc;
     border-radius: 25px 5px;
     margin: 0 auto;
+    border: 1px solid #ccc;
 }
 
-.login-form > form {
+.login-form > form ,.comment-form > form{
     text-align: center;
 }
 
@@ -37,11 +42,12 @@ body {
     border-radius: 10px 2px;
     font-size: 16px;
     padding-left: 40px;
+    margin: 10px auto;
 }
 .input-style{
     height: 40px;
 }
-.textarea-style:focus,.input-style:focus {
+.textarea-style:focus,.input-style:focus{
     border: 2px solid #0d6aad;
 }
 
@@ -84,7 +90,7 @@ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: #0d6aad;
     font-size: 16px;
 }
-.login-button {
+.login-button ,.comment-button{
     border: none;
     width: 80%;
     height: 40px;
@@ -95,7 +101,7 @@ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: #ccc;
 }
 
-.login-button:hover {
+.login-button:hover ,.comment-button:hover{
     transform: translate(0, -1px);
     transition-delay: 0s !important;
     box-shadow: 0 5px 5px #ccc;

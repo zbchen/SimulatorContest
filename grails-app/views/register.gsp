@@ -15,7 +15,7 @@
 </style>
 </head>
 
-<body>
+<body class="register">
 <div id="register" v-cloak>
     <div class="project_name">
         <h1>程序设计综合实践</h1>
