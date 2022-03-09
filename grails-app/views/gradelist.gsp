@@ -32,8 +32,25 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="body_con">
-    <div class="body_top">程序设计综合实践</div>
+<div class="body_con" id="gradelist" v-cloak>
+    <div class="body_top">
+        <h3>程序设计综合实践</h3>
+        <div class="user-panel">
+            <el-dropdown>
+                <span class="el-dropdown-link">
+                    用户操作<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>
+                        <a href="" onclick="window.showModalDialog('/changepasswd')">修改密码</a>
+                    </el-dropdown-item>
+                    <el-dropdown-item>
+                        <a href="/Login/logout">注销</a>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </div>
+    </div>
 
     <div class="body_left">
         <ul class="body_left_list">
@@ -251,5 +268,12 @@
 %{--    });--}%
 %{--</script>--}%
 <g:include view="template/js.gsp"/>
+<asset:javascript src="vue.js"/>
+<asset:javascript src="element-ui.js"/>
+<script>
+    const gradelist = new Vue({
+        el: '#gradelist'
+    })
+</script>
 </body>
 </html>

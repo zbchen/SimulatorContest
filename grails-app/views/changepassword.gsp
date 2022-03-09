@@ -5,19 +5,30 @@
     <asset:stylesheet href="element-ui.css"/>
     <g:include view="template/css.gsp"/>
     <asset:stylesheet src="login-register.css"/>
-    <style>
-    #changepassword{
-        margin: 130px auto;
-    }
-    [v-cloak]{
-        display: none;!important;
-    }
-</style>
 </head>
 
 <body>
-<div class="body_con">
-    <div class="body_top">程序设计综合实践</div>
+<div class="body_con" id="changepassword" v-cloak>
+    <div class="body_top">
+        <h3>程序设计综合实践</h3>
+
+        <div class="user-panel">
+            <el-dropdown>
+                <span class="el-dropdown-link">
+                    用户操作<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>
+                        <a href="" onclick="window.showModalDialog('/changepasswd')">修改密码</a>
+                    </el-dropdown-item>
+                    <el-dropdown-item>
+                        <a href="/Login/logout">注销</a>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </div>
+    </div>
+
     <div class="body_left">
         <ul class="body_left_list">
             <li>
@@ -154,29 +165,28 @@
             </li>
         </ul>
     </div>
+
     <div class="body_right">
-        <div id="changepassword" v-cloak>
-            <div class="login-form">
-                <div class="login-title">修改密码</div>
+        <div class="login-form" style="margin: 130px auto">
+            <div class="login-title">修改密码</div>
 
-                <form role="form" action="/Register/changePasswd" method="post" @submit="on_submit">
-%{--                    <div class="form-control">--}%
-                        <input class="input-style" type="password" name="oldpassword"
-                               placeholder="请输入原密码" v-model="password" @blur="check_password">
+            <form role="form" action="/Register/changePasswd" method="post" @submit="on_submit">
+                %{--                    <div class="form-control">--}%
+                <input class="input-style" type="password" name="oldpassword"
+                       placeholder="请输入原密码" v-model="password" @blur="check_password">
 
-                        <div class="text-error" v-show="error_password">{{ error_password_message }}</div>
-%{--                    </div>--}%
+                <div class="text-error" v-show="error_password">{{ error_password_message }}</div>
+                %{--                    </div>--}%
 
-%{--                    <div class="form-control">--}%
-                        <input class="input-style" type="password" name="newpassword"
-                               placeholder="请输入新密码" v-model="password2" @blur="check_password2">
+                %{--                    <div class="form-control">--}%
+                <input class="input-style" type="password" name="newpassword"
+                       placeholder="请输入新密码" v-model="password2" @blur="check_password2">
 
-                        <div class="text-error" v-show="error_password2">{{ error_password2_message }}</div>
-%{--                    </div>--}%
+                <div class="text-error" v-show="error_password2">{{ error_password2_message }}</div>
+                %{--                    </div>--}%
 
-                    <button type="submit" class="login-button">修 改</button>
-                </form>
-            </div>
+                <button type="submit" class="login-button">修 改</button>
+            </form>
         </div>
     </div>
 </div>
@@ -210,10 +220,10 @@
             check_password2() {
                 if (this.password2 === '') {
                     this.error_password2 = true
-                }else if (this.password2.length < 6) {
+                } else if (this.password2.length < 6) {
                     this.error_password2_message = '密码长度不能小于6位'
                     this.error_password2 = true
-                }else {
+                } else {
                     this.error_password2 = false
                 }
             },
