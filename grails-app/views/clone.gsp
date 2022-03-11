@@ -227,9 +227,13 @@
                                             <a href="/CloneDetector/download?cid=${c.id}">
                                                 <el-button type="primary" plain size="small">下载详细数据</el-button>
                                             </a>
-                                            <a href="/CloneDetector/delete?cid=${c.id}">
-                                                <el-button type="danger" plain size="small">删除</el-button>
+                                            <a href="#">
+                                                <el-button type="danger" plain size="small"
+                                                           onclick="deleteItem(${c.id})">删除</el-button>
                                             </a>
+%{--                                            <a href="/CloneDetector/delete?cid=${c.id}">--}%
+%{--                                                <el-button type="danger" plain size="small">删除</el-button>--}%
+%{--                                            </a>--}%
                                         </th>
                                     </tr>
                                 </g:each>
@@ -299,5 +303,34 @@
     })
 </script>
 <g:include view="template/js.gsp"/>
+<script>
+    function deleteItem(cid) {
+        console.log(cid);
+        removeProject(cid)
+        function removeProject(cid) {
+            var result = confirm("确定要删除所选项目？")
+            if (result) {
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    cache: false,
+                    url: "CloneDetector/delete",
+                    data: {cid: cid},
+                    success: function (data) {
+                        if (data === "1") {
+                            var result = confirm("是否跳转至查重列表？")
+                            if (result) {
+                                window.location.reload()
+                            }
+                        }
+                    },
+                    error: function (xmlhttp, state, msg) {
+                        alert(state + ":" + msg);
+                    }
+                });
+            }
+        }
+    }
+</script>
 </body>
 </html>

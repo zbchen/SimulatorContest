@@ -255,10 +255,14 @@
                                             %{--                                            <a href="/Runner/result?fid=${f.id}">--}%
                                             <el-button type="primary" plain size="small"
                                                        onclick="showResult(${f.id})">查看结果</el-button>
-                                            %{--                                            </a>--}%
-                                            <a href="/FileUpload/remove?fid=${f.id}">
-                                                <el-button type="danger" plain size="small">删除</el-button>
+                                            <a href="#">
+                                                <el-button type="danger" plain size="small"
+                                                           onclick="deleteItem(${f.id})">删除</el-button>
                                             </a>
+                                            %{--                                            </a>--}%
+%{--                                            <a href="/FileUpload/remove?fid=${f.id}">--}%
+%{--                                                <el-button type="danger" plain size="small">删除</el-button>--}%
+%{--                                            </a>--}%
                                         </th>
                                     </tr>
                                     <%
@@ -331,5 +335,40 @@
     })
 </script>
 <g:include view="template/js.gsp"/>
+<script>
+    function deleteItem(fid) {
+        console.log(fid);
+        removeProject(fid)
+        function removeProject(fid) {
+            var result = confirm("确定要删除所选项目？")
+            if (result) {
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    cache: false,
+                    url: "FileUpload/remove",
+                    data: {fid: fid},
+                    success: function (data) {
+                        if (data === "1") {
+                            var result = confirm("是否跳转至用户列表？")
+                            if (result) {
+                                window.location.href='/user'
+                            }
+                        }else if(data==="2"){
+                            alert('Not your file, please!!!')
+                            window.location.reload()
+                        }else if(data==='3'){
+                            alert('The upload file of this ID does not exist!')
+                            window.location.reload()
+                        }
+                    },
+                    error: function (xmlhttp, state, msg) {
+                        alert(state + ":" + msg);
+                    }
+                });
+            }
+        }
+    }
+</script>
 </body>
 </html>

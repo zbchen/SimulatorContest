@@ -44,7 +44,8 @@ class GroupAdminController {
                 new File(file.path).delete()
             }
             g.delete(flush:true)
-            redirect (uri: "/gadmin")
+            render '1'
+//            redirect (uri: "/gadmin")
         } else {
             render "Group does not exist"
         }

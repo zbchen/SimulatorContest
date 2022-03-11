@@ -70,7 +70,8 @@ class CloneDetectorController {
                 f.delete()
             }
             r.delete(flush:true)
-            redirect(uri:"/clone")
+            render '1'
+//            redirect(uri:"/clone")
         } else {
             render "not valid"
         }

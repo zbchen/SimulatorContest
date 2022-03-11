@@ -73,12 +73,15 @@ class FileUploadController {
           f.delete(flush:true)
           def file = new File(fileName)
           file.delete()
-          redirect(uri:"/user")
+          render '1'
+//          redirect(uri:"/user")
         } else {
-          render "Not your file, please!!!"
+          render '2'
+//          render "Not your file, please!!!"
         }
       } else {
-        render "The upload file of this ID does not exist!"
+        render '3'
+//        render "The upload file of this ID does not exist!"
       }
     }
 

@@ -231,8 +231,12 @@
                                             <a href="/muserfile?gid=${g.id}">
                                                 <el-button type="primary" plain size="small">文件列表</el-button>
                                             </a>
-                                            <a href="/groupAdmin/remove?gid=${g.id}">
-                                                <el-button type="danger" plain size="small">删除</el-button>
+%{--                                            <a href="/groupAdmin/remove?gid=${g.id}">--}%
+%{--                                                <el-button type="danger" plain size="small">删除</el-button>--}%
+%{--                                            </a>--}%
+                                            <a href="#">
+                                                <el-button type="danger" plain size="small"
+                                                           onclick="deleteItem(${g.id})">删除</el-button>
                                             </a>
                                         </th>
                                     </tr>
@@ -305,5 +309,34 @@
     })
 </script>
 <g:include view="template/js.gsp"/>
+<script>
+    function deleteItem(gid) {
+        console.log(gid);
+        removeProject(gid)
+        function removeProject(gid) {
+            var result = confirm("确定要删除所选项目？")
+            if (result) {
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    cache: false,
+                    url: "groupAdmin/remove",
+                    data: {gid: gid},
+                    success: function (data) {
+                        if (data === "1") {
+                            var result = confirm("是否跳转至组管理列表？")
+                            if (result) {
+                                window.location.reload()
+                            }
+                        }
+                    },
+                    error: function (xmlhttp, state, msg) {
+                        alert(state + ":" + msg);
+                    }
+                });
+            }
+        }
+    }
+</script>
 </body>
 </html>
