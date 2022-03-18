@@ -106,6 +106,7 @@ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
     transition-delay: 0s !important;
     box-shadow: 0 5px 5px #ccc;
 }
+
 .register-link{
     margin: 10px;
     text-align: center;
@@ -122,6 +123,8 @@ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: #f64646;
 
 }
+
+
 
 /*提交意见*/
 .text{

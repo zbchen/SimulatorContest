@@ -10,18 +10,18 @@ class LoginController {
                 //if (student.group.identity == 75) {
                     session["group"] = student.group
                     session["student"] = student
-                    redirect(uri:"/user")
-//                    redirect(uri: "/navbar")
+                    render '1'
+//                    redirect(uri:"/user")
                 //} else {
                 //    render "Login is not enabled now"
                 //}
             } else {
-                redirect(uri:'/')
+                render '2'
               //  render "Login Fails: password is incorrect"
             }
         }
         else {
-            redirect(uri:'/')
+            render '3'
           //  render "Login Fails: user is not found"
         }
     }

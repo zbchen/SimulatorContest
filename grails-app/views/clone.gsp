@@ -308,27 +308,64 @@
         console.log(cid);
         removeProject(cid)
         function removeProject(cid) {
-            var result = confirm("确定要删除所选项目？")
-            if (result) {
-                $.ajax({
-                    type: "POST",
-                    async: true,
-                    cache: false,
-                    url: "CloneDetector/delete",
-                    data: {cid: cid},
-                    success: function (data) {
-                        if (data === "1") {
-                            var result = confirm("是否跳转至查重列表？")
-                            if (result) {
-                                window.location.reload()
+            swal({
+                title:"",
+                text:"确定要删除所选项目？",
+                icon:"info",
+                buttons:{
+                    cancel:"取消",
+                    confirm:"确定"
+                }
+            }).then((confirm)=>{
+                if(confirm){
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        cache: false,
+                        url: "CloneDetector/delete",
+                        data: {cid: cid},
+                        success: function (data) {
+                            if (data === "1") {
+                                swal({
+                                    title:'成功',
+                                    text:'是否跳转到查重列表？',
+                                    icon:'success',
+                                    button:'确定'
+                                }).then(()=>{
+                                    window.location.reload()
+                                })
                             }
+                        },
+                        error: function (xmlhttp, state, msg) {
+                            swal({
+                                title:'失败',
+                            })
+                            alert(state + ":" + msg);
                         }
-                    },
-                    error: function (xmlhttp, state, msg) {
-                        alert(state + ":" + msg);
-                    }
-                });
-            }
+                    });
+                }
+            })
+            // var result = confirm()
+            // if (result) {
+            //     $.ajax({
+            //         type: "POST",
+            //         async: true,
+            //         cache: false,
+            //         url: "CloneDetector/delete",
+            //         data: {cid: cid},
+            //         success: function (data) {
+            //             if (data === "1") {
+            //                 var result = confirm("是否跳转至查重列表？")
+            //                 if (result) {
+            //                     window.location.reload()
+            //                 }
+            //             }
+            //         },
+            //         error: function (xmlhttp, state, msg) {
+            //             alert(state + ":" + msg);
+            //         }
+            //     });
+            // }
         }
     }
 </script>

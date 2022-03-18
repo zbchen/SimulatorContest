@@ -23,23 +23,25 @@
 
     <div class="login-form">
         <div class="login-title">用户登录</div>
-        <form role="form" action="/Login/log" method="post" @submit="on_submit">
+        <form role="form" action="/Login/log" method="post" @click="on_submit">
             <div class="form-control">
-                <input class="input-style" type="text" name="username"
+                <input id="username" class="input-style" type="text" name="username"
                        placeholder="请输入用户名" v-model="username" @blur="check_username">
                 <div class="text-error" v-show="error_username">{{ error_username_message }}</div>
             </div>
 
             <div class="form-control">
-                <input class="input-style" type="password" name="password"
+                <input id="password" class="input-style" type="password" name="password"
                        placeholder="请输入密码" v-model="password" @blur="check_password">
                 <div class="text-error" v-show="error_password">{{ error_password_message }}</div>
             </div>
-            <button type="submit" class="login-button">登  录</button>
+            <input type="button" id="btn" class="login-button" value="登录" onclick="login()"/>
+%{--            <button type="submit" class="login-button">登  录</button>--}%
         </form>
         <div class="register-link">
             <span>还没有账户 ? <a href="register"> 点击此处</a></span>
         </div>
+
     </div>
 </div>
 <asset:javascript src="vue.js"/>
@@ -82,5 +84,42 @@
     })
 </script>
 <g:include view="template/js.gsp"/>
+<script>
+    function login(){
+        $.ajax({
+            type: "POST",
+            async: true,
+            cache: false,
+            url: "login/log",
+            data: {username: $("#username").val(),password:$("#password").val()},
+            dataType:"TEXT",
+            success: function (data) {
+
+                if (data === "1") {
+                    swal({
+                        title:'登录成功',
+                    }).then(()=>{
+                        window.location.href='/user'
+                    })
+                }else if(data==='2'){
+                    swal({
+                        title:'密码错误'
+                    }).then(()=>{
+                        window.location.href='/'
+                    })
+                }else if(data==='3'){
+                    swal({
+                        title:'用户名不存在'
+                    }).then(()=>{
+                        window.location.href='/'
+                    })
+                }
+            },
+            error: function (xmlhttp, state, msg) {
+                alert(state + ":" + msg);
+            }
+        });
+    }
+</script>
 </body>
 </html>

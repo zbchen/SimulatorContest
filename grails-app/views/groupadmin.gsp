@@ -314,27 +314,40 @@
         console.log(gid);
         removeProject(gid)
         function removeProject(gid) {
-            var result = confirm("确定要删除所选项目？")
-            if (result) {
-                $.ajax({
-                    type: "POST",
-                    async: true,
-                    cache: false,
-                    url: "groupAdmin/remove",
-                    data: {gid: gid},
-                    success: function (data) {
-                        if (data === "1") {
-                            var result = confirm("是否跳转至组管理列表？")
-                            if (result) {
-                                window.location.reload()
+            swal({
+                title:"",
+                text:"确定要删除所选项目？",
+                icon:"info",
+                buttons:{
+                    cancel:"取消",
+                    confirm:"确定"
+                }
+            }).then((confirm)=>{
+                if(confirm){
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        cache: false,
+                        url: "groupAdmin/remove",
+                        data: {gid: gid},
+                        success: function (data) {
+                            if (data === "1") {
+                                swal({
+                                    title:'成功',
+                                    text:'是否跳转到组管理列表？',
+                                    icon:'success',
+                                    button:'确定'
+                                }).then(()=>{
+                                    window.location.href='/gadmin'
+                                })
                             }
+                        },
+                        error: function (xmlhttp, state, msg) {
+                            alert(state + ":" + msg);
                         }
-                    },
-                    error: function (xmlhttp, state, msg) {
-                        alert(state + ":" + msg);
-                    }
-                });
-            }
+                    });
+                }
+            })
         }
     }
 </script>

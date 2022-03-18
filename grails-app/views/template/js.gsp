@@ -3,6 +3,7 @@
 <asset:javascript src="data-table/dataTables.buttons.min.js"/>
 <asset:javascript src="data-table/jquery.dataTables.min.js"/>
 <asset:javascript src="data-table/datatables-init.js"/>
+<asset:javascript src="sweetalert.min.js"/>
 <script type="text/javascript">
     //定义window.showModalDialog如果它不存在
     if (window.showModalDialog == undefined) {

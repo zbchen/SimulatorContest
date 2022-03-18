@@ -4,4 +4,5 @@
 <asset:stylesheet src="data-table/buttons.bootstrap.min.css"/>
 <asset:stylesheet src="data-table/dataTables.bootstrap.min.css"/>
 <asset:stylesheet src="data-table/dataTables-init.css"/>
+<asset:stylesheet src="sweetalert.css"/>
 <asset:stylesheet src="style.css"/>

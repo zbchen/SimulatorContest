@@ -340,33 +340,62 @@
         console.log(fid);
         removeProject(fid)
         function removeProject(fid) {
-            var result = confirm("确定要删除所选项目？")
-            if (result) {
-                $.ajax({
-                    type: "POST",
-                    async: true,
-                    cache: false,
-                    url: "FileUpload/remove",
-                    data: {fid: fid},
-                    success: function (data) {
-                        if (data === "1") {
-                            var result = confirm("是否跳转至用户列表？")
-                            if (result) {
-                                window.location.href='/user'
+            swal({
+                title:"",
+                text:"确定要删除所选项目？",
+                icon:"info",
+                buttons:{
+                    cancel:"取消",
+                    confirm:"确定"
+                }
+            }).then((confirm)=>{
+                if(confirm){
+                    $.ajax({
+                        type: "POST",
+                        async: true,
+                        cache: false,
+                        url: "FileUpload/remove",
+                        data: {fid: fid},
+                        success: function (data) {
+                            if (data === "1") {
+                                swal({
+                                    title:'成功',
+                                    text:'是否跳转到测试列表？',
+                                    icon:'success',
+                                    button:'确定'
+                                }).then(()=>{
+                                    window.location.href='/admin'
+                                })
+                            }else if(data==="2"){
+                                swal({
+                                    title:'失败',
+                                    text:'Not your file, please!!!',
+                                    icon:'warning',
+                                    button:'确定',
+                                    dangerMode: true,
+                                }).then(()=>{
+                                    alert('')
+                                    window.location.reload()
+                                })
+                            }else if(data==='3'){
+                                swal({
+                                    title:'失败',
+                                    text:'The upload file of this ID does not exist!',
+                                    icon:'warning',
+                                    button:'确定',
+                                    dangerMode: true,
+                                }).then(()=>{
+                                    alert('')
+                                    window.location.reload()
+                                })
                             }
-                        }else if(data==="2"){
-                            alert('Not your file, please!!!')
-                            window.location.reload()
-                        }else if(data==='3'){
-                            alert('The upload file of this ID does not exist!')
-                            window.location.reload()
+                        },
+                        error: function (xmlhttp, state, msg) {
+                            alert(state + ":" + msg);
                         }
-                    },
-                    error: function (xmlhttp, state, msg) {
-                        alert(state + ":" + msg);
-                    }
-                });
-            }
+                    });
+                }
+            })
         }
     }
 </script>
