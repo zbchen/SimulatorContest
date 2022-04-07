@@ -23,7 +23,7 @@ class UrlMappings {
         "/clone"(view:"/clone")
         "/viewclone"(view:"/viewclone")
         "/comment"(view:"/comment1")
-        "/updategrade"(view:"/updateGrade")
+        "/updategrade"(view:"/updategrade")
         "/groupcomment"(view:"/groupcomment")
         "/gradelist"(view:"/gradelist")
         "/navbar"(view:"/NavBar")

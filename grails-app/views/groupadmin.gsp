@@ -30,9 +30,10 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="body_con"  id="groupadmin" v-cloak>
+<div class="body_con" id="groupadmin" v-cloak>
     <div class="body_top">
         <h3>程序设计综合实践</h3>
+
         <div class="user-panel">
             <el-dropdown>
                 <span class="el-dropdown-link">
@@ -49,6 +50,7 @@
             </el-dropdown>
         </div>
     </div>
+
     <div class="body_left">
         <ul class="body_left_list">
             <li>
@@ -227,13 +229,53 @@
                                             %{--                                           onclick="window.showModalDialog('/updategrade?gid=${g.id}')">--}%
                                             %{--                                            <el-button type="primary" plain size="small">成绩</el-button>--}%
                                             %{--                                        </a>--}%
-                                            <el-button type="primary" plain size="small" onclick="showGrade(${g.id})">成绩</el-button>
+                                            %{--                                            <el-button type="primary" plain size="small" onclick="showGrade(${g.id})">成绩</el-button>--}%
+                                            <el-button type="primary" plain size="small" data-toggle="modal"
+                                                       data-target="#myModal-grade-${g.id}">修改成绩
+                                            </el-button>
+
+                                            <div class="modal fade" id="myModal-grade-${g.id}" tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="myModalLabel">修改成绩</h4>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <form id="update-grade">
+                                                                <div class="form-group row">
+                                                                    <label class="col-lg-4 col-form-label"
+                                                                           for="grade">成绩：<span
+                                                                            class="text-danger">*</span></label>
+
+                                                                    <div class="col-lg-8">
+                                                                        <input type="text" class="form-control"
+                                                                               id="grade" name="grade">
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <el-button type="info" plain size="small"
+                                                                       data-dismiss="modal">关闭</el-button>
+                                                            <el-button type="primary" plain
+                                                                       size="small"
+                                                                       onclick="updateGrade(${g.id})">修改成绩</el-button>
+
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+
                                             <a href="/muserfile?gid=${g.id}">
                                                 <el-button type="primary" plain size="small">文件列表</el-button>
                                             </a>
-%{--                                            <a href="/groupAdmin/remove?gid=${g.id}">--}%
-%{--                                                <el-button type="danger" plain size="small">删除</el-button>--}%
-%{--                                            </a>--}%
+                                            %{--                                            <a href="/groupAdmin/remove?gid=${g.id}">--}%
+                                            %{--                                                <el-button type="danger" plain size="small">删除</el-button>--}%
+                                            %{--                                            </a>--}%
                                             <a href="#">
                                                 <el-button type="danger" plain size="small"
                                                            onclick="deleteItem(${g.id})">删除</el-button>
@@ -313,17 +355,18 @@
     function deleteItem(gid) {
         console.log(gid);
         removeProject(gid)
+
         function removeProject(gid) {
             swal({
-                title:"",
-                text:"确定要删除所选项目？",
-                icon:"info",
-                buttons:{
-                    cancel:"取消",
-                    confirm:"确定"
+                title: "",
+                text: "确定要删除所选项目？",
+                icon: "info",
+                buttons: {
+                    cancel: "取消",
+                    confirm: "确定"
                 }
-            }).then((confirm)=>{
-                if(confirm){
+            }).then((confirm) => {
+                if (confirm) {
                     $.ajax({
                         type: "POST",
                         async: true,
@@ -333,12 +376,12 @@
                         success: function (data) {
                             if (data === "1") {
                                 swal({
-                                    title:'成功',
-                                    text:'是否跳转到组管理列表？',
-                                    icon:'success',
-                                    button:'确定'
-                                }).then(()=>{
-                                    window.location.href='/gadmin'
+                                    title: '成功',
+                                    text: '是否跳转到组管理列表？',
+                                    icon: 'success',
+                                    button: '确定'
+                                }).then(() => {
+                                    window.location.href = '/gadmin'
                                 })
                             }
                         },
@@ -350,6 +393,47 @@
             })
         }
     }
+
+    function updateGrade(gid) {
+        console.log(gid)
+        Update(gid)
+        function Update(gid) {
+            console.log('sdw')
+            $.ajax({
+                type: "POST",
+                async: true,
+                cache: false,
+                url: "groupAdmin/grade",
+                data: {gid: gid,grade:$("#grade").val()},
+                success: function (data) {
+                    if (data === "1") {
+                        swal({
+                            title: '成绩修改成功',
+                            text: '是否跳转到组管理列表？',
+                            icon: 'success',
+                            button: '确定'
+                        }).then(() => {
+                            window.location.href = '/gadmin'
+                        })
+                    }
+                    if (data === "2") {
+                        swal({
+                            title: '成绩修改失败',
+                            text: '是否跳转到组管理列表？',
+                            icon: 'warning',
+                            button: '确定'
+                        }).then(() => {
+                            window.location.href = '/gadmin'
+                        })
+                    }
+                },
+                error: function (xmlhttp, state, msg) {
+                    alert(state + ":" + msg);
+                }
+            });
+        }
+    }
+
 </script>
 </body>
 </html>

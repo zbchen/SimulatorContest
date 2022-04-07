@@ -124,7 +124,20 @@ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
 
 }
 
+.success-login,.fail-login-name,.fail-login-password{
+    position: absolute;
+    background: rgba(0,0,0,.6);
+    color: #efefef;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    bottom:20%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border-radius: 8px;
+    text-align: center;
 
+}
 
 /*提交意见*/
 .text{

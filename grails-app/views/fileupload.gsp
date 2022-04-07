@@ -215,32 +215,26 @@
     </div>
 
     <div class="body_right">
-        <g:uploadForm controller="FileUpload" action="upload">
+        <g:uploadForm controller="FileUpload" action="upload" enctype="multipart/form-data">
             <div class="file">
                 <div class="file-style">
                     <img src="${resource(dir: 'images', file: 'file.jpeg')}" alt="file" class="img-file">
                     <span class="file-click ">点击此处上传文件</span>
-                    <input type="file" name="myFile" class="input-file"/>
+                    <input type="file" name="myFile" class="input-file" id="input-file"/>
                 </div>
 
                 <div class="submit">
                     <input id="fileCover" type="text" class="form-control" style="display: none"/>
-                    <button class="btn btn-primary btn-outline m-b-10 m-l-5" type="submit">提交</button>
+                    <button class="btn btn-primary btn-outline m-b-10 m-l-5" type="submit" >提交</button>
+%{--                    <input class="btn btn-primary btn-outline m-b-10 m-l-5" type="submit" onclick="submit_file()"/>--}%
+
                 </div>
-                %{--        <input type="submit"/>--}%
+
             </div>
         </g:uploadForm>
     </div>
 </div>
 
-
-<asset:javascript src="jquery-2.2.0.min.js"/>
-<script>
-    $('input[type=file]').change(function () {
-        $('#fileCover').val($(this).val());
-        $('#fileCover').show()
-    });
-</script>
 <asset:javascript src="vue.js"/>
 <asset:javascript src="element-ui.js"/>
 <script>
@@ -248,5 +242,58 @@
         el: '#file',
     })
 </script>
+<asset:javascript src="jquery-2.2.0.min.js"/>
+<script>
+
+    $('input[type=file]').change(function () {
+        $('#fileCover').val($(this).val());
+        $('#fileCover').show()
+    });
+    // function submit_file(){
+    //     // const file = $("#input-file").val()
+    //     // if(file === ''){
+    //     //     alert("lk;")
+    //     //     window.location.href='/fileupload'
+    //     // }
+    //     // console.log($("#input-file")[0].files[0])
+    //     // var filename = file.substring(file.lastIndexOf(".") + 1).toLowerCase()
+    //     // if(filename!=='tar'){
+    //     //     alert("请选择tar压缩文件")
+    //     //     return false
+    //     // }
+    //     var formData = new FormData()
+    //     var type = "file1"
+    //
+    //     formData.append(type,$("#input-file")[0].files[0])
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         async: false,
+    //         cache: false,
+    //         url: "fileUpload/upload",
+    //         data: formData,
+    //         processData:false,
+    //         contentType:false,
+    //
+    //         success: function (data) {
+    //             if (data === "1") {
+    //                 alert("wsrfhiewhft")
+    //                 window.location.href='/user'
+    //
+    //             }
+    //             else if(data==='2'){
+    //
+    //             }
+    //             else if(data==='3'){
+    //
+    //             }
+    //         },
+    //         error: function (xmlhttp, state, msg) {
+    //             alert(state + ":" + msg);
+    //         }
+    //     });
+    // }
+</script>
+
 </body>
 </html>

@@ -41,7 +41,15 @@
         <div class="register-link">
             <span>还没有账户 ? <a href="register"> 点击此处</a></span>
         </div>
-
+        <div class="success-login">
+            登录成功!
+        </div>
+        <div class="fail-login-password">
+            密码错误！
+        </div>
+        <div class="fail-login-name">
+            用户名错误！
+        </div>
     </div>
 </div>
 <asset:javascript src="vue.js"/>
@@ -85,6 +93,12 @@
 </script>
 <g:include view="template/js.gsp"/>
 <script>
+
+</script>
+<script>
+    $(".success-login").hide()
+    $(".fail-login-name").hide()
+    $(".fail-login-password").hide()
     function login(){
         $.ajax({
             type: "POST",
@@ -93,26 +107,29 @@
             url: "login/log",
             data: {username: $("#username").val(),password:$("#password").val()},
             dataType:"TEXT",
-            success: function (data) {
 
+            success: function (data) {
                 if (data === "1") {
-                    swal({
-                        title:'登录成功',
-                    }).then(()=>{
+                    $(".success-login").fadeIn("slow");
+                    setTimeout(function (){
+                        $(".success-login").hide();
                         window.location.href='/user'
-                    })
-                }else if(data==='2'){
-                    swal({
-                        title:'密码错误'
-                    }).then(()=>{
+                    },1000)
+                }
+                else if(data==='2'){
+                    $(".fail-login-password").fadeIn("slow");
+                    setTimeout(function (){
+                        $(".fail-login-password").hide("slow");
                         window.location.href='/'
-                    })
-                }else if(data==='3'){
-                    swal({
-                        title:'用户名不存在'
-                    }).then(()=>{
+                    },1000)
+
+                }
+                else if(data==='3'){
+                    $(".fail-login-name").fadeIn("slow");
+                    setTimeout(function (){
+                        $(".fail-login-name").hide("slow");
                         window.location.href='/'
-                    })
+                    },1000)
                 }
             },
             error: function (xmlhttp, state, msg) {

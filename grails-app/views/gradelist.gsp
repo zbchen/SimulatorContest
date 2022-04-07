@@ -267,7 +267,7 @@
 %{--        });--}%
 %{--    });--}%
 %{--</script>--}%
-<g:include view="template/js.gsp"/>
+
 <asset:javascript src="vue.js"/>
 <asset:javascript src="element-ui.js"/>
 <script>
@@ -275,5 +275,6 @@
         el: '#gradelist'
     })
 </script>
+<g:include view="template/js.gsp"/>
 </body>
 </html>

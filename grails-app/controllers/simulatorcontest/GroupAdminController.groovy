@@ -4,7 +4,7 @@ class GroupAdminController {
 
     def grade() {
         if (!params["gid"] || !session["group"] || session["group"].identity != 75) {
-            redirect(uri:"/")
+            redirect(uri: "/")
             return
         }
 
@@ -12,13 +12,15 @@ class GroupAdminController {
         def g = ContestGroup.findById(gid)
         if (g) {
             g.grade = params["grade"].toString().toFloat()
-            g.save(flush:true)
-            response.setCharacterEncoding("gbk")
-            PrintWriter out=response.getWriter()
-            out.print("<script>self.opener.location.reload();window.close();</script>")
-            render "Grade is updated"
+            g.save(flush: true)
+//            response.setCharacterEncoding("gbk")
+//            PrintWriter out=response.getWriter()
+//            out.print("<script>self.opener.location.reload();window.close();</script>")
+//            render "Grade is updated"
+            render '1'
         } else {
-            render "Group does not exist"
+            render '2'
+//            render "Group does not exist"
         }
 
     }
@@ -26,7 +28,7 @@ class GroupAdminController {
     def remove() {
         /// check the authority
         if (!params["gid"] || !session["group"] || session["group"].identity != 75) {
-            redirect(uri:"/")
+            redirect(uri: "/")
             return
         }
 
@@ -40,10 +42,10 @@ class GroupAdminController {
 //                println file
 //            }
             // remove the files
-            g.files.each{ file ->
+            g.files.each { file ->
                 new File(file.path).delete()
             }
-            g.delete(flush:true)
+            g.delete(flush: true)
             render '1'
 //            redirect (uri: "/gadmin")
         } else {
@@ -53,6 +55,6 @@ class GroupAdminController {
 
     def index() {
         println "abc"
-        redirect (uri: "/gadmin")
+        redirect(uri: "/gadmin")
     }
 }
