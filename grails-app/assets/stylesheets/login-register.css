@@ -106,7 +106,9 @@ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
     transition-delay: 0s !important;
     box-shadow: 0 5px 5px #ccc;
 }
-
+.login-button:active ,.comment-button:active{
+    background: linear-gradient(-135deg, rgba(12, 94, 153, 0.8), rgba(87, 44, 128, 0.8));
+}
 .register-link{
     margin: 10px;
     text-align: center;
@@ -126,12 +128,12 @@ textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
 
 .success-login,.fail-login-name,.fail-login-password{
     position: absolute;
-    background: rgba(0,0,0,.6);
+    background: rgba(0,0,0,.4);
     color: #efefef;
     width: 200px;
     height: 50px;
     line-height: 50px;
-    bottom:20%;
+    top:10%;
     left:50%;
     transform: translate(-50%,-50%);
     border-radius: 8px;

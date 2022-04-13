@@ -22,12 +22,12 @@
                     用户操作<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>
-                        <a href="" onclick="window.showModalDialog('/changepasswd')">修改密码</a>
-                    </el-dropdown-item>
-                    <el-dropdown-item>
-                        <a href="/Login/logout">注销</a>
-                    </el-dropdown-item>
+                    <a href="" onclick="window.showModalDialog('/changepasswd')">
+                        <el-dropdown-item>修改密码</el-dropdown-item>
+                    </a>
+                    <a href="/Login/logout">
+                        <el-dropdown-item>注销 </el-dropdown-item>
+                    </a>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -93,7 +93,7 @@
                     <li>
                         <label>
                             <span>排名</span>
-                            <a href="/Runner/rank"></a>
+                            <a href="" target="_blank" onclick="window.showModalDialog('/Runner/rank')"></a>
                         </label>
                     </li>
                     <% if (session["group"] && session["group"].identity == 75) { %>
@@ -188,7 +188,7 @@
         </div>
     </div>
 </div>
-<g:include view="template/js.gsp"/>
+
 <asset:javascript src="vue.js"/>
 <asset:javascript src="element-ui.js"/>
 <script>
@@ -196,5 +196,6 @@
         el:'#comment'
     })
 </script>
+<g:include view="template/js.gsp"/>
 </body>
 </html>

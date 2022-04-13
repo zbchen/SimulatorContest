@@ -112,24 +112,24 @@
                 if (data === "1") {
                     $(".success-login").fadeIn("slow");
                     setTimeout(function (){
-                        $(".success-login").hide();
+                        $(".success-login").fadeOut();
                         window.location.href='/user'
-                    },1000)
+                    },500)
                 }
                 else if(data==='2'){
                     $(".fail-login-password").fadeIn("slow");
                     setTimeout(function (){
-                        $(".fail-login-password").hide("slow");
-                        window.location.href='/'
-                    },1000)
+                        $(".fail-login-password").fadeOut();
+                        // window.location.href='/'
+                    },500)
 
                 }
                 else if(data==='3'){
                     $(".fail-login-name").fadeIn("slow");
                     setTimeout(function (){
-                        $(".fail-login-name").hide("slow");
-                        window.location.href='/'
-                    },1000)
+                        $(".fail-login-name").fadeOut();
+                        // window.location.href='/'
+                    },500)
                 }
             },
             error: function (xmlhttp, state, msg) {
